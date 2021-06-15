@@ -1,0 +1,84 @@
+
+// полный if
+if (cond) {
+	// code
+} 
+else {
+	// also
+}
+
+// частичный if
+if (cond) {
+	// code
+} 
+
+// if to if
+if (cond) {
+}
+else
+if (cond) {
+}
+
+// однострочный и другие однострочники
+if (cond) // code
+while (cond) // code
+
+//
+while (cond) {
+	// code
+}
+
+//
+do {
+	// code
+} until (cond)
+
+//
+for (;;) {
+	// code
+}
+
+//
+repeat const {
+	// code
+}
+repeat (expr) {
+	// code
+}
+
+// можно использовать только || && ^^
+
+// тернарный оператор обязан быть взят в скобки
+(a ? b : c)
+
+// тернарный оператор в тернарном операторе, это надо пойти прыгнуть в окно
+
+// объявляется только в файлах скриптов на самом верхнем уровне
+function thisName
+
+//
+with (all) - недопустимо
+
+//
+var ar = [0, 1, 2];
+var ar =
+	[ 0
+	, 1
+	, 2
+	];
+
+var struct = {name: "hello", mark: true};
+var struct =
+	{ name: "hello"
+	, mark: true
+	};
+
+// сахарный доступ
+array = [1, 2];
+value = array[i];   // get
+array[@ i] = value; // set
+
+// other
+struct[$ key]
+grid[# xkey, ykey]
+map[? key]

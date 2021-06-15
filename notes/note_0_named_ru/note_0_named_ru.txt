@@ -1,0 +1,88 @@
+
+// префиксы зарезервированные под имена ресурсов] публичные
+[spr, snd, obj, scr, seq, shad, room, ext, path, note, timeline, tileset, font, curve, incl, tag]
+
+// специальный зарезервированный префикс под имена ресурсов - защищённый
+[auto]
+
+// ресурс приватного типа
+[temp]
+
+// приставки [], обязательны. В рамках api они могут быть опущены
+
+// Именнования переменных
+
+// публичные (локальные)
+// не рекомендуется использовать built-in имена
+// явно self.
+self.thisName
+
+// приватные (локальные)
+// явно self.
+self.__thisName
+
+// глобальные
+// не рекомендуется использовать built-in имена
+global.thisName
+
+// глобальные объекты (структуры)
+globalvar [Interf]ThisName
+
+// имена функций
+function thisName()
+function __thisName()
+function array_clear - расширения базовых функций
+
+// макросы
+#macro THIS_NAME
+
+// перечисление
+enum this_name {name_is_0, name_is_1, ...}
+enum this_value
+	{ name_is_0
+	, name_is_1
+	, ...
+	}
+
+// слово Enum зарезервированно для постфикса перечислений
+
+enum [Class|Prototype]ThisName[Enum]ExtName {nameIs0, nameIs1, ...}
+enum [Class|Prototype]ThisName[Enum]ExtName
+	{ nameIs0
+	, nameIs1
+	, ...
+	}
+
+enum [State]ThisName {nameIs0, nameIs1, ...}
+enum [State]ThisName
+	{ nameIs0
+	, nameIs1
+	, ...
+	}
+
+// конструкторы
+
+// слово Enum зарезервированно для постфикса перечислений
+
+function [Class]ThisName()
+function [Prototype]ThisName()
+
+// приватные имена конструкторов, рекомендую обозначать абревиатурой имени класса
+__tn_thisValue - где tn это ThisName
+
+// к приватным полям объекта (при условии его наследования), так же можно добавлять префикс имени объекта
+-> obj_player
+-> obj_player.__p_thisName
+
+// необязательные аргументы, так же можно использовать для именнования локальных переменных
+function (arg0, arg1, _arg2, _arg3)
+var _clock = 0;
+
+// все именнования выходящии за стандарт, служат для реализации api
+
+// так же, skip имена
+[_, _0, _1, _2, _n...] - имена, предполагающие не использования данных
+catch(_)
+function(_0, _1, name)
+
+// Абревиатуры публичных имён не допускаются
