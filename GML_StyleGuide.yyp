@@ -6,6 +6,7 @@
     {"id":{"name":"note_1_style_ru","path":"notes/note_1_style_ru/note_1_style_ru.yy",},"order":1,},
     {"id":{"name":"auto_base_room","path":"rooms/auto_base_room/auto_base_room.yy",},"order":1,},
     {"id":{"name":"auto_scr_array_higherOrder","path":"scripts/auto_scr_array_higherOrder/auto_scr_array_higherOrder.yy",},"order":1,},
+    {"id":{"name":"auto_scr_generators_cast","path":"scripts/auto_scr_generators_cast/auto_scr_generators_cast.yy",},"order":1,},
     {"id":{"name":"note_2_other_ru","path":"notes/note_2_other_ru/note_2_other_ru.yy",},"order":2,},
     {"id":{"name":"auto_scr_functor","path":"scripts/auto_scr_functor/auto_scr_functor.yy",},"order":0,},
     {"id":{"name":"auto_scr_generators_compare","path":"scripts/auto_scr_generators_compare/auto_scr_generators_compare.yy",},"order":0,},
@@ -13,7 +14,9 @@
     {"id":{"name":"AnimationCurve1","path":"animcurves/AnimationCurve1/AnimationCurve1.yy",},"order":4,},
     {"id":{"name":"auto_base","path":"scripts/auto_base/auto_base.yy",},"order":0,},
     {"id":{"name":"auto_scr_array","path":"scripts/auto_scr_array/auto_scr_array.yy",},"order":0,},
+    {"id":{"name":"auto_scr_debug","path":"scripts/auto_scr_debug/auto_scr_debug.yy",},"order":0,},
     {"id":{"name":"Script1","path":"scripts/Script1/Script1.yy",},"order":2,},
+    {"id":{"name":"auto_test_array","path":"scripts/auto_test_array/auto_test_array.yy",},"order":0,},
     {"id":{"name":"note_0_named_ru","path":"notes/note_0_named_ru/note_0_named_ru.yy",},"order":0,},
   ],
   "Options": [
@@ -44,6 +47,7 @@
     {"folderPath":"folders/GML_StyleGuide_api (VM compiler)/api/generators.yy","order":4,"resourceVersion":"1.0","name":"generators","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/GML_StyleGuide_api (VM compiler)/api/comparator.yy","order":3,"resourceVersion":"1.0","name":"comparator","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/GML_StyleGuide_api (VM compiler)/api-tests.yy","order":5,"resourceVersion":"1.0","name":"api-tests","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/GML_StyleGuide_api (VM compiler)/api/debug.yy","order":5,"resourceVersion":"1.0","name":"debug","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},

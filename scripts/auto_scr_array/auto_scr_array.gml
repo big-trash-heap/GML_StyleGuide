@@ -1,10 +1,16 @@
 
+/*
+	Тестируется в "auto_test_array"
+*/
+
+
 #region modify
 
 function array_presset(array, arrayPresset) {
 	var size = array_length(arrayPresset);
     array_resize(array, size);
 	array_copy(array, 0, arrayPresset, 0, size);
+	return array;
 }
 
 /// @function array_place(array, index, ...value);
@@ -13,43 +19,37 @@ function array_place(array, index) {
 	if (count > 0) {
 		
 		array_resize(array, max(array_length(array), index + count));
-		for (var i = 0; i < count; i++) array_set(array, index + i, argument[i + 1]);
-		
-		return count;
+		for (var i = 0; i < count; i++) array_set(array, index + i, argument[i + 2]);
 	}
-	return 0;
 }
 
-/// @function array_place_concat(array, ...arrayOrValue);
-function array_place_concat(array) {
-	if (argument_count > 1) {
+/// @function array_place_ext(array, index, ...arrayOrValue);
+function array_place_ext(array, index) {
+	if (argument_count > 2) {
 		
 		var value, jsize, j, temp;
-		var size = array_length(array);
-		var count = size;
+		var baseSize = array_length(array);
+		var size = (is_undefined(index) ? baseSize : index);
 		
-		for (var i = 1; i < argument_count; i++) {
+		for (var i = 2; i < argument_count; i++) {
 			value = argument[i];
 			
 			if (is_array(value)) {
 				
-				jsize = array_length(jsize);
-				temp = size + jsize;
-				
-				array_resize(array, temp);
+				jsize = array_length(value);
+				temp  = size + jsize;
+				array_resize(array, max(temp, baseSize));
 				
 				for (j = 0; j < jsize; j++) array_set(array, size + j, value[j]);
 				
 				size = temp;
 			} else {
+				
+				array_set(array, size, value);
 				size += 1;
-				array_push(array, value);
 			}
 		}
-		
-		return (array_length(array) - count);
 	}
-	return 0;
 }
 
 /// @function array_insert_row(array, index, count, _value);
@@ -62,7 +62,7 @@ function array_insert_row(array, index, count) {
         if (_insert) {
 			
             var shift = index + count;
-            while (size--) array_set(array, size + index, array_get(array, size + shift));
+            while (size--) array_set(array, size + shift, array_get(array, size + index));
         }
         if (argument_count > 3) {
             if (_insert) {
@@ -94,11 +94,10 @@ function array_shift(array) {
 function array_unshift(array) {
     if (array_insert_row(array, 0, argument_count - 1)) {
 		
-		var size = array_length(array);
         var i = 0;
         while (++i < argument_count) array_set(array, i - 1, argument[i]);
 		
-		return (array_length(array) - size);
+		return (argument_count - 1);
     }
 	return 0;
 }
@@ -201,6 +200,12 @@ function array_reverse(array) {
     }
 }
 
+function array_remove_noorder(array, index) {
+	var size = array_length(array) - 1;
+	array_set(array, index, array_get(array, size));
+	array_resize(array, size);
+}
+
 #endregion
 
 #region build
@@ -216,12 +221,60 @@ function array_build_reverse(array) {
 	return _new_array;
 }
 
+function array_build_concat() {
+	var build = [];
+	if (argument_count > 0) {
+		
+		var value, jsize, j, temp, size = 0;
+		for (var i = 0; i < argument_count; i++) {
+			value = argument[i];
+			
+			if (is_array(value)) {
+				
+				jsize = array_length(jsize);
+				temp = size + jsize;
+				
+				array_resize(build, temp);
+				
+				for (j = 0; j < jsize; j++) array_set(build, size + j, value[j]);
+				
+				size = temp;
+			} else {
+				size += 1;
+				array_push(build, value);
+			}
+		}
+	}
+	return build;
+}
+
+/// @function array_build_range(size|indexBegin, _indexEnd, _step);
+function array_build_range() {
+	if (argument_count == 0) {
+		return [];
+	}
+	else
+	if (argument_count == 1) {
+		if (argument[0] > 0) {
+			
+			return array_build_gen(0, argument[0] - 1, 1, functor_id);
+		}
+		return [];
+	}
+	else
+	if (argument_count == 2) {
+		var step = -real(ComparatorNumber(argument[0], argument[1]));
+		return array_build_gen(argument[0], argument[1] - 1, step, functor_id);
+	}
+	return array_build_gen(argument[0], argument[1] - 1, argument[2], functor_id);
+}
+
 #endregion
 
 #region find
 
 function array_find_index(array, value, _reverse, _index, _step) {
-	return array_find(array, GeneratorCompareEq(value), undefined, _reverse, _index, _step);
+	return array_find(array, generator_compare_eq(value), undefined, _reverse, _index, _step);
 }
 
 function array_exists(array, value) {
@@ -229,3 +282,23 @@ function array_exists(array, value) {
 }
 
 #endregion
+
+#region range
+
+function array_range_get(array, index, length) {
+	var range = [];
+	array_copy(range, 0, array, index, length);
+	return range;
+}
+
+function array_range_set(array, index, range) {
+	array_ext_copy(array, range, index, 0, array_length(range));
+}
+
+function array_range_insert(array, index, range) {
+	array_ext_insert(array, range, index, 0, array_length(range));
+}
+
+#endregion
+
+

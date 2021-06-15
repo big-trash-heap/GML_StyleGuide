@@ -37,6 +37,18 @@ function array_build_filter(array, f, _data) {
     }
 }
 
+// f = function(index, data)
+function array_build_gen(indexBegin, indexEnd, step, f, _data) {
+	var build = [];
+	if (sign(indexEnd - indexBegin) == sign(step)) {
+		while (indexBegin <= indexEnd) {
+			array_push(build, f(indexBegin, _data));
+			indexBegin += step;
+		}
+	}
+	return build;
+}
+
 #endregion
 
 #region iterator
@@ -88,6 +100,25 @@ function array_foreach(array, f, _data, _reverse, _index, _step) {
         }
     }
     return result;
+}
+
+// f = function(init, value, data)
+ /// @function array_fold(array, f, _data, _reverse, _init);
+function array_fold(array, f, _data, _reverse) {
+    var _size = array_length(array);
+	
+	if (is_undefined(_reverse)) _reverse = false;
+	
+    var _init;
+    if (_reverse) {
+        _init = (argument_count > 4 ? argument[4] : array[--_size]);
+        while (_size--) _init = f(_init, array[_size], _data);
+    } else {
+        var _i = -1;
+        _init = (argument_count > 4 ? argument[4] : array[++_i]);
+        while (++_i < _size) _init = f(_init, array[_i], _data);
+    }
+    return _init;
 }
 
 #endregion

@@ -1,4 +1,5 @@
 
+
 enum ComparatorEnum
 	{ lt = -1
 	, eq = 0
@@ -37,3 +38,4 @@ function ComparatorStringLexical(left, right) { // лексикографиче�
 function ComparatorStringLength(left, right) { // по длинам строк
 	return ComparatorNumber(string_length(left), string_length(right));
 }
+

@@ -1,4 +1,5 @@
 
+
 #region basic
 
 function functor_empty() {
@@ -27,3 +28,4 @@ function functor_struct_wrap(value, key) {
 }
 
 #endregion
+
