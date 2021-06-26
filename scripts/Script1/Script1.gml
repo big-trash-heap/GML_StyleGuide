@@ -1,5 +1,4 @@
-pickup "Script3" complete;
-regist "Script1" complete;
+
 
 
 

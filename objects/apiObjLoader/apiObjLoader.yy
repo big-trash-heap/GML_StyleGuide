@@ -27,7 +27,7 @@
     "path": "folders/GML_StyleGuide_api (VM compiler)/api/loader.yy",
   },
   "resourceVersion": "1.0",
-  "name": "auto_base_loader",
+  "name": "apiObjLoader",
   "tags": [],
   "resourceType": "GMObject",
 }
