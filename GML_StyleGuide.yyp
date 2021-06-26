@@ -1,6 +1,7 @@
 {
   "resources": [
     {"id":{"name":"Script3","path":"scripts/Script3/Script3.yy",},"order":5,},
+    {"id":{"name":"auto_scr_iterator","path":"scripts/auto_scr_iterator/auto_scr_iterator.yy",},"order":0,},
     {"id":{"name":"auto_base_loader","path":"objects/auto_base_loader/auto_base_loader.yy",},"order":2,},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},"order":3,},
     {"id":{"name":"note_1_style_ru","path":"notes/note_1_style_ru/note_1_style_ru.yy",},"order":1,},
@@ -24,6 +25,10 @@
     {"name":"macOS","path":"options/mac/options_mac.yy",},
     {"name":"Main","path":"options/main/options_main.yy",},
     {"name":"Windows","path":"options/windows/options_windows.yy",},
+    {"name":"Amazon Fire","path":"options/amazonfire/options_amazonfire.yy",},
+    {"name":"Android","path":"options/android/options_android.yy",},
+    {"name":"iOS","path":"options/ios/options_ios.yy",},
+    {"name":"tvOS","path":"options/tvos/options_tvos.yy",},
   ],
   "isDnDProject": false,
   "isEcma": false,
@@ -48,6 +53,7 @@
     {"folderPath":"folders/GML_StyleGuide_api (VM compiler)/api/comparator.yy","order":3,"resourceVersion":"1.0","name":"comparator","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/GML_StyleGuide_api (VM compiler)/api-tests.yy","order":5,"resourceVersion":"1.0","name":"api-tests","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/GML_StyleGuide_api (VM compiler)/api/debug.yy","order":5,"resourceVersion":"1.0","name":"debug","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/GML_StyleGuide_api (VM compiler)/api/iterator.yy","order":6,"resourceVersion":"1.0","name":"iterator","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},

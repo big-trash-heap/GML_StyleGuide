@@ -177,9 +177,9 @@ function array_ext_insert(dest, scr, _dest_index, _src_index, _length) {
             if (dest == scr) {
 				
                 var _temp = array_create(_length), i = -1;
-                while (++i < _length)  array_set(_temp, i                  , array_get(scr,   i + _src_index)); i = -1;
-                while (size--)        array_set(dest,  size + _dest_index, array_get(dest,  size + _dest_shift));
-                while (++i < _length)  array_set(dest,  i + _dest_index    , array_get(_temp, i));
+                while (++i < _length)  array_set(_temp, i                 , array_get(scr,   i + _src_index)); i = -1;
+                while (size--)         array_set(dest,  size + _dest_index, array_get(dest,  size + _dest_shift));
+                while (++i < _length)  array_set(dest,  i + _dest_index   , array_get(_temp, i));
                 exit;
             }
             while (size--) array_set(dest, size + _dest_index, array_get(dest, size + _dest_shift));

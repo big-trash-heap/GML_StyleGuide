@@ -37,18 +37,6 @@ function array_build_filter(array, f, _data) {
     }
 }
 
-// f = function(index, data)
-function array_build_gen(indexBegin, indexEnd, step, f, _data) {
-	var build = [];
-	if (sign(indexEnd - indexBegin) == sign(step)) {
-		while (indexBegin <= indexEnd) {
-			array_push(build, f(indexBegin, _data));
-			indexBegin += step;
-		}
-	}
-	return build;
-}
-
 #endregion
 
 #region iterator
