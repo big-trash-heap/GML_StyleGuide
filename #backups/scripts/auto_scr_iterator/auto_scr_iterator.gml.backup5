@@ -1,3 +1,4 @@
+// 2021-06-28 11:43:07
 
 // f = function(index, count, data)
 function apiIteratorRange(f, data) {
@@ -15,8 +16,7 @@ function apiIteratorRange(f, data) {
 		var count = 0;
 		while (i <= j) {
 			
-			f(i, count++, data);
-			i += step;
+			f(i++, count++, data);
 		}
 	}
 }

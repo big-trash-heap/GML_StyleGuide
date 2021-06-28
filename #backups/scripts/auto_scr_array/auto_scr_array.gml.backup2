@@ -1,3 +1,4 @@
+// 2021-06-28 11:30:56
 
 /*
 	Тестируется в "auto_test_array"
@@ -251,8 +252,8 @@ function apiArrayBuildConcat() {
 	return build;
 }
 
-/// @function apiArrayBuildRange(size|indexBegin, _indexEnd, _step);
-function apiArrayBuildRange() {
+/// @function array_build_range(size|indexBegin, _indexEnd, _step);
+function array_build_range() {
 	if (argument_count == 0) {
 		return [];
 	}

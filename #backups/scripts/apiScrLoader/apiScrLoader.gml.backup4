@@ -1,0 +1,60 @@
+// 2021-06-28 13:00:01
+
+//
+if (variable_global_exists("__apiLoaderBase")) exit;
+
+//
+global.__apiLoaderBase = { 
+	api: ds_priority_create(), 
+	project: ds_priority_create()
+};
+
+//
+function apiLoader(_intPriority, _loader) {
+	
+	apiScrLoader();
+	ds_priority_add(global.__apiLoaderBase.project, _loader, _intPriority);
+}
+
+function __apiLoader(_intPriority, _loader) {
+	
+	apiScrLoader();
+	ds_priority_add(global.__apiLoaderBase.api, _loader, _intPriority);
+}
+
+function __api_loaderLoad() {
+	var heap;
+	
+	heap = global.__apiLoaderBase.api;
+	while (!ds_priority_empty(heap)) {
+		ds_priority_delete_min(heap)();
+	}
+	ds_priority_destroy(heap);
+	
+	heap = global.__apiLoaderBase.project;
+	while (!ds_priority_empty(heap)) {
+		ds_priority_delete_min(heap)();
+	}
+	ds_priority_destroy(heap);
+}
+
+function hello() {}
+var hello = "hello";
+show_message(hello);
+
+//
+__api_loader(-infinity, function() {
+	show_debug_message("_loader");
+});
+
+
+
+
+
+
+
+
+
+
+
+

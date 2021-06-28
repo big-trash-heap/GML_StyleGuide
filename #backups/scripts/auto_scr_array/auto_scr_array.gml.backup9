@@ -1,3 +1,4 @@
+// 2021-06-28 11:27:30
 
 /*
 	Тестируется в "auto_test_array"
@@ -18,10 +19,7 @@ function apiArrayPlace(array, index) {
 	var count = argument_count - 2;
 	if (count > 0) {
 		
-		var size = array_length(array);
-		if (is_undefined(index)) index = size;
-		
-		array_resize(array, max(size, index + count));
+		array_resize(array, max(array_length(array), index + count));
 		for (var i = 0; i < count; i++) array_set(array, index + i, argument[i + 2]);
 	}
 }
@@ -191,7 +189,7 @@ function apiArrayInsert(dest, scr, _dest_index, _src_index, _length) {
     }
 }
 
-function apiArrayReverse(array) {
+function array_reverse(array) {
 	var size = array_length(array);
 	if (size > 1) {
         var _swap, i = -1;
@@ -203,7 +201,7 @@ function apiArrayReverse(array) {
     }
 }
 
-function apiArrayRemoveNoOrder(array, index) {
+function array_remove_noorder(array, index) {
 	var size = array_length(array) - 1;
 	array_set(array, index, array_get(array, size));
 	array_resize(array, size);
@@ -213,18 +211,18 @@ function apiArrayRemoveNoOrder(array, index) {
 
 #region build
 
-function apiArrayBuildDup1d(array) {
-	return apiArrayFill([], array);
+function array_build_dup1d(array) {
+	return array_presset([], array);
 }
 
-function apiArrayBuildReverse(array) {
+function array_build_reverse(array) {
 	var size = array_length(array);
 	var _new_array = array_create(size);
 	for (var i = 0; i < size; i++) array_set(_new_array, i, array_get(array, --size));
 	return _new_array;
 }
 
-function apiArrayBuildConcat() {
+function array_build_concat() {
 	var build = [];
 	if (argument_count > 0) {
 		
@@ -251,8 +249,8 @@ function apiArrayBuildConcat() {
 	return build;
 }
 
-/// @function apiArrayBuildRange(size|indexBegin, _indexEnd, _step);
-function apiArrayBuildRange() {
+/// @function array_build_range(size|indexBegin, _indexEnd, _step);
+function array_build_range() {
 	if (argument_count == 0) {
 		return [];
 	}

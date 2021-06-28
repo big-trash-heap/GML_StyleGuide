@@ -1,6 +1,3 @@
 
-if (variable_struct_exists(Base, "loaderRunner")) {
-	Base.loaderRunner();
-}
-
+__apiLoaderLoad();
 room_goto_next();
