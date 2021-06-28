@@ -1,52 +1,44 @@
-// 2021-06-28 12:58:26
+// 2021-06-28 13:52:10
 
 //
-if (variable_global_exists("__api_loader")) exit;
+if (variable_global_exists("__apiLoaderHeap")) exit;
 
 //
-global.__api_loaderBase = { 
+global.__apiLoaderHeap = { 
 	api: ds_priority_create(), 
 	project: ds_priority_create()
 };
 
 //
-function api_loader(_intPriority, _loader) {
+function apiLoader(_intPriority, _loader) {
 	
-	apiScr_loader();
-	ds_priority_add(global.__api_loader.project, _loader, _intPriority);
+	apiScrLoader();
+	ds_priority_add(global.__apiLoaderHeap.project, _loader, _intPriority);
 }
 
-function __api_loader(_intPriority, _loader) {
+function __apiLoader(_intPriority, _loader) {
 	
-	apiScr_loader();
-	ds_priority_add(global.__api_loaderBase.api, _loader, _intPriority);
+	apiScrLoader();
+	ds_priority_add(global.__apiLoaderHeap.api, _loader, _intPriority);
 }
 
-function __api_loaderLoad() {
-	var heap;
+function __apiLoaderLoad() {
+	var _heap;
 	
-	heap = global.__api_loader.api;
-	while (!ds_priority_empty(heap)) {
-		ds_priority_delete_min(heap)();
+	_heap = global.__apiLoaderHeap.api;
+	while (!ds_priority_empty(_heap)) {
+		ds_priority_delete_min(_heap)();
 	}
-	ds_priority_destroy(heap);
+	ds_priority_destroy(_heap);
 	
-	heap = global.__api_loader.project;
-	while (!ds_priority_empty(heap)) {
-		ds_priority_delete_min(heap)();
+	_heap = global.__apiLoaderHeap.project;
+	while (!ds_priority_empty(_heap)) {
+		ds_priority_delete_min(_heap)();
 	}
-	ds_priority_destroy(heap);
+	ds_priority_destroy(_heap);
 }
 
-function hello() {}
-var hello = "hello";
-show_message(hello);
-
-//
-__api_loader(-infinity, function() {
-	show_debug_message("_loader");
-});
-
+show_message(apiArrayBuildRange(50))
 
 
 

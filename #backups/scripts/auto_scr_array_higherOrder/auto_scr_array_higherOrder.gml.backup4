@@ -1,3 +1,4 @@
+// 2021-06-28 14:16:16
 
 
 #region modify
@@ -38,7 +39,7 @@ function apiArrayBuildMap(_array, f, _data) {
 }
 
 // f = function(value, index, data)
-/// @function apiBuildFilter(array, f, _data);
+/// @function apiBuilderFilter(array, f, _data);
 /// @param array
 /// @param f
 /// @param _data

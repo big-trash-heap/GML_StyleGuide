@@ -1,3 +1,4 @@
+// 2021-06-28 14:14:28
 
 
 #region modify
@@ -18,7 +19,7 @@ function apiArrayMap(_array, f, _data) {
 /// @param f
 /// @param _data
 function apiArrayFilter(_array, f, _data) {
-	apiArrayFill(_array, apiBuildFilter(_array, f, _data));
+	apiArrayFill(_array, array_build_filter(array, f, _data));
 }
 
 #endregion
@@ -30,26 +31,22 @@ function apiArrayFilter(_array, f, _data) {
 /// @param array
 /// @param f
 /// @param _data
-function apiArrayBuildMap(_array, f, _data) {
-	var _size = array_length(_array);
-	var _dups = array_create(_size);
-	for (var i = 0; i < _size; i += 1) array_set(_dups, i, f(_array[i], i, _data));
-	return _dups;
+function apiArrayBuildMap(array, f, _data) {
+	var size = array_length(array);
+	var dups = array_create(size);
+	for (var i = 0; i < size; i += 1) array_set(dups, i, f(array[i], i, _data));
+	return dups;
 }
 
 // f = function(value, index, data)
-/// @function apiBuildFilter(array, f, _data);
-/// @param array
-/// @param f
-/// @param _data
-function apiBuildFilter(_array, f, _data) {
-	var _size = array_length(_array), _new_array = [];
-    if (_size > 0) {
+function array_build_filter(array, f, _data) {
+	var size = array_length(array), _new_array = [];
+    if (size > 0) {
         var i = 0, _value;
         do {
-            _value = _array[i];
+            _value = array[i];
             if (f(_value, i, _data)) array_push(_new_array, _value);
-        } until (++i == _size);
+        } until (++i == size);
     }
 }
 
@@ -57,20 +54,20 @@ function apiBuildFilter(_array, f, _data) {
 
 #region iterator
 
-// f = function(value, index, data, _array)
-function array_foreach(_array, f, _data, _reverse, _index, _step) {
-	var _size = array_length(_array);
-    if (_size--) {
+// f = function(value, index, data, array)
+function array_foreach(array, f, _data, _reverse, _index, _step) {
+	var size = array_length(array);
+    if (size--) {
         
 		var result = {index: -1, data: _data};
 		
 		if (is_undefined(_reverse)) _reverse = false;
         if (is_undefined(_index)) {
 			
-			_index = (_reverse ? _size : 0);
+			_index = (_reverse ? size : 0);
 		} else {
 			
-            if (_index < 0 or _index > _size) return result;
+            if (_index < 0 or _index > size) return result;
         }
         if (is_undefined(_step)) {
 			
@@ -82,7 +79,7 @@ function array_foreach(_array, f, _data, _reverse, _index, _step) {
         if (_reverse) {
             do {
 				
-				if (f(_array[_index], _index, _data, _array)) {
+				if (f(array[_index], _index, _data, array)) {
 					
 					result.index = _index;
 					return result;
@@ -93,34 +90,34 @@ function array_foreach(_array, f, _data, _reverse, _index, _step) {
         } else {
             do {
 				
-                if (f(_array[_index], _index, _data, _array)) {
+                if (f(array[_index], _index, _data, array)) {
 					
 					result.index = _index;
 					return result;
 				}
 				
                 _index += _step;
-            } until (_index > _size);
+            } until (_index > size);
         }
     }
     return result;
 }
 
 // f = function(init, value, data)
- /// @function array_fold(_array, f, _data, _reverse, _init);
-function array_fold(_array, f, _data, _reverse) {
-    var _size = array_length(_array);
+ /// @function array_fold(array, f, _data, _reverse, _init);
+function array_fold(array, f, _data, _reverse) {
+    var _size = array_length(array);
 	
 	if (is_undefined(_reverse)) _reverse = false;
 	
     var _init;
     if (_reverse) {
-        _init = (argument_count > 4 ? argument[4] : _array[--_size]);
-        while (_size--) _init = f(_init, _array[_size], _data);
+        _init = (argument_count > 4 ? argument[4] : array[--_size]);
+        while (_size--) _init = f(_init, array[_size], _data);
     } else {
         var _i = -1;
-        _init = (argument_count > 4 ? argument[4] : _array[++_i]);
-        while (++_i < _size) _init = f(_init, _array[_i], _data);
+        _init = (argument_count > 4 ? argument[4] : array[++_i]);
+        while (++_i < _size) _init = f(_init, array[_i], _data);
     }
     return _init;
 }
@@ -129,9 +126,9 @@ function array_fold(_array, f, _data, _reverse) {
 
 #region find
 
-// f = function(value, index, data, _array)
-function array_find(_array, f, _data, _reverse, _index, _step) {
-	return array_foreach(_array, f, _data, _reverse, _index, _step).index;
+// f = function(value, index, data, array)
+function array_find(array, f, _data, _reverse, _index, _step) {
+	return array_foreach(array, f, _data, _reverse, _index, _step).index;
 }
 
 #endregion

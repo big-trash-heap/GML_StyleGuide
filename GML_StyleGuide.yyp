@@ -1,7 +1,7 @@
 {
   "resources": [
     {"id":{"name":"Script3","path":"scripts/Script3/Script3.yy",},"order":5,},
-    {"id":{"name":"auto_scr_iterator","path":"scripts/auto_scr_iterator/auto_scr_iterator.yy",},"order":0,},
+    {"id":{"name":"apiScrIterators","path":"scripts/apiScrIterators/apiScrIterators.yy",},"order":0,},
     {"id":{"name":"apiObjLoader","path":"objects/apiObjLoader/apiObjLoader.yy",},"order":2,},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},"order":3,},
     {"id":{"name":"apiNote2StyleRu","path":"notes/apiNote2StyleRu/apiNote2StyleRu.yy",},"order":1,},

@@ -1,10 +1,11 @@
+// 2021-06-28 14:15:09
 
 
 #region modify
 
 // f = function(value, index, data)
-/// @function apiArrayMap(array, f, _data);
-/// @param array
+/// @function apiArrayMap(_array, f, _data);
+/// @param _array
 /// @param f
 /// @param _data
 function apiArrayMap(_array, f, _data) {
@@ -13,12 +14,12 @@ function apiArrayMap(_array, f, _data) {
 }
 
 // f = function(value, index, data)
-/// @function apiArrayFilter(array, f, _data);
-/// @param array
+/// @function apiArrayFilter(_array, f, _data);
+/// @param _array
 /// @param f
 /// @param _data
 function apiArrayFilter(_array, f, _data) {
-	apiArrayFill(_array, apiBuildFilter(_array, f, _data));
+	apiArrayFill(_array, array_build_filter(_array, f, _data));
 }
 
 #endregion
@@ -26,8 +27,8 @@ function apiArrayFilter(_array, f, _data) {
 #region build
 
 // f = function(value, index, data)
-/// @function apiArrayBuildMap(array, f, _data);
-/// @param array
+/// @function apiArrayBuildMap(_array, f, _data);
+/// @param _array
 /// @param f
 /// @param _data
 function apiArrayBuildMap(_array, f, _data) {
@@ -38,11 +39,7 @@ function apiArrayBuildMap(_array, f, _data) {
 }
 
 // f = function(value, index, data)
-/// @function apiBuildFilter(array, f, _data);
-/// @param array
-/// @param f
-/// @param _data
-function apiBuildFilter(_array, f, _data) {
+function array_build_filter(_array, f, _data) {
 	var _size = array_length(_array), _new_array = [];
     if (_size > 0) {
         var i = 0, _value;

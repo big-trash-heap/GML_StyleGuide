@@ -1,3 +1,4 @@
+// 2021-06-28 14:16:08
 
 
 #region modify
@@ -18,7 +19,7 @@ function apiArrayMap(_array, f, _data) {
 /// @param f
 /// @param _data
 function apiArrayFilter(_array, f, _data) {
-	apiArrayFill(_array, apiBuildFilter(_array, f, _data));
+	apiArrayFill(_array, apiBuilderFilter(_array, f, _data));
 }
 
 #endregion
@@ -38,11 +39,11 @@ function apiArrayBuildMap(_array, f, _data) {
 }
 
 // f = function(value, index, data)
-/// @function apiBuildFilter(array, f, _data);
+/// @function apiBuilderFilter(array, f, _data);
 /// @param array
 /// @param f
 /// @param _data
-function apiBuildFilter(_array, f, _data) {
+function apiBuilderFilter(_array, f, _data) {
 	var _size = array_length(_array), _new_array = [];
     if (_size > 0) {
         var i = 0, _value;
