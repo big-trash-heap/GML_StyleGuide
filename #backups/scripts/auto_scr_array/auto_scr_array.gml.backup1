@@ -1,4 +1,4 @@
-// 2021-06-28 14:09:42
+// 2021-06-29 14:43:25
 
 /*
 	Тестируется в "auto_test_array"
@@ -17,9 +17,9 @@ function apiArrayFill(_array, _arrayFill) {
 	return _array;
 }
 
-/// @function apiArrayPlace(array, index, ...value);
+/// @function apiArrayPlace(array, ??index, ...value);
 /// @param array
-/// @param index
+/// @param ??index
 /// @param ...value
 function apiArrayPlace(_array, _index) {
 	var _count = argument_count - 2;
@@ -29,23 +29,24 @@ function apiArrayPlace(_array, _index) {
 		if (is_undefined(_index)) _index = _size;
 		
 		array_resize(_array, max(_size, _index + _count));
-		for (var i = 0; i < _count; i++) array_set(_array, _index + i, argument[i + 2]);
+		for (var _i = 0; _i < _count; _i++) array_set(_array, _index + _i, argument[_i + 2]);
 	}
 }
 
-/// @function apiArrayPlaceExt(array, index, ...arrayOrValue);
+/// @function apiArrayPlaceExt(array, ??index, ...arrayOrValue);
 /// @param array
-/// @param index
+/// @param ??index
 /// @param ...arrayOrValue
 function apiArrayPlaceExt(_array, _index) {
-	if (argument_count > 2) {
+	var _argSize = argument_count;
+	if (_argSize > 2) {
 		
-		var _value, jsize, j, _temp;
+		var _value, jsize, _j, _temp;
 		var baseSize = array_length(_array);
 		var _size = (is_undefined(_index) ? baseSize : _index);
 		
-		for (var i = 2; i < argument_count; i++) {
-			_value = argument[i];
+		for (var _i = 2; _i < _argSize; _i++) {
+			_value = argument[_i];
 			
 			if (is_array(_value)) {
 				
@@ -53,10 +54,11 @@ function apiArrayPlaceExt(_array, _index) {
 				_temp  = _size + jsize;
 				array_resize(_array, max(_temp, baseSize));
 				
-				for (j = 0; j < jsize; j++) array_set(_array, _size + j, _value[j]);
+				for (_j = 0; _j < jsize; _j++) array_set(_array, _size + _j, _value[_j]);
 				
 				_size = _temp;
-			} else {
+			} 
+			else {
 				
 				array_set(_array, _size, _value);
 				_size += 1;
@@ -65,11 +67,11 @@ function apiArrayPlaceExt(_array, _index) {
 	}
 }
 
-/// @function apiArrayInsertEmpty(array, index, count, _value);
+/// @function apiArrayInsertEmpty(array, index, count, ?value);
 /// @param array
 /// @param index
 /// @param count
-/// @param _value
+/// @param ?value
 function apiArrayInsertEmpty(_array, _index, _count) {
     if (_count > 0) {
 		
@@ -113,12 +115,13 @@ function apiArrayShift(_array) {
 /// @param array
 /// @param ...value
 function apiArrayUnshift(_array) {
-    if (apiArrayInsertEmpty(_array, 0, argument_count - 1)) {
+	var _argSize = argument_count;
+    if (apiArrayInsertEmpty(_array, 0, _argSize - 1)) {
 		
-        var i = 0;
-        while (++i < argument_count) array_set(_array, i - 1, argument[i]);
+        var _i = 0;
+        while (++_i < _argSize) array_set(_array, _i - 1, argument[_i]);
 		
-		return (argument_count - 1);
+		return (_argSize - 1);
     }
 	return 0;
 }
@@ -129,13 +132,13 @@ function apiArrayShuffle(_array) {
     var _size = array_length(_array);
     if (_size > 1) {
 		
-        var i = -1, _swap, j;
-        while (++i < _size) {
+        var _i = -1, _swap, _j;
+        while (++_i < _size) {
 			
-            j = irandom(_size - 1);
-            _swap = array_get(_array, i);
-            array_set(_array, i, array_get(_array, j));
-            array_set(_array, j, _swap);
+            _j = irandom(_size - 1);
+            _swap = array_get(_array, _i);
+            array_set(_array, _i, array_get(_array, _j));
+            array_set(_array, _j, _swap);
         }
 	}
 }
@@ -153,78 +156,76 @@ function apiArrayResizeUp(_array, _sizeup) {
 	array_resize(_array, array_length(_array) + _sizeup);
 }
 
-/// @function apiArrayCopy(dest, scr, _dest_index, _src_index, _length);
+/// @function apiArrayCopy(dest, src, dest_index, ?src_index, ?length);
 /// @param dest
 /// @param src
-/// @param _dest_index
-/// @param _src_index
-/// @param _length
-function apiArrayCopy(_dest, _src, _dest_index, _src_index, _length) {
-    var _dest_length = array_length(_dest);
-    var _src_length = array_length(_src);
-    if (is_undefined(_dest_length)) _dest_index = _dest_length;
-    if (is_undefined(_src_index))   _src_index  = 0;
-    if (is_undefined(_length)) {
-		
-		_length = _src_length - _src_index;
-	} else {
-		
-		_length = min(_length, _src_length - _src_index);
-	}
+/// @param dest_index
+/// @param ?src_index
+/// @param ?length
+function apiArrayCopy(_dest, _src, _destIndex, _srcIndex, _length) {
+    var _destLength = array_length(_dest);
+    var _srcLength = array_length(_src);
+    if (is_undefined(_srcIndex)) _srcIndex = 0;
+    if (is_undefined(_length)) _length = _srcLength - _srcIndex;
     if (_length > 0) {
 		
-        array_resize(_dest, max(_dest_length, _dest_index + _length));
+        array_resize(_dest, max(_destLength, _destIndex + _length));
         if (_dest == _src) {
 			
-            if (_dest_index == _src_index) exit;
-            if (_dest_index > _src_index) {
-                while (_length--) array_set(_dest, _length + _dest_index, array_get(_src, _length + _src_index));
+            if (_destIndex == _srcIndex) exit;
+            if (_destIndex > _srcIndex) {
+            	
+            	do {
+            		_length -= 1;
+            		array_set(_dest, _length + _destIndex, array_get(_src, _length + _srcIndex));
+            	} until (_length <= 0);
                 exit;
             }
         }
-        var i = 0;
+        var _i = 0;
         do {
-            array_set(_dest, i + _dest_index, array_get(_src, i + _src_index));
-        } until (++i == _length);
+            array_set(_dest, _i + _destIndex, array_get(_src, _i + _srcIndex));
+        } until (++_i == _length);
     }
 }
 
-/// @function apiArrayInsert(dest, scr, _dest_index, _src_index, _length);
+/// @function apiArrayInsert(dest, src, dest_index, ?src_index, ?length);
 /// @param dest
 /// @param src
-/// @param _dest_index
-/// @param _src_index
-/// @param _length
-function apiArrayInsert(_dest, scr, _dest_index, _src_index, _length) {
-    var _dest_length = array_length(_dest);
-    var _src_length = array_length(scr);
-    if (is_undefined(_dest_length)) _dest_index = 0;
-    if (is_undefined(_src_index))   _src_index  = 0;
-    if (is_undefined(_length)) {
-		
-		_length = _src_length - _src_index;
-	} else {
-		
-		_length = min(_length, _src_length - _src_index);
-	}
+/// @param dest_index
+/// @param ?src_index
+/// @param ?length
+function apiArrayInsert(_dest, _src, _destIndex, _srcIndex, _length) {
+    var _destLength = array_length(_dest);
+    var _srcLength = array_length(_src);
+    if (is_undefined(_srcIndex)) _srcIndex = 0;
+    if (is_undefined(_length)) _length = _srcLength - _srcIndex;
     if (_length > 0) {
 		
-        array_resize(_dest, _dest_length + _length);
-        var _size = _dest_length - _dest_index;
+        array_resize(_dest, _destLength + _length);
+        var _size = _destLength - _destIndex;
         if (_size > 0) {
 			
-            var _dest_shift = _dest_index + _length;
-            if (_dest == scr) {
+            var _destShift = _destIndex + _length;
+            if (_dest == _src) {
 				
-                var _temp = array_create(_length), i = -1;
-                while (++i < _length)  array_set(_temp, i                 , array_get(scr,   i + _src_index)); i = -1;
-                while (_size--)         array_set(_dest,  _size + _dest_index, array_get(_dest,  _size + _dest_shift));
-                while (++i < _length)  array_set(_dest,  i + _dest_index   , array_get(_temp, i));
+                var _temp = array_create(_length), _i = -1;
+                while (++_i < _length) array_set(_temp, _i,                 array_get(_src, _i + _srcIndex));
+                while (_size--)        array_set(_dest, _size + _destIndex, array_get(_dest, _size + _destShift));
+                
+                _i = -1;
+                while (++_i < _length) array_set(_dest, _i + _destIndex,    array_get(_temp, _i));
                 exit;
             }
-            while (_size--) array_set(_dest, _size + _dest_index, array_get(_dest, _size + _dest_shift));
+            do {
+            	_size -= 1;
+            	array_set(_dest, _size + _destIndex, array_get(_dest, _size + _destShift))
+            } until (_size <= 0);
         }
-        while (_length--) array_set(_dest, _length + _dest_index, array_get(scr , _length + _src_index));
+        do {
+        	_length -= 1;
+        	array_set(_dest, _length + _destIndex, array_get(_src, _length + _srcIndex));
+        } until (_length <= 0);
     }
 }
 
@@ -233,10 +234,11 @@ function apiArrayInsert(_dest, scr, _dest_index, _src_index, _length) {
 function apiArrayReverse(_array) {
 	var _size = array_length(_array);
 	if (_size > 1) {
-        var _swap, i = -1;
+        var _swap, _i = -1;
         repeat (_size div 2) {
-            _swap = array_get(_array, ++i);
-            array_set(_array, i, array_get(_array, --_size));
+        	
+            _swap = array_get(_array, ++_i);
+            array_set(_array, _i, array_get(_array, --_size));
             array_set(_array, _size, _swap);
         }
     }
@@ -255,6 +257,15 @@ function apiArrayRemoveNoOrder(_array, _index) {
 
 #region build
 
+/// @function apiArrayBuild(...value);
+/// @param ...value
+function apiArrayBuild() {
+	var _argSize = _argSize;
+	var _array = array_create(_argSize);
+	for (var _i = 0; _i < _argSize; _i++) array_set(_array, _i, argument[_i]);
+	return _array;
+}
+
 /// @function apiArrayBuildDup1d(array);
 /// @param array
 function apiArrayBuildDup1d(_array) {
@@ -265,20 +276,21 @@ function apiArrayBuildDup1d(_array) {
 /// @param array
 function apiArrayBuildReverse(_array) {
 	var _size = array_length(_array);
-	var _new_array = array_create(_size);
-	for (var i = 0; i < _size; i++) array_set(_new_array, i, array_get(_array, --_size));
-	return _new_array;
+	var _newArray = array_create(_size);
+	for (var _i = 0; _i < _size; _i++) array_set(_newArray, _i, array_get(_array, --_size));
+	return _newArray;
 }
 
 /// @function apiArrayBuildConcat(...arrayOrValue);
 /// @param ...arrayOrValue
 function apiArrayBuildConcat() {
+	var _argSize = argument_count;
 	var _build = [];
-	if (argument_count > 0) {
+	if (_argSize > 0) {
 		
-		var _value, _jsize, j, _temp, _size = 0;
-		for (var i = 0; i < argument_count; i++) {
-			_value = argument[i];
+		var _value, _jsize, _j, _temp, _size = 0;
+		for (var _i = 0; _i < _argSize; _i++) {
+			_value = argument[_i];
 			
 			if (is_array(_value)) {
 				
@@ -287,10 +299,11 @@ function apiArrayBuildConcat() {
 				
 				array_resize(_build, _temp);
 				
-				for (j = 0; j < _jsize; j++) array_set(_build, _size + j, _value[j]);
+				for (_j = 0; _j < _jsize; _j++) array_set(_build, _size + _j, _value[_j]);
 				
 				_size = _temp;
-			} else {
+			} 
+			else {
 				_size += 1;
 				array_push(_build, _value);
 			}
@@ -299,11 +312,11 @@ function apiArrayBuildConcat() {
 	return _build;
 }
 
-/// @function apiArrayBuildRange(size|indexBegin, _indexEnd, _step);
+/// @function apiArrayBuildRange(size|indexBegin, ?indexEnd, ?step);
 /// @param size|indexBegin
-/// @param _indexEnd
-/// @param _step
-function apiArrayBuildRange(i, j, _step) {
+/// @param ?indexEnd
+/// @param ?step
+function apiArrayBuildRange(_i, _j, _step) {
 	return apiIteratorRange(
 		function(_array, _0, _size) {
 			
@@ -312,7 +325,7 @@ function apiArrayBuildRange(i, j, _step) {
 		function(_array, _index, _count) {
 			
 			array_set(_array, _count, _index);
-		}, [], i, j, _step
+		}, [], _i, _j, _step
 	);
 }
 
@@ -320,30 +333,49 @@ function apiArrayBuildRange(i, j, _step) {
 
 #region find
 
-function array_find_index(_array, _value, _reverse, _index, _step) {
-	return array_find(_array, generator_compare_eq(_value), undefined, _reverse, _index, _step);
+/// @function apiArrayFindIndex(array, value, ?step, ?index);
+/// @param array
+/// @param value
+/// @param ?step
+/// @param ?index
+function apiArrayFindIndex(_array, _value, _step, _index) {
+	return apiArrayFor(_array, apiMethodGenCompareEq(_value), undefined, _step, _index);
 }
 
-function array_exists(_array, _value) {
-	return (array_find_index(_array, _value) != -1);
+/// @function apiArrayExists(array, value);
+/// @param array
+/// @param value
+function apiArrayExists(_array, _value) {
+	return (apiArrayFindIndex(_array, _value) != -1);
 }
 
 #endregion
 
 #region range
 
-function array_range_get(_array, _index, _length) {
-	var range = [];
-	array_copy(range, 0, _array, _index, _length);
-	return range;
+/// @function apiArrayRangeGet(array, value);
+/// @param array
+/// @param value
+function apiArrayRangeGet(_array, _index, _length) {
+	var _range = [];
+	array_copy(_range, 0, _array, _index, _length);
+	return _range;
 }
 
-function array_range_set(_array, _index, range) {
-	array_ext_copy(_array, range, _index, 0, array_length(range));
+/// @function apiArrayRangeSet(array, value, range);
+/// @param array
+/// @param value
+/// @param range
+function apiArrayRangeSet(_array, _index, _range) {
+	apiArrayCopy(_array, _range, _index);
 }
 
-function array_range_insert(_array, _index, range) {
-	array_ext_insert(_array, range, _index, 0, array_length(range));
+/// @function apiArrayRangeInsert(array, value, range);
+/// @param array
+/// @param value
+/// @param range
+function apiArrayRangeInsert(_array, _index, _range) {
+	apiArrayInsert(_array, _range, _index);
 }
 
 #endregion

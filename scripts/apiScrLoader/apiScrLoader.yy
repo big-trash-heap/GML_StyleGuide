@@ -3,7 +3,7 @@
   "isCompatibility": false,
   "parent": {
     "name": "loader",
-    "path": "folders/GML_StyleGuide_api (VM compiler)/api/loader.yy",
+    "path": "folders/GML_StyleGuide_api/api-core/loader.yy",
   },
   "resourceVersion": "1.0",
   "name": "apiScrLoader",

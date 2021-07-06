@@ -1,0 +1,7 @@
+// 2021-06-29 14:47:10
+
+function apiDebugAssert(assert, mess) {
+	if (!assert) {
+		throw ("\n\t" + mess);
+	}
+}

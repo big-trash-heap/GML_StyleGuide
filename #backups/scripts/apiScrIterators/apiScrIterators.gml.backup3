@@ -1,14 +1,14 @@
-// 2021-06-28 14:05:22
+// 2021-06-29 13:23:35
 
 // fInit = function(data, index, size)
 // fIter = function(data, index, count)
-/// @function apiIteratorRange(fInit, fIter, data, size|indexBegin, _indexEnd, _step)
+/// @function apiIteratorRange(fInit, fIter, data, size|indexBegin, ?indexEnd, ?step)
 /// @param fInit
 /// @param fIter
 /// @param data
 /// @param size|indexBegin
-/// @param _indexEnd
-/// @param _step
+/// @param ?indexEnd
+/// @param ?step
 function apiIteratorRange(_fInit, _fIter, _data, i, j, _step) {
 	if (is_undefined(_step)) {
 		
@@ -29,9 +29,8 @@ function apiIteratorRange(_fInit, _fIter, _data, i, j, _step) {
 			if (!is_undefined(_fInit)) _fInit(_data, i, _size);
 			while (_count < _size) {
 				
-				_fIter(_data, i, _count);
+				_fIter(_data, i, _count++);
 				i += _step;
-				_count += 1;
 			}
 		}
 		else {

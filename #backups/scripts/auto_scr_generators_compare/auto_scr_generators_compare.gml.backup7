@@ -1,0 +1,10 @@
+// 2021-06-29 10:31:08
+
+
+function generator_compare_eq(left) {
+	static _compareRight = function(right) {
+		return (self.__left == right);
+	}
+	return method({__left: left}, _compareRight);
+}
+

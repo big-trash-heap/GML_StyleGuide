@@ -7,6 +7,11 @@ else {
 	// code
 }
 
+if (cond)
+	// code
+else
+	// code
+
 // частичный if
 if (cond) {
 	// code
@@ -24,10 +29,20 @@ if (cond) {
 
 // однострочный и другие однострочники
 if (cond) // code
+if (cond)
+	// code
 while (cond) // code
+while (cond)
+	// code
 repeat const // code
+repeat const
+	// code
 repeat (expr) // code
+repeat (expt)
+	// code
 for (..;..;..) // code
+for (..;..;..) 
+	// code
 
 //
 while (cond) {

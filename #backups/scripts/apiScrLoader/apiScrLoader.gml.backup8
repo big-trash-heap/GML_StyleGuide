@@ -1,4 +1,4 @@
-// 2021-06-28 13:46:16
+// 2021-06-28 14:07:00
 
 //
 if (variable_global_exists("__apiLoaderHeap")) exit;
@@ -38,7 +38,7 @@ function __apiLoaderLoad() {
 	ds_priority_destroy(_heap);
 }
 
-show_message(apiArrayBuildRange(50))
+show_message(apiArrayBuildRange(0, -10, -2))
 
 
 
