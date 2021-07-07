@@ -1,8 +1,7 @@
 
-global.apiArrayFill = "";
-show_message(global.apiArrayFill)
+#region[#4e4a944F] modify
 
-#region apiArrayFill
+#region[#b59f671f] apiArrayFill
 var _array, _arset;
 
 _arset = [1, 5, 2, 2];
@@ -19,7 +18,7 @@ apiDebugAssert(array_equals(_array, _arset), "apiArrayFill - 2");
 
 #endregion
 
-#region apiArrayPlace
+#region[#b59f671f] apiArrayPlace
 var _array, _artst;
 
 _array = [1, 4,  2,    8, 1, 5, 13];
@@ -40,7 +39,7 @@ apiDebugAssert(array_equals(_array, _artst), "apiArrayPlace - 2");
 
 #endregion
 
-#region apiArrayPlaceExt
+#region[#b59f671f] apiArrayPlaceExt
 var _array, _artst;
 
 _array = [1,   2, 3, 4];
@@ -66,7 +65,7 @@ apiDebugAssert(array_equals(_array, _artst), "apiArrayPlaceExt - 3");
 
 #endregion
 
-#region apiArrayInsertEmpty
+#region[#b59f671f] apiArrayInsertEmpty
 var _array, _artst;
 
 _array = [1, 2, 3, 4];
@@ -107,7 +106,7 @@ apiDebugAssert(array_equals(_array, _artst), "apiArrayInsertEmpty - 6");
 
 #endregion
 
-#region apiArrayUnshift
+#region[#b59f671f] apiArrayUnshift
 var _array, _artst, _count;
 
 _array = [1, 2, 3, 4];
@@ -130,8 +129,71 @@ apiDebugAssert(_count == 4, "apiArrayUnshift - 2._count");
 
 #endregion
 
-#region array_shift
+#region[#b59f671f] apiArrayShift
+var _array = [1, 2, 3, 4];
 
-
+apiDebugAssert(1 == apiArrayShift(_array), "apiArrayShift - 0");
+apiDebugAssert(2 == apiArrayShift(_array), "apiArrayShift - 1");
+apiDebugAssert(3 == apiArrayShift(_array), "apiArrayShift - 2");
+apiDebugAssert(4 == apiArrayShift(_array), "apiArrayShift - 3");
+apiDebugAssert(_ == apiArrayShift(_array), "apiArrayShift - 4");
+apiDebugAssert(array_length(_array) == 0, "apiArrayShift - 5");
 
 #endregion
+
+#region[#b59f671f] apiArrayShuffle
+var _array = [[], [], [], []];
+var _tester = function(_array_test, _msg) {
+    var _size = array_length(_array_test);
+    var _copy = array_create(_size);
+    array_copy(_copy, 0, _array_test, 0, _size);
+    var _seed = random_get_seed();
+    randomize();
+    apiArrayShuffle(_copy);
+    var _counter = _size;
+    for (var _i = 0; _i < _size; ++_i) {
+        
+        for (var _j = 0; _j < _size; ++_j) {
+            
+            if (_array_test[_i] == _copy[_j]) {
+                
+                _counter -= 1;
+                break;
+            }
+        }
+    }
+    random_set_seed(_seed);
+    apiDebugAssert(_counter == 0, _msg);
+}
+
+var _percent = 0;
+repeat 100 {
+    var _size = array_length(_array);
+    var _copy = array_create(_size);
+    array_copy(_copy, 0, _array, 0, _size);
+    apiArrayShuffle(_copy);
+    for (var _i = 0; _i < _size; ++_i) {
+        
+        if (_array[_i] != _copy[_i]) {
+            
+            _percent += 1;
+            break;
+        }
+    }
+}
+
+apiDebugAssert(_percent > 0, "apiArrayShuffle - main");
+
+repeat 100 _tester(_array, "apiArrayShuffle - 0");
+_tester([[], [], [], [], {}, [], 1, "hello"], "apiArrayShuffle - 1");
+_tester([1, 2, 3], "apiArrayShuffle - 2");
+
+#endregion
+
+#endregion
+
+apiLoader(function() {
+    
+    show_message("good job")
+    game_end();
+});

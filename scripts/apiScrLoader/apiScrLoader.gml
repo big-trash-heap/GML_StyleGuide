@@ -8,14 +8,23 @@ global.__apiLoaderHeap = apiStructBuild(
 	["project", ds_priority_create()],
 );
 
-//
-function apiLoader(_intPriority, _loader) {
+/// @function apiLoader(loader, intPriotiry=0);
+/// @param loader
+/// @param intPriotiry=0
+function apiLoader(_loader, _intPriority) {
+	
+	if (is_undefined(_intPriority)) _intPriority = 0;
 	
 	apiScrLoader();
 	ds_priority_add(global.__apiLoaderHeap[$ "project"], _loader, _intPriority);
 }
 
-function __apiLoader(_intPriority, _loader) {
+/// @function __apiLoader(loader, intPriotiry=0);
+/// @param loader
+/// @param intPriotiry=0
+function __apiLoader(_loader, _intPriority) {
+	
+	if (is_undefined(_intPriority)) _intPriority = 0;
 	
 	apiScrLoader();
 	ds_priority_add(global.__apiLoaderHeap[$ "api"], _loader, _intPriority);
@@ -33,8 +42,6 @@ function __apiLoaderLoad() {
 	ds_priority_destroy(_heap);
 	
 }
-
-
 
 
 

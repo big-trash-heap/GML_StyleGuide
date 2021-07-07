@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "scripts",
-    "path": "folders/scripts.yy",
+    "name": "struct",
+    "path": "folders/GML_StyleGuide_api/api-core/ds/struct.yy",
   },
   "resourceVersion": "1.0",
-  "name": "Script1",
+  "name": "apiScrStructHigher",
   "tags": [],
   "resourceType": "GMScript",
 }

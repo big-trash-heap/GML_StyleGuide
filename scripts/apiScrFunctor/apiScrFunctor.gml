@@ -2,19 +2,19 @@
 
 #region basic
 
-function functor_empty() {
+function apiFunctorEmpty() {
 	return undefined;
 }
 
-function functor_id(_value) {
+function apiFunctorId(_value) {
 	return _value;
 }
 
-function functor_array_wrap(_value) {
+function apiFunctorArray(_value) {
 	return (is_array(_value) ? _value : [_value]);
 }
 
-function functor_struct_wrap(_value, _key) {
+function apiFunctorStruct(_value, _key) {
 	if (is_struct(_value)) return _value;
 	var _build = {};
 	_build[$ (is_undefined(_key) ? "" : _key)] = _value;

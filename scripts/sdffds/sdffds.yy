@@ -6,7 +6,7 @@
     "path": "folders/scripts.yy",
   },
   "resourceVersion": "1.0",
-  "name": "Script1",
+  "name": "sdffds",
   "tags": [],
   "resourceType": "GMScript",
 }

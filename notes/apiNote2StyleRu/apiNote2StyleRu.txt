@@ -2,7 +2,7 @@
 // полный if
 if (cond) {
 	// code
-} 
+}
 else {
 	// code
 }

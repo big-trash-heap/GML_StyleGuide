@@ -1,3 +1,3 @@
 
 __apiLoaderLoad();
-room_goto_next();
+alarm_set(0, 5);

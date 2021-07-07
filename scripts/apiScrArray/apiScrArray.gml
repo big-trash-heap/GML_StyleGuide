@@ -4,7 +4,7 @@
 */
 
 
-#region modify
+#region[#4e4a944F] modify
 
 /// @function apiArrayPlace(array, arrayFill)
 /// @param array
@@ -254,7 +254,7 @@ function apiArrayRemoveNoOrder(_array, _index) {
 
 #endregion
 
-#region build
+#region[#944a754F] build
 
 /// @function apiArrayBuild(...value);
 /// @param ...value
@@ -330,7 +330,7 @@ function apiArrayBuildRange(_i, _j, _step) {
 
 #endregion
 
-#region find
+#region[#4e4a944F] find
 
 /// @function apiArrayFindIndex(array, value, ?step, ?index);
 /// @param array
@@ -350,7 +350,7 @@ function apiArrayExists(_array, _value) {
 
 #endregion
 
-#region range
+#region[#944a754F] range
 
 /// @function apiArrayRangeGet(array, value);
 /// @param array
