@@ -10,6 +10,7 @@
     {"id":{"name":"apiNote3OtherRu","path":"notes/apiNote3OtherRu/apiNote3OtherRu.yy",},"order":2,},
     {"id":{"name":"apiScrFunctor","path":"scripts/apiScrFunctor/apiScrFunctor.yy",},"order":0,},
     {"id":{"name":"apiScrMethodGen","path":"scripts/apiScrMethodGen/apiScrMethodGen.yy",},"order":0,},
+    {"id":{"name":"apiObjMain","path":"objects/apiObjMain/apiObjMain.yy",},"order":3,},
     {"id":{"name":"note_plan","path":"notes/note_plan/note_plan.yy",},"order":5,},
     {"id":{"name":"apiScrComparator","path":"scripts/apiScrComparator/apiScrComparator.yy",},"order":0,},
     {"id":{"name":"AnimationCurve1","path":"animcurves/AnimationCurve1/AnimationCurve1.yy",},"order":2,},
