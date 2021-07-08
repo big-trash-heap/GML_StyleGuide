@@ -70,8 +70,8 @@ function apiToStringBaseToIntegerBuildTable(_table) {
     return _build;
 }
 
-/// @function apiToString(integerOrIntegerCrypt, base=16, ?padding)
-/// @param integerOrIntegerCrypt
+/// @function apiToString(integer_or_integerCrypt, base=16, ?padding)
+/// @param integer_or_integerCrypt
 /// @param base=16
 /// @param ?padding
 function apiToString(_integerOrIntegerCrypt, _base, _padding) {
@@ -101,9 +101,9 @@ function apiToString(_integerOrIntegerCrypt, _base, _padding) {
 	return (_sign == -1 ? "-" + _hex : _hex);
 }
 
-/// @function apiToStringBuffer(buffer, ?ignoreSeek)
+/// @function apiToStringBuffer(buffer, ?ignore_seek)
 /// @param buffer
-/// @param ?ignoreSeek
+/// @param ?ignore_seek
 function apiToStringBuffer(_buffer, _ignoreSeek) {
 	
 	var _size = buffer_get_size(_buffer);

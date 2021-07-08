@@ -28,6 +28,7 @@
     {"id":{"name":"apiScrStringBuilder","path":"scripts/apiScrStringBuilder/apiScrStringBuilder.yy",},"order":1,},
     {"id":{"name":"apiScrString","path":"scripts/apiScrString/apiScrString.yy",},"order":0,},
     {"id":{"name":"apiScrToString","path":"scripts/apiScrToString/apiScrToString.yy",},"order":2,},
+    {"id":{"name":"apiScrBuffer","path":"scripts/apiScrBuffer/apiScrBuffer.yy",},"order":0,},
   ],
   "Options": [
     {"name":"Linux","path":"options/linux/options_linux.yy",},
@@ -67,6 +68,7 @@
     {"folderPath":"folders/GML_StyleGuide_api/api-core/ds/struct.yy","order":1,"resourceVersion":"1.0","name":"struct","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/scripts.yy","order":5,"resourceVersion":"1.0","name":"scripts","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/GML_StyleGuide_api/api-core/string.yy","order":8,"resourceVersion":"1.0","name":"string","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/GML_StyleGuide_api/api-core/buffer.yy","order":9,"resourceVersion":"1.0","name":"buffer","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},

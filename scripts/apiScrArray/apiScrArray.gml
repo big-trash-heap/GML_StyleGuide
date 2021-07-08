@@ -6,9 +6,9 @@
 
 #region[#4e4a944F] modify
 
-/// @function apiArrayPlace(array, arrayFill)
+/// @function apiArrayPlace(array, array_fill)
 /// @param array
-/// @param arrayFill
+/// @param array_fill
 function apiArrayFill(_array, _arrayFill) {
 	var _size = array_length(_arrayFill);
     array_resize(_array, _size);
@@ -32,10 +32,10 @@ function apiArrayPlace(_array, _index) {
 	}
 }
 
-/// @function apiArrayPlaceExt(array, ??index, ...arrayOrValue);
+/// @function apiArrayPlaceExt(array, ??index, ...array_or_value);
 /// @param array
 /// @param ??index
-/// @param ...arrayOrValue
+/// @param ...array_or_value
 function apiArrayPlaceExt(_array, _index) {
 	var _argSize = argument_count;
 	if (_argSize > 2) {
@@ -280,8 +280,8 @@ function apiArrayBuildReverse(_array) {
 	return _newArray;
 }
 
-/// @function apiArrayBuildConcat(...arrayOrValue);
-/// @param ...arrayOrValue
+/// @function apiArrayBuildConcat(...array_or_value);
+/// @param ...array_or_value
 function apiArrayBuildConcat() {
 	var _argSize = argument_count;
 	var _build = [];
@@ -311,8 +311,8 @@ function apiArrayBuildConcat() {
 	return _build;
 }
 
-/// @function apiArrayBuildRange(size|indexBegin, ?indexEnd, ?step);
-/// @param size|indexBegin
+/// @function apiArrayBuildRange(size|index_begin, ?indexEnd, ?step);
+/// @param size|index_begin
 /// @param ?indexEnd
 /// @param ?step
 function apiArrayBuildRange(_i, _j, _step) {
