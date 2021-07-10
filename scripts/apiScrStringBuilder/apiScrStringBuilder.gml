@@ -25,9 +25,14 @@ function ApiStringBuilder(_bufferGrow) constructor {
 		return self;
 	}
 	
-	static clear = function() {
+	static clear = function(_size) {
 	    
 		buffer_seek(self.buffer, buffer_seek_start, 0);
+		
+		if (is_undefined(_size) and buffer_get_size(self.buffer) > _size)
+			buffer_resize(self.buffer, _size);
+		
+		return self;
 	}
 	
 	static render = function() {

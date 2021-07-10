@@ -8,9 +8,9 @@ global.__apiLoaderHeap = apiStructBuild(
 	["project", ds_priority_create()],
 );
 
-/// @function apiLoader(loader, intPriotiry=0);
+/// @function apiLoader(loader, int_priority=0);
 /// @param loader
-/// @param intPriotiry=0
+/// @param int_priority=0
 function apiLoader(_loader, _intPriority) {
 	
 	if (is_undefined(_intPriority)) _intPriority = 0;
@@ -19,9 +19,9 @@ function apiLoader(_loader, _intPriority) {
 	ds_priority_add(global.__apiLoaderHeap[$ "project"], _loader, _intPriority);
 }
 
-/// @function __apiLoader(loader, intPriotiry=0);
+/// @function __apiLoader(loader, int_priority=0);
 /// @param loader
-/// @param intPriotiry=0
+/// @param int_priority=0
 function __apiLoader(_loader, _intPriority) {
 	
 	if (is_undefined(_intPriority)) _intPriority = 0;

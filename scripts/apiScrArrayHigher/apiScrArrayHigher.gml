@@ -61,13 +61,29 @@ function apiArrayBuildFilter(_array, _f, _data) {
 #region iterator
 
 // f = function(array, index, data)
-/// @function apiArrayFor(array, f, ?data, ?step, ?index);
+/// @function apiArrayForEach(array, f, ?data);
+/// @param array
+/// @param f
+/// @param ?data
+function apiArrayForEach(_array, _f, _data) {
+	
+	var _size = array_length(_array);
+	for (var _i = 0; _i < _size; ++_i) {
+		
+		if (_f(_array, _i, _data)) return _i;
+	}
+	
+	return _i;
+}
+
+// f = function(array, index, data)
+/// @function apiArrayForStep(array, f, ?data, ?step, ?index);
 /// @param array
 /// @param f
 /// @param ?data
 /// @param ?step
 /// @param ?index
-function apiArrayFor(_array, _f, _data, _step, _index) {
+function apiArrayForStep(_array, _f, _data, _step, _index) {
 	var _size = array_length(_array);
     if (_size--) {
         

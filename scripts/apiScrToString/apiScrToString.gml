@@ -1,5 +1,8 @@
 
 #macro API_INTEGER_TO_BASE_DEFAULT_TABLE "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+#macro API_INTEGER_TO_BASE_HEX           16
+#macro API_INTEGER_TO_BASE_OCT           8
+#macro API_INTEGER_TO_BASE_BIN           2
 
 /// @function apiToStringIntegerToBase(integer, base, ?table)
 /// @param integer

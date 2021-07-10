@@ -28,7 +28,7 @@ function apiArrayPlace(_array, _index) {
 		if (is_undefined(_index)) _index = _size;
 		
 		array_resize(_array, max(_size, _index + _count));
-		for (var _i = 0; _i < _count; _i++) array_set(_array, _index + _i, argument[_i + 2]);
+		for (var _i = 0; _i < _count; ++_i) array_set(_array, _index + _i, argument[_i + 2]);
 	}
 }
 
@@ -44,7 +44,7 @@ function apiArrayPlaceExt(_array, _index) {
 		var baseSize = array_length(_array);
 		var _size = (is_undefined(_index) ? baseSize : _index);
 		
-		for (var _i = 2; _i < _argSize; _i++) {
+		for (var _i = 2; _i < _argSize; ++_i) {
 			_value = argument[_i];
 			
 			if (is_array(_value)) {
@@ -261,7 +261,7 @@ function apiArrayRemoveNoOrder(_array, _index) {
 function apiArrayBuild() {
 	var _argSize = argument_count;
 	var _array = array_create(_argSize);
-	for (var _i = 0; _i < _argSize; _i++) array_set(_array, _i, argument[_i]);
+	for (var _i = 0; _i < _argSize; ++_i) array_set(_array, _i, argument[_i]);
 	return _array;
 }
 
@@ -276,7 +276,7 @@ function apiArrayBuildDup1d(_array) {
 function apiArrayBuildReverse(_array) {
 	var _size = array_length(_array);
 	var _newArray = array_create(_size);
-	for (var _i = 0; _i < _size; _i++) array_set(_newArray, _i, array_get(_array, --_size));
+	for (var _i = 0; _i < _size; ++_i) array_set(_newArray, _i, array_get(_array, --_size));
 	return _newArray;
 }
 
@@ -288,7 +288,7 @@ function apiArrayBuildConcat() {
 	if (_argSize > 0) {
 		
 		var _value, _jsize, _j, _temp, _size = 0;
-		for (var _i = 0; _i < _argSize; _i++) {
+		for (var _i = 0; _i < _argSize; ++_i) {
 			_value = argument[_i];
 			
 			if (is_array(_value)) {
@@ -301,7 +301,7 @@ function apiArrayBuildConcat() {
 				for (_j = 0; _j < _jsize; _j++) array_set(_build, _size + _j, _value[_j]);
 				
 				_size = _temp;
-			} 
+			}
 			else {
 				_size += 1;
 				array_push(_build, _value);
@@ -311,9 +311,9 @@ function apiArrayBuildConcat() {
 	return _build;
 }
 
-/// @function apiArrayBuildRange(size|index_begin, ?indexEnd, ?step);
+/// @function apiArrayBuildRange(size|index_begin, ?index_end, ?step);
 /// @param size|index_begin
-/// @param ?indexEnd
+/// @param ?index_end
 /// @param ?step
 function apiArrayBuildRange(_i, _j, _step) {
 	return apiIteratorRange(
@@ -332,13 +332,31 @@ function apiArrayBuildRange(_i, _j, _step) {
 
 #region[#4e4a944F] find
 
-/// @function apiArrayFindIndex(array, value, ?step, ?index);
+/// @function apiArrayFindIndex(array, value, ?index);
+/// @param array
+/// @param value
+/// @param ?index
+function apiArrayFindIndex(_array, _value, _index) {
+	
+	var _size = array_length(_array);
+	for (var _i = (is_undefined(_index) ? 0 : _index); _i < _size; ++_i)
+		if (_array[_i] == _value) return _i;
+	
+	return -1;
+}
+
+/// @function apiArrayFindIndexStep(array, value, ?step, ?index);
 /// @param array
 /// @param value
 /// @param ?step
 /// @param ?index
-function apiArrayFindIndex(_array, _value, _step, _index) {
-	return apiArrayFor(_array, apiMethodGenCompareEq(_value), _, _step, _index);
+function apiArrayFindIndexStep(_array, _value, _step, _index) {
+	static _compare = apiMethodGenCompareEq(undefined);
+	static _compareStruct = method_get_self(_compare);
+	_compareStruct.__left = _value;
+	_index = apiArrayForStep(_array, _compare, _, _step, _index);
+	_compareStruct.__left = undefined;
+	return _index;
 }
 
 /// @function apiArrayExists(array, value);
@@ -346,6 +364,12 @@ function apiArrayFindIndex(_array, _value, _step, _index) {
 /// @param value
 function apiArrayExists(_array, _value) {
 	return (apiArrayFindIndex(_array, _value) != -1);
+}
+
+/// @function apiArrayEmpty(array);
+/// @param array
+function apiArrayEmpty(_array) {
+	return (array_length(_array) == 0);
 }
 
 #endregion

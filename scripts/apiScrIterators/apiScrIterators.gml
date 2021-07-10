@@ -1,12 +1,12 @@
 
-// fInit = function(data, index, size)
-// fIter = function(data, index, count)
-/// @function apiIteratorRange(?fInit, ?fIter, data, size|indexBegin, ?indexEnd, ?step)
-/// @param ?fInit
-/// @param ?fIter
+// f_init = function(data, index, size)
+// f_iter = function(data, index, count)
+/// @function apiIteratorRange(?f_init, ?f_iter, data, size|index_begin, ?index_end, ?step)
+/// @param ?f_init
+/// @param ?f_iter
 /// @param data
-/// @param size|indexBegin
-/// @param ?indexEnd
+/// @param size|index_begin
+/// @param ?index_end
 /// @param ?step
 function apiIteratorRange(_fInit, _fIter, _data, _i, _j, _step) {
 	if (is_undefined(_step)) {
@@ -52,8 +52,13 @@ function apiIteratorRange(_fInit, _fIter, _data, _i, _j, _step) {
 	return _data;
 }
 
-// fInit = function(data, array, size)
-// fIter = function(data, array, index)
+// f_init = function(data, array, size)
+// f_iter = function(data, array, index)
+/// @function apiIteratorArrays(?f_init, ?f_iter, data, ...array);
+/// @param ?f_init
+/// @param ?f_iter
+/// @param data
+/// @param ...array
 function apiIteratorArrays(_fInit, _fIter, _data) {
 	
 	var _argSize = argument_count;
@@ -72,7 +77,8 @@ function apiIteratorArrays(_fInit, _fIter, _data) {
 				
 				if (_fInit(_data, _array, _size)) _index += 1;
 			}
-			if (!is_undefined(_fIter)) for (; _index < _size; ++_index) _fIter(_data, _array, _index);
+			if (!is_undefined(_fIter)) 
+				for (; _index < _size; ++_index) _fIter(_data, _array, _index);
 		} until (++_argIndex < _argSize);
 	}
 	
