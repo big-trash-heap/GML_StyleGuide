@@ -331,29 +331,31 @@ function ApiTreeRB(_compare) constructor {
 
 var tree = new ApiTreeRB();
 
-tree.insert(2,"hello");
-tree.insert(2,"x");
-tree.insert(3,"tanks");
-tree.insert(4,"putin");
-tree.insert(6,"bcv");
-tree.insert(-10,"work");
+var size = 1000;
+var keys = ds_list_create();
+var key;
+repeat size {
+    
+    key = irandom_range(-10000, 10000);
+    if (ds_list_find_index(keys, key) != -1) continue;
+    ds_list_add(keys, key);
+    tree.insert(key, string(key));
+}
 
-show_message(tree.find(2));
-tree.remove(2);
-show_message(tree.find(2));
-show_message(tree.find(3));
-show_message(tree.find(4));
-show_message(tree.find(6));
-show_message(tree.find(-10));
+size = ds_list_size(keys);
+ds_list_shuffle(keys);
+for (var i = 0; i < size; ++i) {
+    
+    key = keys[| i];
+    show_debug_message("exists| key: " + string(key) + ", value: " + string(tree.find(key)));
+    if (tree.find(key) != string(key)) show_error("aosidfhisdfsodifhsoidfasdfisdjfsdfsdf", true);
+}
 
-tree.remove(6);
-tree.remove(6);
-tree.remove(6);
-tree.remove(6);
-tree.remove(2);
-tree.remove(-10);
-tree.remove(4);
-tree.remove(3);
-show_message(tree.find(6));
-show_message(tree.size()])
+for (var i = 0; i < size; ++i) {
+    
+    key = keys[| i];
+    if (tree.find(key) == undefined) show_error("x | " + string(key), true);
+    if (!tree.remove(key)) show_error("2 22 2 2 sdfkmsdfksdfsdfsdf | " + string(key), true);
+    show_debug_message("remove: " + string(i) + "\t\t" + "| " + string(key));
+}
 
