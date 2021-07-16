@@ -3,7 +3,7 @@
   "isCompatibility": false,
   "parent": {
     "name": "array",
-    "path": "folders/GML_StyleGuide_api/api-core/ds/array.yy",
+    "path": "folders/GML_StyleGuide_api/api_core/ds/array.yy",
   },
   "resourceVersion": "1.0",
   "name": "apiScrArray",

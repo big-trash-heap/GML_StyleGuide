@@ -60,7 +60,7 @@ function apiToStringBaseToInteger(_integerCrypt, _base, _table) {
 		_number = _table[$ string_char_at(_integerCrypt, _pointerLast--)];
 		_integer += power(_base, _pointerFirst++) * _number;
 	}
-	return _integer * _sign;
+	return (_integer * _sign);
 }
 
 /// @function apiToStringBaseToIntegerBuildTable(table)
@@ -73,11 +73,11 @@ function apiToStringBaseToIntegerBuildTable(_table) {
     return _build;
 }
 
-/// @function apiToString(integer_or_integerCrypt, base=16, ?padding)
+/// @function apiToStringInteger(integer_or_integerCrypt, base=16, ?padding)
 /// @param integer_or_integerCrypt
 /// @param base=16
 /// @param ?padding
-function apiToString(_integerOrIntegerCrypt, _base, _padding) {
+function apiToStringInteger(_integerOrIntegerCrypt, _base, _padding) {
 	
 	if (is_undefined(_base)) _base = 16;
 	
@@ -121,8 +121,8 @@ function apiToStringBuffer(_buffer, _ignoreSeek) {
 		}
 		
 		_string += " ";
-		_string += apiToString(buffer_peek(_buffer, _i, buffer_u8), _, 2);
+		_string += apiToStringInteger(buffer_peek(_buffer, _i, buffer_u8), _, 2);
 	}
-	return _string + ">";
+	return (_string + ">");
 }
 

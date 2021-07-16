@@ -5,7 +5,7 @@
 /// @param dest_offset
 /// @param ?src_offset
 /// @param ?size
-function apiBufferCopy(_dest, _src, _destOffset, _srcOffest, _size) {
+function apiBufferCopy(_dest, _src, _destOffset, _srcOffest, _size) { // TODO: optimize alg copyng
     var _destLength = buffer_get_size(_dest);
     var _srcLength = buffer_get_size(_src);
     if (is_undefined(_srcOffest)) _srcOffest = 0;

@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "generators",
-    "path": "folders/GML_StyleGuide_api/api_core/generators.yy",
+    "name": "red_black",
+    "path": "folders/GML_StyleGuide_api/api_core/tree/red_black.yy",
   },
   "resourceVersion": "1.0",
-  "name": "apiScrMethodGen",
+  "name": "apiScrTreeRedBlack",
   "tags": [],
   "resourceType": "GMScript",
 }

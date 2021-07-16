@@ -61,3 +61,23 @@ function apiStructBuildDup1d(_struct) {
 }
 
 #endregion
+
+#region self
+
+function apiSelfExists(_key) {
+    return variable_struct_exists(self, _key);
+}
+
+function apiSelfGet(_key) {
+    return variable_struct_get(self, _key);
+}
+
+function apiSelfSet(_key, _value) {
+    variable_struct_set(self, _key, _value);
+}
+
+function apiSelfRemove(_key) {
+    variable_struct_remove(self, _key);
+}
+
+#endregion

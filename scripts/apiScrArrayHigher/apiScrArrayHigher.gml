@@ -68,10 +68,8 @@ function apiArrayBuildFilter(_array, _f, _data) {
 function apiArrayForEach(_array, _f, _data) {
 	
 	var _size = array_length(_array);
-	for (var _i = 0; _i < _size; ++_i) {
-		
+	for (var _i = 0; _i < _size; ++_i)
 		if (_f(_array, _i, _data)) return _i;
-	}
 	
 	return _i;
 }

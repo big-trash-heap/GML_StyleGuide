@@ -3,7 +3,7 @@
   "isCompatibility": false,
   "parent": {
     "name": "buffer",
-    "path": "folders/GML_StyleGuide_api/api-core/buffer.yy",
+    "path": "folders/GML_StyleGuide_api/api_core/buffer.yy",
   },
   "resourceVersion": "1.0",
   "name": "apiScrBuffer",

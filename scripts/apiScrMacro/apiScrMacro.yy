@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "api-core",
-    "path": "folders/GML_StyleGuide_api/api-core.yy",
+    "name": "api_core",
+    "path": "folders/GML_StyleGuide_api/api_core.yy",
   },
   "resourceVersion": "1.0",
   "name": "apiScrMacro",

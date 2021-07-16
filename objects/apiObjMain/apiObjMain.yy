@@ -24,7 +24,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "loader",
-    "path": "folders/GML_StyleGuide_api/api-core/loader.yy",
+    "path": "folders/GML_StyleGuide_api/api_core/loader.yy",
   },
   "resourceVersion": "1.0",
   "name": "apiObjMain",
