@@ -11,7 +11,11 @@
 function apiToStringIntegerToBase(_integer, _base, _table) {
     
     if (is_undefined(_table)) _table = API_INTEGER_TO_BASE_DEFAULT_TABLE;
-    var _result = "", _sign = sign(_integer), _mod;
+    
+    var _sign = sign(_integer);
+    if (_sign == 0) return string_char_at(_table, 0);
+    
+    var _result = "", _mod;
     _integer = abs(_integer);
     while (_integer > 0) {
         
