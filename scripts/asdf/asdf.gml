@@ -1,3 +1,5 @@
+/*
+
 
 function ApiBufferWrap(_buffer) constructor {
     
@@ -71,6 +73,41 @@ function ApiBuffer(_size, _alignment) : ApiBufferWrap(_) constructor {
     
 }
 
+
+// f = function(value, index, data)
+/// @function apiArrayForStep(array, f, ?data, ?step, ?index);
+/// @param array
+/// @param f
+/// @param ?data
+/// @param ?step
+/// @param ?index
+function apiArrayFindExt(_array, _f, _data, _step, _index) {
+	var _size = array_length(_array);
+    if (_size--) {
+        
+		if (is_undefined(_step)) _step = 1;
+		var _reverse = (sign(_step) == -1);
+		
+        if (is_undefined(_index)) _index = (_reverse ? _size : 0);
+        if (_reverse) {
+            do {
+				
+				if (_f(_array[_index], _index, _data)) return _index;
+				
+                _index += _step;
+            } until (_index < 0);
+        } 
+        else {
+            do {
+				
+                if (_f(_array[_index], _index, _data)) return _index;
+				
+                _index += _step;
+            } until (_index > _size);
+        }
+    }
+    return -1;
+}
 
 
 /*

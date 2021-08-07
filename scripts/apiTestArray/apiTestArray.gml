@@ -39,31 +39,31 @@ apiDebugAssert(array_equals(_array, _artst), "apiArrayPlace - 2");
 
 #endregion
 	   
-#region apiArrayPlaceExt
-var _array, _artst;
+//#region apiArrayPlaceExt
+//var _array, _artst;
 
-_array = [1,   2, 3, 4];
-_artst = [-1, -2, 3, undefined, 0];
-apiArrayPlaceExt(_array, 0, [-1, -2], 3, undefined, [0]);
-apiDebugAssert(array_equals(_array, _artst), "apiArrayPlaceExt - 0");
+//_array = [1,   2, 3, 4];
+//_artst = [-1, -2, 3, undefined, 0];
+//apiArrayPlaceExt(_array, 0, [-1, -2], 3, undefined, [0]);
+//apiDebugAssert(array_equals(_array, _artst), "apiArrayPlaceExt - 0");
 
-_array = [1, 2, 3];
-_artst = [1, 2, 3, "hello", -1, -2];
-apiArrayPlaceExt(_array, undefined, "hello", [-1, -2]);
-apiDebugAssert(array_equals(_array, _artst), "apiArrayPlaceExt - 1");
+//_array = [1, 2, 3];
+//_artst = [1, 2, 3, "hello", -1, -2];
+//apiArrayPlaceExt(_array, undefined, "hello", [-1, -2]);
+//apiDebugAssert(array_equals(_array, _artst), "apiArrayPlaceExt - 1");
 
 
-_array = [1, 4,  2,    8, 1, 5, 13];
-_artst = [1, 4, -1, "hi", 1, 5, 13];
-apiArrayPlaceExt(_array, 2, [-1], "hi");
-apiDebugAssert(array_equals(_array, _artst), "apiArrayPlaceExt - 2");
+//_array = [1, 4,  2,    8, 1, 5, 13];
+//_artst = [1, 4, -1, "hi", 1, 5, 13];
+//apiArrayPlaceExt(_array, 2, [-1], "hi");
+//apiDebugAssert(array_equals(_array, _artst), "apiArrayPlaceExt - 2");
 
-_array = [1, 4, 2, 1];
-_artst = _array;
-apiArrayPlaceExt(_array, 4);
-apiDebugAssert(array_equals(_array, _artst), "apiArrayPlaceExt - 3");
+//_array = [1, 4, 2, 1];
+//_artst = _array;
+//apiArrayPlaceExt(_array, 4);
+//apiDebugAssert(array_equals(_array, _artst), "apiArrayPlaceExt - 3");
 
-#endregion
+//#endregion
 	   
 #region apiArrayInsertEmpty
 var _array, _artst;

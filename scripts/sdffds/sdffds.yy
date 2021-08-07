@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "scripts",
-    "path": "folders/scripts.yy",
+    "name": "not include",
+    "path": "folders/not include.yy",
   },
   "resourceVersion": "1.0",
   "name": "sdffds",

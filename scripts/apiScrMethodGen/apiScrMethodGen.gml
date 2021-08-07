@@ -1,4 +1,4 @@
-
+/*
 #region compare
 
 /// @function apiMethodGenCompareEq(left)

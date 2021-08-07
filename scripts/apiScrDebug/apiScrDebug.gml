@@ -1,6 +1,8 @@
 
 
 /// @function apiDebugShow(array, [handler]);
+/// @param array
+/// @param [handler]
 function apiDebugShow(_array, _handler) {
 	
 	static _handler_def = function(_value) {
@@ -19,6 +21,8 @@ function apiDebugShow(_array, _handler) {
 	return _text;
 }
 
+/// @function apiDebugPrint(...values);
+/// @param ...values
 function apiDebugPrint() {
 	
 	//

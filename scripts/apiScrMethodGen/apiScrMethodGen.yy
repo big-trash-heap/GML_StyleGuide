@@ -3,7 +3,7 @@
   "isCompatibility": false,
   "parent": {
     "name": "generators",
-    "path": "folders/GML_StyleGuide_api/api_core/generators.yy",
+    "path": "folders/not include/generators.yy",
   },
   "resourceVersion": "1.0",
   "name": "apiScrMethodGen",

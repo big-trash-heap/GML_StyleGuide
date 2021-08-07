@@ -10,11 +10,11 @@ function apiStructClear(_struct) {
     for (var _i = 0; _i < _size; ++_i) variable_struct_remove(_struct, _keys[_i]);
 }
 
-/// @function apiStructMerge(struct_merge, struct, ?union);
+/// @function apiStructMerge(struct_merge, struct, [union]);
 /// @param dest
 /// @param src
-/// @param ?union
-function apiStructMerge(_struct_merge, _struct, _union) {
+/// @param [union]
+function apiStructMerge(_struct_merge, _struct, _union=false) {
     
     var _keys = variable_struct_get_names(_struct);
     var _size = array_length(_keys), _key;
@@ -62,22 +62,3 @@ function apiStructBuildDup1d(_struct) {
 
 #endregion
 
-#region self
-
-function apiSelfExists(_key) {
-    return variable_struct_exists(self, _key);
-}
-
-function apiSelfGet(_key) {
-    return variable_struct_get(self, _key);
-}
-
-function apiSelfSet(_key, _value) {
-    variable_struct_set(self, _key, _value);
-}
-
-function apiSelfRemove(_key) {
-    variable_struct_remove(self, _key);
-}
-
-#endregion

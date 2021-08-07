@@ -4,7 +4,7 @@
 */
 
 
-#region[#4e4a944F] modify
+#region modify
 
 /// @function apiArrayPlace(array, array_fill)
 /// @param array
@@ -16,9 +16,9 @@ function apiArrayFill(_array, _arrayFill) {
 	return _array;
 }
 
-/// @function apiArrayPlace(array, ??index, ...value);
+/// @function apiArrayPlace(array, [index], ...value);
 /// @param array
-/// @param ??index
+/// @param [index]
 /// @param ...value
 function apiArrayPlace(_array, _index) {
 	var _count = argument_count - 2;
@@ -32,49 +32,18 @@ function apiArrayPlace(_array, _index) {
 	}
 }
 
-/// @function apiArrayPlaceExt(array, ??index, ...array_or_value);
-/// @param array
-/// @param ??index
-/// @param ...array_or_value
-function apiArrayPlaceExt(_array, _index) {
-	var _argSize = argument_count;
-	if (_argSize > 2) {
-		
-		var _value, jsize, _j, _temp;
-		var baseSize = array_length(_array);
-		var _size = (is_undefined(_index) ? baseSize : _index);
-		
-		for (var _i = 2; _i < _argSize; ++_i) {
-			_value = argument[_i];
-			
-			if (is_array(_value)) {
-				
-				jsize = array_length(_value);
-				_temp  = _size + jsize;
-				array_resize(_array, max(_temp, baseSize));
-				
-				for (_j = 0; _j < jsize; _j++) array_set(_array, _size + _j, _value[_j]);
-				
-				_size = _temp;
-			} 
-			else {
-				
-				array_set(_array, _size, _value);
-				_size += 1;
-			}
-		}
-	}
-}
-
-/// @function apiArrayInsertEmpty(array, index, count, ?value);
+/// @function apiArrayInsertEmpty(array, index, count, [value]);
 /// @param array
 /// @param index
 /// @param count
-/// @param ?value
+/// @param [value]
 function apiArrayInsertEmpty(_array, _index, _count) {
     if (_count > 0) {
 		
-        var _length = array_length(_array), _size = _length - _index, _insert = (_size > 0);
+        var _length = array_length(_array);
+		var _size   = _length - _index;
+		var _insert = (_size > 0);
+		
         array_resize(_array, max(_length, _index + _count));
 		
         if (_insert) {
@@ -142,19 +111,6 @@ function apiArrayShuffle(_array) {
 	}
 }
 
-/// @function apiArrayClear(array);
-/// @param array
-function apiArrayClear(_array) {
-	array_resize(_array, 0);
-}
-
-/// @function apiArrayClear(array, sizeup);
-/// @param array
-/// @param sizeup
-function apiArrayResizeUp(_array, _sizeup) {
-	array_resize(_array, array_length(_array) + _sizeup);
-}
-
 /// @function apiArrayCopy(dest, src, dest_index, ?src_index, ?length);
 /// @param dest
 /// @param src
@@ -217,29 +173,14 @@ function apiArrayInsert(_dest, _src, _destIndex, _srcIndex, _length) {
                 exit;
             }
             do {
-            	_size -= 1;
-            	array_set(_dest, _size + _destIndex, array_get(_dest, _size + _destShift))
-            } until (_size <= 0);
+				_size -= 1;
+            	array_set(_dest, _size + _destShift, array_get(_dest, _size + _destIndex));
+            } until (_size == 0);
         }
         do {
         	_length -= 1;
         	array_set(_dest, _length + _destIndex, array_get(_src, _length + _srcIndex));
-        } until (_length <= 0);
-    }
-}
-
-/// @function apiArrayReverse(array);
-/// @param array
-function apiArrayReverse(_array) {
-	var _size = array_length(_array);
-	if (_size > 1) {
-        var _swap, _i = -1;
-        repeat (_size div 2) {
-        	
-            _swap = array_get(_array, ++_i);
-            array_set(_array, _i, array_get(_array, --_size));
-            array_set(_array, _size, _swap);
-        }
+        } until (_length == 0);
     }
 }
 
@@ -254,7 +195,7 @@ function apiArrayRemoveNoOrder(_array, _index) {
 
 #endregion
 
-#region[#944a754F] build
+#region build
 
 /// @function apiArrayBuild(...value);
 /// @param ...value
@@ -263,21 +204,6 @@ function apiArrayBuild() {
 	var _array = array_create(_argSize);
 	for (var _i = 0; _i < _argSize; ++_i) array_set(_array, _i, argument[_i]);
 	return _array;
-}
-
-/// @function apiArrayBuildDup1d(array);
-/// @param array
-function apiArrayBuildDup1d(_array) {
-	return apiArrayFill([], _array);
-}
-
-/// @function apiArrayBuildReverse(array);
-/// @param array
-function apiArrayBuildReverse(_array) {
-	var _size = array_length(_array);
-	var _newArray = array_create(_size);
-	for (var _i = 0; _i < _size; ++_i) array_set(_newArray, _i, array_get(_array, --_size));
-	return _newArray;
 }
 
 /// @function apiArrayBuildConcat(...array_or_value);
@@ -298,11 +224,13 @@ function apiArrayBuildConcat() {
 				
 				array_resize(_build, _temp);
 				
-				for (_j = 0; _j < _jsize; _j++) array_set(_build, _size + _j, _value[_j]);
+				for (_j = 0; _j < _jsize; _j++) 
+					array_set(_build, _size + _j, _value[_j]);
 				
 				_size = _temp;
 			}
 			else {
+				
 				_size += 1;
 				array_push(_build, _value);
 			}
@@ -311,35 +239,30 @@ function apiArrayBuildConcat() {
 	return _build;
 }
 
-#endregion
-
-#region[#4e4a944F] find
-
-/// @function apiArrayFindIndex(array, value, ?index);
+/// @function apiArrayBuildDup1d(array);
 /// @param array
-/// @param value
-/// @param ?index
-function apiArrayFindIndex(_array, _value, _index) {
-	
+function apiArrayBuildDup1d(_array) {
 	var _size = array_length(_array);
-	for (var _i = (is_undefined(_index) ? 0 : _index); _i < _size; ++_i)
-		if (_array[_i] == _value) return _i;
-	
-	return -1;
+	var _build = array_create(_array);
+	array_copy(_build, 0, _array, 0, _size);
+	return _build;
 }
 
-/// @function apiArrayFindIndexStep(array, value, ?step, ?index);
+#endregion
+
+#region find
+
+/// @function apiArrayFindIndex(array, value, [index]);
 /// @param array
 /// @param value
-/// @param ?step
-/// @param ?index
-function apiArrayFindIndexStep(_array, _value, _step, _index) {
-	static _compare = apiMethodGenCompareEq(undefined);
-	static _compareStruct = method_get_self(_compare);
-	_compareStruct.__left = _value;
-	_index = apiArrayForStep(_array, _compare, _, _step, _index);
-	_compareStruct.__left = undefined;
-	return _index;
+/// @param [index]
+function apiArrayFindIndex(_array, _value, _index=0) {
+	
+	var _size = array_length(_array);
+	for (; _index < _size; ++_index)
+		if (_array[_index] == _value) return _index;
+	
+	return -1;
 }
 
 /// @function apiArrayExists(array, value);
@@ -349,36 +272,31 @@ function apiArrayExists(_array, _value) {
 	return (apiArrayFindIndex(_array, _value) != -1);
 }
 
-/// @function apiArrayEmpty(array);
-/// @param array
-function apiArrayEmpty(_array) {
-	return (array_length(_array) == 0);
-}
-
 #endregion
 
-#region[#944a754F] range
+#region range
 
-/// @function apiArrayRangeGet(array, value);
+/// @function apiArrayRangeGet(array, index, size);
 /// @param array
-/// @param value
+/// @param index
+/// @param size
 function apiArrayRangeGet(_array, _index, _length) {
 	var _range = [];
 	array_copy(_range, 0, _array, _index, _length);
 	return _range;
 }
 
-/// @function apiArrayRangeSet(array, value, range);
+/// @function apiArrayRangeSet(array, index, range);
 /// @param array
-/// @param value
+/// @param index
 /// @param range
 function apiArrayRangeSet(_array, _index, _range) {
 	apiArrayCopy(_array, _range, _index);
 }
 
-/// @function apiArrayRangeInsert(array, value, range);
+/// @function apiArrayRangeInsert(array, index, range);
 /// @param array
-/// @param value
+/// @param index
 /// @param range
 function apiArrayRangeInsert(_array, _index, _range) {
 	apiArrayInsert(_array, _range, _index);
