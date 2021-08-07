@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "string",
-    "path": "folders/GML_StyleGuide_api/api_core/string.yy",
+    "name": "buffer",
+    "path": "folders/GML_StyleGuide_api/api_core/buffer.yy",
   },
   "resourceVersion": "1.0",
-  "name": "apiScrStringBuilder",
+  "name": "apiScrBufferText",
   "tags": [],
   "resourceType": "GMScript",
 }
