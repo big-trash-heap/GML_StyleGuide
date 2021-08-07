@@ -1,4 +1,4 @@
-
+/*
 enum API_TREE_RB_TYPE {RED, BLACK};
 
 //
@@ -269,7 +269,11 @@ function ApiTreeRB(_compare) constructor {
             self.__root = _x;
         }
         
-        if (_y != _z) _z.key = _y.key;
+        if (_y != _z) {
+            
+            _z.key = _y.key;
+            _z.value = _y.value;
+        }
         
         if (_y.color == API_TREE_RB_TYPE.BLACK)
             self.__deleteFixup(_x);
@@ -343,7 +347,7 @@ repeat size {
 }
 
 size = ds_list_size(keys);
-ds_list_shuffle(keys);
+// ds_list_shuffle(keys);
 for (var i = 0; i < size; ++i) {
     
     key = keys[| i];

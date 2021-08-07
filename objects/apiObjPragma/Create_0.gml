@@ -1,0 +1,3 @@
+
+__apiPragmaEmmit();
+alarm_set(0, 5);

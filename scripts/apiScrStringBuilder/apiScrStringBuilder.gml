@@ -1,6 +1,6 @@
 
-/// @function ApiStringBuilder(?buffer_grow);
-/// @param ?buffer_grow
+/// @function ApiStringBuilder([buffer_grow]);
+/// @param [buffer_grow]
 function ApiStringBuilder(_bufferGrow) constructor {
 	
 	self.buffer = (is_undefined(_bufferGrow) ? buffer_create(32, buffer_grow, 1) : _bufferGrow);
@@ -17,9 +17,9 @@ function ApiStringBuilder(_bufferGrow) constructor {
 	static merge = function(_buffer, _offset, _size) {
 	    
 	    if (is_undefined(_offset)) _offset = 0;
-	    if (is_undefined(_size)) _size = buffer_tell(_buffer) - _offset;
-	    
-	    apiBufferCopy(self.buffer, _buffer, buffer_tell(self.buffer), _offset, _size);
+	    if (is_undefined(_size))   _size = buffer_get_size(_buffer) - _offset;
+		
+		buffer_copy(_buffer, _offset, _size, self.buffer, buffer_tell(self.buffer));
 		buffer_seek(self.buffer, buffer_seek_relative, _size);
 		
 		return self;

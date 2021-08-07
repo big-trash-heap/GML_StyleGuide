@@ -23,8 +23,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "loader",
-    "path": "folders/GML_StyleGuide_api/api_core/loader.yy",
+    "name": "pragma",
+    "path": "folders/GML_StyleGuide_api/api_core/pragma.yy",
   },
   "resourceVersion": "1.0",
   "name": "apiObjMain",

@@ -1,7 +1,7 @@
 
-#region[#4e4a944F] modify
-
-#region[#b59f671f] apiArrayFill
+#region modify
+	   
+#region apiArrayFill
 var _array, _arset;
 
 _arset = [1, 5, 2, 2];
@@ -17,8 +17,8 @@ _array = apiArrayFill(_array, _arset);
 apiDebugAssert(array_equals(_array, _arset), "apiArrayFill - 2");
 
 #endregion
-
-#region[#b59f671f] apiArrayPlace
+	   
+#region apiArrayPlace
 var _array, _artst;
 
 _array = [1, 4,  2,    8, 1, 5, 13];
@@ -38,8 +38,8 @@ apiArrayPlace(_array, 6, "hi", 1);
 apiDebugAssert(array_equals(_array, _artst), "apiArrayPlace - 2");
 
 #endregion
-
-#region[#b59f671f] apiArrayPlaceExt
+	   
+#region apiArrayPlaceExt
 var _array, _artst;
 
 _array = [1,   2, 3, 4];
@@ -64,8 +64,8 @@ apiArrayPlaceExt(_array, 4);
 apiDebugAssert(array_equals(_array, _artst), "apiArrayPlaceExt - 3");
 
 #endregion
-
-#region[#b59f671f] apiArrayInsertEmpty
+	   
+#region apiArrayInsertEmpty
 var _array, _artst;
 
 _array = [1, 2, 3, 4];
@@ -106,7 +106,7 @@ apiDebugAssert(array_equals(_array, _artst), "apiArrayInsertEmpty - 6");
 
 #endregion
 
-#region[#b59f671f] apiArrayUnshift
+#region apiArrayUnshift
 var _array, _artst, _count;
 
 _array = [1, 2, 3, 4];
@@ -129,7 +129,7 @@ apiDebugAssert(_count == 4, "apiArrayUnshift - 2._count");
 
 #endregion
 
-#region[#b59f671f] apiArrayShift
+#region apiArrayShift
 var _array = [1, 2, 3, 4];
 
 apiDebugAssert(1 == apiArrayShift(_array), "apiArrayShift - 0");
@@ -141,7 +141,7 @@ apiDebugAssert(array_length(_array) == 0, "apiArrayShift - 5");
 
 #endregion
 
-#region[#b59f671f] apiArrayShuffle
+#region apiArrayShuffle
 var _array = [[], [], [], []];
 var _tester = function(_array_test, _msg) {
     var _size = array_length(_array_test);
@@ -192,8 +192,9 @@ _tester([1, 2, 3], "apiArrayShuffle - 2");
 
 #endregion
 
-apiLoader(function() {
+apiPragma(function() {
     
-    show_message("good job")
+    show_message("good job");
     game_end();
 });
+

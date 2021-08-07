@@ -311,23 +311,6 @@ function apiArrayBuildConcat() {
 	return _build;
 }
 
-/// @function apiArrayBuildRange(size|index_begin, ?index_end, ?step);
-/// @param size|index_begin
-/// @param ?index_end
-/// @param ?step
-function apiArrayBuildRange(_i, _j, _step) {
-	return apiIteratorRange(
-		function(_array, _0, _size) {
-			
-			array_resize(_array, _size);
-		},
-		function(_array, _index, _count) {
-			
-			array_set(_array, _count, _index);
-		}, [], _i, _j, _step
-	);
-}
-
 #endregion
 
 #region[#4e4a944F] find

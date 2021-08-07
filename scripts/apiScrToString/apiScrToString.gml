@@ -4,13 +4,11 @@
 #macro API_INTEGER_TO_BASE_OCT           8
 #macro API_INTEGER_TO_BASE_BIN           2
 
-/// @function apiToStringIntegerToBase(integer, base, ?table)
+/// @function apiToStringIntegerToBase(integer, base, [table])
 /// @param integer
 /// @param base
-/// @param ?table
-function apiToStringIntegerToBase(_integer, _base, _table) {
-    
-    if (is_undefined(_table)) _table = API_INTEGER_TO_BASE_DEFAULT_TABLE;
+/// @param [table]
+function apiToStringIntegerToBase(_integer, _base, _table=API_INTEGER_TO_BASE_DEFAULT_TABLE) {
     
     var _sign = sign(_integer);
     if (_sign == 0) return string_char_at(_table, 0);
@@ -19,18 +17,17 @@ function apiToStringIntegerToBase(_integer, _base, _table) {
     _integer = abs(_integer);
     while (_integer > 0) {
         
-        _mod = _integer mod _base;
+        _mod     = _integer mod _base;
         _integer = _integer div _base;
-        
-        _result = string_char_at(_table, 1 + _mod) + _result;
+        _result  = string_char_at(_table, 1 + _mod) + _result;
     }
     return (_sign == -1 ? "-" + _result : _result);
 }
 
-/// @function apiToStringBaseToInteger(integer, base, ?table)
+/// @function apiToStringBaseToInteger(integer, base, [table])
 /// @param integer
 /// @param base
-/// @param ?table
+/// @param [table]
 function apiToStringBaseToInteger(_integerCrypt, _base, _table) {
     
     static _defaultTable = apiToStringBaseToIntegerBuildTable(API_INTEGER_TO_BASE_DEFAULT_TABLE);
@@ -77,11 +74,11 @@ function apiToStringBaseToIntegerBuildTable(_table) {
     return _build;
 }
 
-/// @function apiToStringInteger(integer_or_integerCrypt, base=16, ?padding)
+/// @function apiToStringInteger(integer_or_integerCrypt, [base=16], [padding])
 /// @param integer_or_integerCrypt
-/// @param base=16
-/// @param ?padding
-function apiToStringInteger(_integerOrIntegerCrypt, _base, _padding) {
+/// @param [base=16]
+/// @param [padding]
+function apiToStringInteger(_integerOrIntegerCrypt, _base=16, _padding=false) {
 	
 	if (is_undefined(_base)) _base = 16;
 	
@@ -89,7 +86,7 @@ function apiToStringInteger(_integerOrIntegerCrypt, _base, _padding) {
 		return apiToStringBaseToInteger(_integerOrIntegerCrypt, _base);
 	
 	var _hex = apiToStringIntegerToBase(_integerOrIntegerCrypt, _base);
-	if (is_undefined(_padding)) return _hex;
+	if (!_padding) return _hex;
 	
 	var _sign;
 	if (string_char_at(_hex, 1) == "-") {
@@ -108,10 +105,10 @@ function apiToStringInteger(_integerOrIntegerCrypt, _base, _padding) {
 	return (_sign == -1 ? "-" + _hex : _hex);
 }
 
-/// @function apiToStringBuffer(buffer, ?ignore_seek)
+/// @function apiToStringBuffer(buffer, [ignore_seek])
 /// @param buffer
-/// @param ?ignore_seek
-function apiToStringBuffer(_buffer, _ignoreSeek) {
+/// @param [ignore_seek]
+function apiToStringBuffer(_buffer, _ignoreSeek=false) {
 	
 	var _size = buffer_get_size(_buffer);
 	var _seek = (_ignoreSeek ? -1 : buffer_tell(_buffer));
