@@ -1,8 +1,8 @@
 
+#region print
 
-/// @function apiDebugShow(array, [handler]);
-/// @param array
-/// @param [handler]
+/// @function		apiDebugShow(array, [handler]);
+/// @description	
 function apiDebugShow(_array, _handler) {
 	
 	static _handler_def = function(_value) {
@@ -21,8 +21,8 @@ function apiDebugShow(_array, _handler) {
 	return _text;
 }
 
-/// @function apiDebugPrint(...values);
-/// @param ...values
+/// @function		apiDebugPrint(...values);
+/// @description	
 function apiDebugPrint() {
 	
 	//
@@ -33,9 +33,17 @@ function apiDebugPrint() {
 	return _text;
 }
 
+#endregion
 
+#region assert
+
+/// @function		apiDebugAssert(assert, message);
+/// @description	
 function apiDebugAssert(_assert, _mess) {
 	if (!_assert) {
+		clipboard_set_text("\"" + _mess + "\"");
 		throw ("\n\t" + _mess);
 	}
 }
+
+#endregion

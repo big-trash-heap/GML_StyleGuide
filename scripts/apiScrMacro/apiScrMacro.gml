@@ -9,3 +9,12 @@
 										__argArrs[__i] = argument[__i];                                          
 
 #macro API_MACRO_ARGUMENT_PACK_GET  __argArrs
+
+#macro API_MACRO_UINT16_MAX         65535
+#macro API_MACRO_INT32_MAX          2147483647
+#macro API_MACRO_INT32_MIN          (-2147483648)
+
+#macro API_MACRO_DEFAULT_CHAR       "▯"
+
+
+ 

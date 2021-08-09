@@ -6,16 +6,6 @@
 
 #region modify
 
-/// @function apiArrayPlace(array, array_fill)
-/// @param array
-/// @param array_fill
-function apiArrayFill(_array, _arrayFill) {
-	var _size = array_length(_arrayFill);
-    array_resize(_array, _size);
-	array_copy(_array, 0, _arrayFill, 0, _size);
-	return _array;
-}
-
 /// @function apiArrayPlace(array, [index], ...value);
 /// @param array
 /// @param [index]

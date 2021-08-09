@@ -4,6 +4,7 @@
     {"id":{"name":"apiObjPragma","path":"objects/apiObjPragma/apiObjPragma.yy",},"order":2,},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},"order":1,},
     {"id":{"name":"apiNote2_Style","path":"notes/apiNote2_Style/apiNote2_Style.yy",},"order":1,},
+    {"id":{"name":"apiScrTest","path":"scripts/apiScrTest/apiScrTest.yy",},"order":1,},
     {"id":{"name":"apiRoomLoader","path":"rooms/apiRoomLoader/apiRoomLoader.yy",},"order":1,},
     {"id":{"name":"apiScrFileJson","path":"scripts/apiScrFileJson/apiScrFileJson.yy",},"order":0,},
     {"id":{"name":"apiScrArrayHigher","path":"scripts/apiScrArrayHigher/apiScrArrayHigher.yy",},"order":1,},

@@ -1,11 +1,13 @@
 
-#region Ordered
+#region ordered
+
+/*
+
+*/
 
 enum API_COMPARATOR {LT = -1, EQ = 0, GT = 1};
 
 /// @function apiComparatorNumber(left, right);
-/// @param left
-/// @param right
 function apiComparatorNumber(_left, _right) {
 	
 	/*
@@ -20,20 +22,15 @@ function apiComparatorNumber(_left, _right) {
 	*/
 	
 	var _comp = sign(_left - _right);
-	if (_comp == 0) {
-		return API_COMPARATOR.EQ;
-	}
+	if (_comp == 0) return API_COMPARATOR.EQ;
 	else
-	if (_comp == 1) {
-		return API_COMPARATOR.GT;
-	}
+	if (_comp == 1) return API_COMPARATOR.GT;
 	return API_COMPARATOR.LT;
 }
 
-/// @function apiComparatorStringLexical(left, right);
-/// @param left
-/// @param right
-function apiComparatorStringLexical(_left, _right) { // лексикографическое (вроде как)
+/// @function		apiComparatorStringLexical(left, right);
+/// @description	Лексикографическое сравнение строк
+function apiComparatorStringLexical(_left, _right) {
 
 	/*
 		apiComparatorStringLexical("aa", "aa") -> API_COMPARATOR.EQ
@@ -48,13 +45,13 @@ function apiComparatorStringLexical(_left, _right) { // лексикографи
 		apiComparatorStringLexical("2", "")    -> API_COMPARATOR.GT
 	*/
 	
-	var _sizeLeft = string_length(_left);
+	var _sizeLeft  = string_length(_left);
 	var _sizeRight = string_length(_right);
 	
 	var _charLeft, _charRight;
-	for (var _i = 1; _i <= _sizeLeft; _i++) {
+	for (var _i = 1; _i <= _sizeLeft; ++_i) {
 		
-		_charLeft = string_char_at(_left, _i);
+		_charLeft  = string_char_at(_left, _i);
 		_charRight = string_char_at(_right, _i);
 		
 		if (_charLeft != _charRight)
@@ -64,13 +61,6 @@ function apiComparatorStringLexical(_left, _right) { // лексикографи
 	}
 	
 	return apiComparatorNumber(_sizeLeft, _sizeRight);
-}
-
-/// @function apiComparatorStringLexical(left, right);
-/// @param left
-/// @param right
-function apiComparatorStringLength(_left, _right) { // по длинам строк
-	return apiComparatorNumber(string_length(_left), string_length(_right));
 }
 
 #endregion

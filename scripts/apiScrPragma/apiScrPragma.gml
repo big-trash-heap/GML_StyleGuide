@@ -1,6 +1,6 @@
 
 //
-#macro API_PRAGMA_NAME  apiScrPragma
+#macro API_PRAGMA_NAME apiScrPragma
 
 //
 if (variable_global_exists("__apiPragmaHeap")) exit;

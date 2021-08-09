@@ -1,4 +1,12 @@
 
+#region simple
+
+/*
+	
+*/
+
+/// @function		apiFileJsonSave(filename, map_or_json);
+/// @description	
 function apiFileJsonSave(_filename, _json) {
 	
 	var _type = is_numeric(_json);
@@ -10,6 +18,9 @@ function apiFileJsonSave(_filename, _json) {
 	file_text_close(_file);
 }
 
+/// @description	
+//
+/// @param filename
 function apiFileJsonLoad(_filename) {
 	
 	var _file = file_text_open_read(_filename);
@@ -26,10 +37,11 @@ function apiFileJsonLoad(_filename) {
 		if (_type == -1) _type = undefined;
 	}
 	else {
-		
 		_type = json_parse(file_text_readln(_file));
 	}
 	
 	file_text_close(_file);
 	return _type;
 }
+
+#endregion

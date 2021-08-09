@@ -1,4 +1,19 @@
 
+#region simple
+
+/// @function		apiFileTextWrite(filename, string, [append=false]);
+/// @description	
+function apiFileTextWrite(_filename, _string, _append=false) {
+	
+	var _file = (_append ? file_text_open_append : file_text_open_write)(_filename);
+	file_text_write_string(_file, _string);
+	file_text_close(_file);
+}
+
+
+/// @description	
+//
+/// @param filename
 function apiFileTextRead(_filename) {
 	
 	var _file = file_text_open_read(_filename);
@@ -17,10 +32,4 @@ function apiFileTextRead(_filename) {
 	return apiBufferTextFree(_textbuf);
 }
 
-function apiFileTextWrite(_filename, _text, _append=false) {
-	
-	var _file = (_append ? file_text_open_append : file_text_open_write)(_filename);
-	file_text_write_string(_file, _text);
-	file_text_close(_file);
-}
-
+#endregion
