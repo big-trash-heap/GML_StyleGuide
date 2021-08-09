@@ -2,7 +2,6 @@
 
 
 function apiStringReplace(_substring, _string, _index, _count) {
-	
 	return (
 		string_copy(_string, 1, _index - 1) +
 		_substring +
@@ -61,7 +60,7 @@ function apiStringFormat(_textbuf, _ord=37, _handler=string, _string) {
 			
 			_k = _i - _j;
 			if (_k > 0)
-				apiBufferTextPush(_textbuf,
+				apiBufTxtPush(_textbuf,
 					string_copy(_string, _j, _k),
 					_handler(argument[_a++])
 				);
@@ -72,6 +71,6 @@ function apiStringFormat(_textbuf, _ord=37, _handler=string, _string) {
 	
 	_k = _i - _j;
 	if (_k > 0)
-		apiBufferTextAppend(_textbuf, string_copy(_string, _j, _k));
+		apiBufTxtAppend(_textbuf, string_copy(_string, _j, _k));
 }
 

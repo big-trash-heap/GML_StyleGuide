@@ -5,9 +5,9 @@
 	
 */
 
-/// @function		apiFileJsonSave(filename, map_or_json);
+/// @function		apiFJsonSave(filename, map_or_json);
 /// @description	
-function apiFileJsonSave(_filename, _json) {
+function apiFJsonSave(_filename, _json) {
 	
 	var _type = is_numeric(_json);
 	var _file = file_text_open_write(_filename);
@@ -21,7 +21,7 @@ function apiFileJsonSave(_filename, _json) {
 /// @description	
 //
 /// @param filename
-function apiFileJsonLoad(_filename) {
+function apiFJsonLoad(_filename) {
 	
 	var _file = file_text_open_read(_filename);
 	if (_file == -1) {

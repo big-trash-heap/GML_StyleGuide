@@ -101,16 +101,10 @@ function apiArrayShuffle(_array) {
 	}
 }
 
-/// @function apiArrayCopy(dest, src, dest_index, ?src_index, ?length);
-/// @param dest
-/// @param src
-/// @param dest_index
-/// @param ?src_index
-/// @param ?length
-function apiArrayCopy(_dest, _src, _destIndex, _srcIndex, _length) {
+/// @function apiArrayCopy(dest, src, dest_index, [src_index], [length]);
+function apiArrayCopy(_dest, _src, _destIndex, _srcIndex=0, _length) {
     var _destLength = array_length(_dest);
     var _srcLength = array_length(_src);
-    if (is_undefined(_srcIndex)) _srcIndex = 0;
     if (is_undefined(_length)) _length = _srcLength - _srcIndex;
     if (_length > 0) {
 		

@@ -1,7 +1,7 @@
 
 #region toString
 
-/// @function		apiToStringBuffer(buffer, [bytesize], [bytestart], [metainfo]);
+/// @function		apiToStrBuffer(buffer, [bytesize], [bytestart], [metainfo]);
 /// @description	Генерирует строку, где каждый байт буффера
 //					будет представлен в виде числа в HEX (шестнадцатеричном) формате
 //					
@@ -10,7 +10,7 @@
 /// @param			[bytestart] - байт с которого нужно начать отображение
 /// @param			[metainfo] - нужно ли отображать мета информацию,
 //						или только последовательность байтов
-function apiToStringBuffer(_buffer, _j, _i, _meta=true) {
+function apiToStrBuffer(_buffer, _j, _i, _meta=true) {
 	
 	/*
 		u8 = buffer_u8
@@ -21,7 +21,7 @@ function apiToStringBuffer(_buffer, _j, _i, _meta=true) {
 	var _string = (_meta ? "<Buffer" : "");
 	
 	if (is_undefined(_i)) {
-		
+
 		_i = 0;
 	} 
 	else
@@ -54,20 +54,20 @@ if (API_TEST_ENABLE) {
 	if (API_TEST) {
 		
 		show_debug_message(
-			"<API TEST>\n\t" + "apiToStringBuffer"
+			"<API TEST>\n\t" + "apiToStrBuffer"
 		);
 		
-		var _f      = apiToStringBuffer;
+		var _f      = apiToStrBuffer;
 		var _buffer = buffer_create(8, buffer_fixed, 1);
 		
 		apiDebugAssert(
 			_f(_buffer) == "<Buffer 00 00 00 00 00 00 00 00>",
-			"<apiToStringBuffer 1>"
+			"<apiToStrBuffer 1>"
 		);
 		
 		apiDebugAssert(
 			_f(_buffer, _, _, false) == "00 00 00 00 00 00 00 00",
-			"<apiToStringBuffer 1.1>"
+			"<apiToStrBuffer 1.1>"
 		);
 		
 		buffer_poke(_buffer, 0, buffer_u8, 254);
@@ -76,32 +76,32 @@ if (API_TEST_ENABLE) {
 		
 		apiDebugAssert(
 			_f(_buffer, 4) == "<Buffer FE FF 00 00 | ...bytes 4>",
-			"<apiToStringBuffer 2>"
+			"<apiToStrBuffer 2>"
 		);
 		
 		apiDebugAssert(
 			_f(_buffer, 4, _, false) == "FE FF 00 00",
-			"<apiToStringBuffer 2.1>"
+			"<apiToStrBuffer 2.1>"
 		);
 		
 		apiDebugAssert(
 			_f(_buffer, 4, 1) == "<Buffer start of 1 | FF 00 00 00 | ...bytes 3>",
-			"<apiToStringBuffer 3>"
+			"<apiToStrBuffer 3>"
 		);
 		
 		apiDebugAssert(
 			_f(_buffer, 4, 1, false) == "FF 00 00 00",
-			"<apiToStringBuffer 3.1>"
+			"<apiToStrBuffer 3.1>"
 		);
 		
 		apiDebugAssert(
 			_f(_buffer, _, 1) == "<Buffer start of 1 | FF 00 00 00 00 00 20>",
-			"<apiToStringBuffer 4>"
+			"<apiToStrBuffer 4>"
 		);
 		
 		apiDebugAssert(
 			_f(_buffer, _, 1, false) == "FF 00 00 00 00 00 20",
-			"<apiToStringBuffer 4.1>"
+			"<apiToStrBuffer 4.1>"
 		);
 		
 		buffer_delete(_buffer);

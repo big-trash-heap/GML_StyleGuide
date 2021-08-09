@@ -2,14 +2,12 @@
 
 #region basic
 
-/// @function apiFunctorEmpty(?value);
-/// @param ?value
-function apiFunctorEmpty() {
+/// @function apiFunctorEm(...values);
+function apiFunctorEm() {
 	return undefined;
 }
 
-/// @function apiFunctorId(value);
-/// @param value
+/// @function apiFunctorId(value, ...values);
 function apiFunctorId(_value) {
 	return _value;
 }

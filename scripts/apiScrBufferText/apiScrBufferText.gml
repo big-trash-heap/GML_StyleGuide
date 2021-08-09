@@ -15,19 +15,17 @@
 */
 
 /// @param			[size]
-function apiBufferTextCreate(_size=128) {
-	
+function apiBufTxtCreate(_size=128) {
 	return buffer_create(_size, buffer_grow, 1);
 }
 
-/// @function		apiBufferTextAppend(buffer, string);
-function apiBufferTextAppend(_buffer, _string) {
-	
+/// @function		apiBufTxtAppend(buffer, string);
+function apiBufTxtAppend(_buffer, _string) {
 	buffer_write(_buffer, buffer_text, _string);
 }
 
-/// @function		apiBufferTextPush(buffer, ...strings);
-function apiBufferTextPush(_buffer) {
+/// @function		apiBufTxtPush(buffer, ...strings);
+function apiBufTxtPush(_buffer) {
 	
 	var _argSize = argument_count;
 	for (var _i = 1; _i < _argSize; ++_i) 
@@ -37,7 +35,7 @@ function apiBufferTextPush(_buffer) {
 /// @description	Возвращает строку записанную в буффере
 //
 /// @param			buffer
-function apiBufferTextRead(_buffer) {
+function apiBufTxtRead(_buffer) {
 	
 	var _anchor = buffer_tell(_buffer);
 	buffer_write(_buffer, buffer_u8, 0);
@@ -47,12 +45,12 @@ function apiBufferTextRead(_buffer) {
 	return _string;
 }
 
-/// @function		apiBufferTextClear(buffer, [newsize]);
+/// @function		apiBufTxtClear(buffer, [newsize]);
 /// @description	Производит отчистку буфферу
 //					и изменяет его размер если он был указан
 //					Размер может быть изменён, 
 //					только в меньшую сторону
-function apiBufferTextClear(_buffer, _size) {
+function apiBufTxtClear(_buffer, _size) {
 	
 	buffer_seek(_buffer, buffer_seek_start, 0);
 	
@@ -64,9 +62,9 @@ function apiBufferTextClear(_buffer, _size) {
 //					строку записанную в нём
 //
 /// @param			buffer
-function apiBufferTextFree(_buffer) {
+function apiBufTxtFree(_buffer) {
 	
-	var _string = apiBufferTextRead(_buffer);
+	var _string = apiBufTxtRead(_buffer);
 	buffer_delete(_buffer);
 	return _string;
 }
@@ -81,87 +79,87 @@ if (API_TEST_ENABLE) {
 			"<API TEST>\n\t" + "apiScrBufferText"
 		);
 		
-		var _textbuf = apiBufferTextCreate(32);
+		var _textbuf = apiBufTxtCreate(32);
 		
 		apiDebugAssert(
 			buffer_exists(_textbuf),
-			"<apiBufferTextCreate create>"
+			"<apiBufTxtCreate create>"
 		);
 		
 		apiDebugAssert(
 			buffer_get_size(_textbuf) == 32,
-			"<apiBufferTextCreate size>"
+			"<apiBufTxtCreate size>"
 		);
 		
 		apiDebugAssert(
-			apiBufferTextRead(_textbuf) == "",
-			"<apiBufferTextRead empty 0>"
+			apiBufTxtRead(_textbuf) == "",
+			"<apiBufTxtRead empty 0>"
 		);
 		
-		apiBufferTextPush(_textbuf);
+		apiBufTxtPush(_textbuf);
 		apiDebugAssert(
-			apiBufferTextRead(_textbuf) == "",
-			"<apiBufferTextPush empty push>"
+			apiBufTxtRead(_textbuf) == "",
+			"<apiBufTxtPush empty push>"
 		);
 		
-		apiBufferTextAppend(_textbuf, "Hello World!");
+		apiBufTxtAppend(_textbuf, "Hello World!");
 		apiDebugAssert(
-			apiBufferTextRead(_textbuf) == "Hello World!",
-			"<apiBufferTextAppend append 1>"
-		);
-		
-		apiDebugAssert(
-			apiBufferTextRead(_textbuf) == "Hello World!",
-			"<apiBufferTextRead repeated get 1>"
-		);
-		
-		apiBufferTextAppend(_textbuf, "GML");
-		apiDebugAssert(
-			apiBufferTextRead(_textbuf) == "Hello World!GML",
-			"<apiBufferTextAppend append 2>"
+			apiBufTxtRead(_textbuf) == "Hello World!",
+			"<apiBufTxtAppend append 1>"
 		);
 		
 		apiDebugAssert(
-			apiBufferTextRead(_textbuf) == "Hello World!GML",
-			"<apiBufferTextRead repeated get 2>"
+			apiBufTxtRead(_textbuf) == "Hello World!",
+			"<apiBufTxtRead repeated get 1>"
 		);
 		
-		apiBufferTextPush(_textbuf, "!", " It is work!");
+		apiBufTxtAppend(_textbuf, "GML");
 		apiDebugAssert(
-			apiBufferTextRead(_textbuf) == "Hello World!GML! It is work!",
-			"<apiBufferTextPush push 1>"
+			apiBufTxtRead(_textbuf) == "Hello World!GML",
+			"<apiBufTxtAppend append 2>"
 		);
 		
-		apiBufferTextPush(_textbuf, "1", "2", "3");
 		apiDebugAssert(
-			apiBufferTextRead(_textbuf) == "Hello World!GML! It is work!123",
-			"<apiBufferTextPush push 2>"
+			apiBufTxtRead(_textbuf) == "Hello World!GML",
+			"<apiBufTxtRead repeated get 2>"
 		);
 		
-		apiBufferTextClear(_textbuf, 20);
+		apiBufTxtPush(_textbuf, "!", " It is work!");
+		apiDebugAssert(
+			apiBufTxtRead(_textbuf) == "Hello World!GML! It is work!",
+			"<apiBufTxtPush push 1>"
+		);
+		
+		apiBufTxtPush(_textbuf, "1", "2", "3");
+		apiDebugAssert(
+			apiBufTxtRead(_textbuf) == "Hello World!GML! It is work!123",
+			"<apiBufTxtPush push 2>"
+		);
+		
+		apiBufTxtClear(_textbuf, 20);
 		apiDebugAssert(
 			buffer_get_size(_textbuf) == 20,
-			"<apiBufferTextClear clear size>"
+			"<apiBufTxtClear clear size>"
 		);
 		apiDebugAssert(
-			apiBufferTextRead(_textbuf) == "",
-			"<apiBufferTextClear clear read>"
-		);
-		
-		apiBufferTextAppend(_textbuf, "Text Buffer");
-		apiDebugAssert(
-			apiBufferTextRead(_textbuf) == "Text Buffer",
-			"<apiBufferTextAppend append 10>"
+			apiBufTxtRead(_textbuf) == "",
+			"<apiBufTxtClear clear read>"
 		);
 		
+		apiBufTxtAppend(_textbuf, "Text Buffer");
 		apiDebugAssert(
-			apiBufferTextFree(_textbuf) == "Text Buffer",
-			"<apiBufferTextFree free read>"
+			apiBufTxtRead(_textbuf) == "Text Buffer",
+			"<apiBufTxtAppend append 10>"
+		);
+		
+		apiDebugAssert(
+			apiBufTxtFree(_textbuf) == "Text Buffer",
+			"<apiBufTxtFree free read>"
 		);
 		
 		apiDebugAssert(
 			!buffer_exists(_textbuf),
-			"<apiBufferTextFree free data>"
+			"<apiBufTxtFree free data>"
 		);
 		
 		if (buffer_exists(_textbuf)) buffer_delete(_textbuf);

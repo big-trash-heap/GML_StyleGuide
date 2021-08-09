@@ -26,8 +26,8 @@ function apiDebugShow(_array, _handler) {
 function apiDebugPrint() {
 	
 	//
-	API_MACRO_ARGUMENT_PACK_READ;
-	var _text = apiDebugShow(API_MACRO_ARGUMENT_PACK_GET);
+	API_MACRO_ARGPACK_READ;
+	var _text = apiDebugShow(API_MACRO_ARGPACK_GET);
 	
 	show_debug_message(_text);
 	return _text;
@@ -41,6 +41,7 @@ function apiDebugPrint() {
 /// @description	
 function apiDebugAssert(_assert, _mess) {
 	if (!_assert) {
+		
 		clipboard_set_text("\"" + _mess + "\"");
 		throw ("\n\t" + _mess);
 	}
