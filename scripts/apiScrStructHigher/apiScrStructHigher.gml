@@ -1,7 +1,8 @@
 
-#region iterator
 
-// f = f(struct, key, data)
+#region modify
+
+//					f = f(struct, key, data)
 /// @function		apiStructForEach(struct, f, [data]);
 function apiStructForeach(_struct, _f, _data) {
     
@@ -12,7 +13,7 @@ function apiStructForeach(_struct, _f, _data) {
 	
 }
 
-// f = f(struct, key, data)
+//					f = f(struct, key, data)
 /// @function		apiStructFind(struct, f, [data]);
 function apiStructFind(_struct, _f, _data) {
     
@@ -25,3 +26,4 @@ function apiStructFind(_struct, _f, _data) {
 }
 
 #endregion
+

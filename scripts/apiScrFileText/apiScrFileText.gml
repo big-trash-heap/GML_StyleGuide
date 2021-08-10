@@ -1,4 +1,5 @@
 
+
 #region simple
 
 /// @function		apiFTextWrite(filename, string, [append=false]);
@@ -30,8 +31,3 @@ function apiFTextRead(_filename) {
 
 #endregion
 
-#region buffer
-
-
-
-#endregion

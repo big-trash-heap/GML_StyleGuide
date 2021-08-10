@@ -2,7 +2,7 @@
 
 #region modify
 
-/// @function		apiStructClear(struct);
+/// @param			struct
 function apiStructClear(_struct) {
     
     var _keys = variable_struct_get_names(_struct);
@@ -42,8 +42,9 @@ function apiStructBul() {
     return _structBul;
 }
 
-/// @function		apiStructBulDup1d(struct);
 /// @description	Клонирование структуры с глубиной 1
+//
+/// @param			struct
 function apiStructBulDup1d(_struct) {
     
     var _structBul = {};

@@ -1,9 +1,6 @@
 
-#region simple
 
-/*
-	
-*/
+#region simple
 
 /// @function		apiFJsonSave(filename, map_or_json);
 function apiFJsonSave(_filename, _json) {
@@ -42,3 +39,4 @@ function apiFJsonLoad(_filename) {
 }
 
 #endregion
+
