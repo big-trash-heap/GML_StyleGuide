@@ -1,7 +1,7 @@
 /*
 #region compare
 
-/// @function apiMethodGenCompareEq(left)
+/// @function		apiMethodGenCompareEq(left)
 /// @param left
 function apiMethodGenCompareEq(_left) {
 	static _compareRight = function(_right) {
@@ -14,7 +14,7 @@ function apiMethodGenCompareEq(_left) {
 
 #region return
 
-/// @function apiMethodGenReturnId(id)
+/// @function		apiMethodGenReturnId(id)
 /// @param id
 function apiMethodGenReturnId(_id) {
 	static _returnId = function() {

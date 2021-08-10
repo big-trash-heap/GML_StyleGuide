@@ -2,7 +2,6 @@
 #region simple
 
 /// @function		apiFTextWrite(filename, string, [append=false]);
-/// @description	
 function apiFTextWrite(_filename, _string, _append=false) {
 	
 	var _file = (_append ? file_text_open_append : file_text_open_write)(_filename);
@@ -10,9 +9,7 @@ function apiFTextWrite(_filename, _string, _append=false) {
 	file_text_close(_file);
 }
 
-/// @description	
-//
-/// @param filename
+/// @param			filename
 function apiFTextRead(_filename) {
 	
 	var _file = file_text_open_read(_filename);
@@ -33,3 +30,8 @@ function apiFTextRead(_filename) {
 
 #endregion
 
+#region buffer
+
+
+
+#endregion

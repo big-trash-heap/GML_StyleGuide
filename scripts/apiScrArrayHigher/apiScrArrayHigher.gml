@@ -3,21 +3,16 @@
 #region modify
 
 // f = function(value, index, data)
-/// @function apiArrayMap(array, f, ?data);
-/// @param array
-/// @param f
-/// @param ?data
-function apiArrayMap(_array, _f, _data) {
+/// @function		apiArrMap(array, f, [data]);
+function apiArrMap(_array, _f, _data) {
 	var _size = array_length(_array);
-	for (var _i = 0; _i < _size; _i += 1) array_set(_array, _i, _f(_array[_i], _i, _data));
+	for (var _i = 0; _i < _size; _i += 1) 
+		array_set(_array, _i, _f(_array[_i], _i, _data));
 }
 
 // f = function(value, index, data)
-/// @function apiArrayFilter(array, f, ?data);
-/// @param array
-/// @param f
-/// @param ?data
-function apiArrayFilter(_array, _f, _data) {
+/// @function		apiArrFilter(array, f, [data]);
+function apiArrFilter(_array, _f, _data) {
 	
 	var _size = array_length(_array);
     if (_size > 0) {
@@ -45,11 +40,8 @@ function apiArrayFilter(_array, _f, _data) {
 #region build
 
 // f = function(value, index, data)
-/// @function apiArrayBuildMap(array, f, ?data);
-/// @param array
-/// @param f
-/// @param ?data
-function apiArrayBuildMap(_array, _f, _data) {
+/// @function		apiArrBulMap(array, f, [data]);
+function apiArrBulMap(_array, _f, _data) {
 	
 	var _size = array_length(_array);
 	var _dups = array_create(_size);
@@ -61,11 +53,8 @@ function apiArrayBuildMap(_array, _f, _data) {
 }
 
 // f = function(value, index, data)
-/// @function apiArrayBuildFilter(array, f, ?data);
-/// @param array
-/// @param f
-/// @param ?data
-function apiArrayBuildFilter(_array, _f, _data) {
+/// @function		apiArrBulFilter(array, f, [data]);
+function apiArrBulFilter(_array, _f, _data) {
 	
 	var _size = array_length(_array);
 	var _newArray = [];
@@ -88,11 +77,8 @@ function apiArrayBuildFilter(_array, _f, _data) {
 #region other
 
 // f = function(value, index, data)
-/// @function apiArrayCall(array, f, [data]);
-/// @param array
-/// @param f
-/// @param [data]
-function apiArrayCall(_array, _f, _data) {
+/// @function		apiArrCall(array, f, [data]);
+function apiArrCall(_array, _f, _data) {
 	
 	var _size = array_length(_array);
 	for (var _i = 0; _i < _size; ++_i) 
@@ -100,3 +86,4 @@ function apiArrayCall(_array, _f, _data) {
 }
 
 #endregion
+

@@ -6,14 +6,14 @@
 if (variable_global_exists("__apiPragmaHeap")) exit;
 
 //
-global.__apiPragmaHeap = apiStructBuild(
+global.__apiPragmaHeap = apiStructBul(
 	["api",     ds_priority_create()],
 	["project", ds_priority_create()],
 );
 
 global.__apiFinal = ds_list_create();
 
-/// @function apiPragma(loader, [int_priority=0]);
+/// @function		apiPragma(loader, [int_priority=0]);
 /// @param loader
 /// @param [int_priority=0]
 function apiPragma(_loader, _intPriority=0) {
@@ -22,7 +22,7 @@ function apiPragma(_loader, _intPriority=0) {
 	ds_priority_add(global.__apiPragmaHeap[$ "project"], _loader, _intPriority);
 }
 
-/// @function apiFinal(final);
+/// @function		apiFinal(final);
 /// @param final
 function apiFinal(_final) {
 	
@@ -30,7 +30,7 @@ function apiFinal(_final) {
 	ds_list_add(global.__apiFinal, _final);
 }
 
-/// @function __apiPragma(loader, [int_priority=0]);
+/// @function		__apiPragma(loader, [int_priority=0]);
 /// @param loader
 /// @param [int_priority=0]
 function __apiPragma(_loader, _intPriority=0) {

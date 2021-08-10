@@ -1,4 +1,5 @@
 
+
 /*
 	Данные функции являются обёрткой над обычными буфферами
 	
@@ -69,10 +70,11 @@ function apiBufTxtFree(_buffer) {
 	return _string;
 }
 
+
 #region tests
 if (API_TEST_ENABLE) {
 	
-	API_TEST_LOCAL false
+	API_TEST_LOCAL false;
 	if (API_TEST) {
 		
 		show_debug_message(
@@ -167,3 +169,4 @@ if (API_TEST_ENABLE) {
 	}
 }
 #endregion
+

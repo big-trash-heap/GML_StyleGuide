@@ -2,10 +2,7 @@
 #region iterator
 
 // f = f(struct, key, data)
-/// @function apiStructForEach(struct, f, [data]);
-/// @param struct
-/// @param f
-/// @param [data]
+/// @function		apiStructForEach(struct, f, [data]);
 function apiStructForeach(_struct, _f, _data) {
     
     var _keys = variable_struct_get_names(_struct);
@@ -16,10 +13,7 @@ function apiStructForeach(_struct, _f, _data) {
 }
 
 // f = f(struct, key, data)
-/// @function apiStructFind(struct, f, [data]);
-/// @param struct
-/// @param f
-/// @param [data]
+/// @function		apiStructFind(struct, f, [data]);
 function apiStructFind(_struct, _f, _data) {
     
     var _keys = variable_struct_get_names(_struct);

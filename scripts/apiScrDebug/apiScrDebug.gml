@@ -1,8 +1,15 @@
 
+
+/*
+	Набор функций для отладки и тестирования
+*/
+
 #region print
 
 /// @function		apiDebugShow(array, [handler]);
-/// @description	
+/// @description	Конструирует строку из массива,
+//					применяя к каждому элементу массива
+//					handler
 function apiDebugShow(_array, _handler) {
 	
 	static _handler_def = function(_value) {
@@ -22,7 +29,6 @@ function apiDebugShow(_array, _handler) {
 }
 
 /// @function		apiDebugPrint(...values);
-/// @description	
 function apiDebugPrint() {
 	
 	//
@@ -38,7 +44,6 @@ function apiDebugPrint() {
 #region assert
 
 /// @function		apiDebugAssert(assert, message);
-/// @description	
 function apiDebugAssert(_assert, _mess) {
 	if (!_assert) {
 		
@@ -48,3 +53,4 @@ function apiDebugAssert(_assert, _mess) {
 }
 
 #endregion
+

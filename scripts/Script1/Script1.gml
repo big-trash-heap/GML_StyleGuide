@@ -1,7 +1,7 @@
 
 /*
 // f = function(init, value, data)
-/// @function apiArrayFold(array, f, [data], [reverse], [init]);
+/// @function		apiArrayFold(array, f, [data], [reverse], [init]);
 /// @param array
 /// @param f
 /// @param [data]
@@ -23,7 +23,7 @@ function apiArrayFold(_array, _f, _data, _reverse=false) {
 }
 
 
-/// @function apiArrayBuildReverse(array);
+/// @function		apiArrayBuildReverse(array);
 /// @param array
 function apiArrayBuildReverse(_array) {
 	var _size = array_length(_array);
@@ -32,7 +32,7 @@ function apiArrayBuildReverse(_array) {
 	return _newArray;
 }
 
-/// @function apiArrayBuildConcat(...array_or_value);
+/// @function		apiArrayBuildConcat(...array_or_value);
 /// @param ...array_or_value
 function apiArrayBuildConcat() {
 	var _argSize = argument_count;
@@ -64,7 +64,7 @@ function apiArrayBuildConcat() {
 }
 
 
-/// @function apiArrayReverse(array);
+/// @function		apiArrayReverse(array);
 /// @param array
 function apiArrayReverse(_array) {
 	var _size = array_length(_array);
@@ -79,20 +79,20 @@ function apiArrayReverse(_array) {
     }
 }
 
-/// @function apiArrayClear(array, sizeup);
+/// @function		apiArrayClear(array, sizeup);
 /// @param array
 /// @param sizeup
 function apiArrayResizeUp(_array, _sizeup) {
 	array_resize(_array, array_length(_array) + _sizeup);
 }
 
-/// @function apiArrayClear(array);
+/// @function		apiArrayClear(array);
 /// @param array
 function apiArrayClear(_array) {
 	array_resize(_array, 0);
 }
 
-/// @function apiArrayPlaceExt(array, [index], ...array_or_value);
+/// @function		apiArrayPlaceExt(array, [index], ...array_or_value);
 /// @param array
 /// @param [index]
 /// @param ...array_or_value
@@ -126,7 +126,7 @@ function apiArrayPlaceExt(_array, _index) {
 	}
 }
 
-/// @function apiArrayShift(array)
+/// @function		apiArrayShift(array)
 /// @param array
 function apiArrayShift(_array) {
     if (array_length(_array)) {
@@ -138,14 +138,14 @@ function apiArrayShift(_array) {
     return undefined;
 }
 
-/// @function apiArrayEmpty(array);
+/// @function		apiArrayEmpty(array);
 /// @param array
 function apiArrayEmpty(_array) {
 	return (array_length(_array) == 0);
 }
 
 // f = function(init, value, data)
-/// @function apiArrayFold(array, f, [data], [reverse], [init]);
+/// @function		apiArrayFold(array, f, [data], [reverse], [init]);
 /// @param array
 /// @param f
 /// @param [data]

@@ -75,7 +75,7 @@ function ApiBuffer(_size, _alignment) : ApiBufferWrap(_) constructor {
 
 
 // f = function(value, index, data)
-/// @function apiArrayForStep(array, f, ?data, ?step, ?index);
+/// @function		apiArrayForStep(array, f, ?data, ?step, ?index);
 /// @param array
 /// @param f
 /// @param ?data

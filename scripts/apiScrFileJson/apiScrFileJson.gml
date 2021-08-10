@@ -6,7 +6,6 @@
 */
 
 /// @function		apiFJsonSave(filename, map_or_json);
-/// @description	
 function apiFJsonSave(_filename, _json) {
 	
 	var _type = is_numeric(_json);
@@ -18,9 +17,7 @@ function apiFJsonSave(_filename, _json) {
 	file_text_close(_file);
 }
 
-/// @description	
-//
-/// @param filename
+/// @param			filename
 function apiFJsonLoad(_filename) {
 	
 	var _file = file_text_open_read(_filename);

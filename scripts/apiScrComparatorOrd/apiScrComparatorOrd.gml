@@ -1,11 +1,13 @@
 
-/*
 
+/*
+	Сравнение объектов, с возможностью отсортировать их в порядке (Ord)
+	Можно использовать например для функции array_sort
 */
 
-#macro API_COMP_LT -1
-#macro API_COMP_EQ 0
-#macro API_COMP_GT 1
+#macro API_COMP_LT	-1	// what < with
+#macro API_COMP_EQ	0  	// what = with
+#macro API_COMP_GT	1	// what > with
 
 #region basic
 
@@ -60,53 +62,18 @@ function apiCompOrdStr(_what, _with) {
 
 #endregion
 
+
 #region tests - basic
 if (API_TEST_ENABLE) {
 	
-	API_TEST_LOCAL false
+	API_TEST_LOCAL false;
 	if (API_TEST) {
 		
 		show_debug_message(
 			"<API TEST>\n\t" + "apiScrComparatorOrd"
 		);
 		
-		#region apiCompOrdNum
-		
-		apiDebugAssert(
-			apiCompOrdNum(2.0000242, 2.0000242) == API_COMP_EQ,
-			"<apiCompOrdNum eq 1>"
-		);
-		
-		apiDebugAssert(
-			apiCompOrdNum(2.0000242, 2.0000243) == API_COMP_LT,
-			"<apiCompOrdNum lt 1>"
-		);
-		
-		apiDebugAssert(
-			apiCompOrdNum(2.0000243, 2.0000242) == API_COMP_GT,
-			"<apiCompOrdNum gt 1>"
-		);
-		
-		apiDebugAssert(
-			apiCompOrdNum(5, 5) == API_COMP_EQ,
-			"<apiCompOrdNum eq 2>"
-		);
-		
-		apiDebugAssert(
-			apiCompOrdNum(2, 5) == API_COMP_LT,
-			"<apiCompOrdNum lt 2>"
-		);
-		
-		apiDebugAssert(
-			apiCompOrdNum(5, 2) == API_COMP_GT,
-			"<apiCompOrdNum gt 2>"
-		);
-		
-		show_debug_message("\t apiCompOrdNum \t\t\tis work");
-		
-		#endregion
-		
-		#region apiCompOrdStr
+		show_debug_message("\t apiCompOrdNum \tskip check");
 		
 		apiDebugAssert(
 			apiCompOrdStr("aa", "aa") == API_COMP_EQ,
@@ -164,11 +131,20 @@ if (API_TEST_ENABLE) {
 			"<apiCompOrdStr gt 4>"
 		);
 		
-		show_debug_message("\t apiCompOrdStr \tis work");
+		show_debug_message("\t apiCompOrdStr \t\tis work");
 		
-		#endregion
+		var _array = ["Message", "World", "Map", "Dota", "Haskell is good language"];
+		array_sort(_array, apiCompOrdStr);
+		
+		apiDebugAssert(
+			array_equals(
+				["Dota", "Haskell is good language", "Map", "Message", "World"], _array
+			),
+			"<apiCompOrdStr array_sort>"
+		);
 		
 		show_debug_message("<COMPLETE>");
 	}
 }
 #endregion
+

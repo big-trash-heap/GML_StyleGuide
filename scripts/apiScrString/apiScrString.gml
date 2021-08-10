@@ -1,7 +1,7 @@
 
 
 
-function apiStringReplace(_substring, _string, _index, _count) {
+function apiStrReplace(_substring, _string, _index, _count) {
 	return (
 		string_copy(_string, 1, _index - 1) +
 		_substring +
@@ -9,7 +9,7 @@ function apiStringReplace(_substring, _string, _index, _count) {
 	);
 }
 
-function apiStringFindBalance(_string, _left_ord, _right_ord, _index=1) {
+function apiStrFindBalance(_string, _left_ord, _right_ord, _index=1) {
 	
 	var _type = string_ord_at(_string, _index), _limit;
 	if (_type == _left_ord) {
@@ -50,7 +50,7 @@ function apiStringFindBalance(_string, _left_ord, _right_ord, _index=1) {
 	return 0;
 }
 
-function apiStringFormat(_textbuf, _ord=37, _handler=string, _string) {
+function apiStrFormat(_textbuf, _ord=37/* % */, _handler=string, _string) {
 	
 	var _size = string_length(_string);
 	var _i = 1, _j = 1, _a = 4, _k;

@@ -1,14 +1,14 @@
 
-#macro API_INTEGER_TO_BASE_DEFAULT_TABLE "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-#macro API_INTEGER_TO_BASE_HEX           16
-#macro API_INTEGER_TO_BASE_OCT           8
-#macro API_INTEGER_TO_BASE_BIN           2
+#macro API_INT_TBASE_DEFTABLE   "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+#macro API_INT_TBASE_HEX        16
+#macro API_INT_TBASE_OCT        8
+#macro API_INT_TBASE_BIN        2
 
-/// @function apiToStringIntegerToBase(integer, base, [table])
+/// @function		apiTStrIntTBase(integer, base, [table])
 /// @param integer
 /// @param base
 /// @param [table]
-function apiToStringIntegerToBase(_integer, _base, _table=API_INTEGER_TO_BASE_DEFAULT_TABLE) {
+function apiTStrIntTBase(_integer, _base, _table=API_INT_TBASE_DEFTABLE) {
     
     var _sign = sign(_integer);
     if (_sign == 0) return string_char_at(_table, 0);
@@ -24,13 +24,13 @@ function apiToStringIntegerToBase(_integer, _base, _table=API_INTEGER_TO_BASE_DE
     return (_sign == -1 ? "-" + _result : _result);
 }
 
-/// @function apiToStringBaseToInteger(integer, base, [table])
+/// @function		apiTStrBaseTInt(integer, base, [table])
 /// @param integer
 /// @param base
 /// @param [table]
-function apiToStringBaseToInteger(_integerCrypt, _base, _table) {
+function apiTStrBaseTInt(_integerCrypt, _base, _table) {
     
-    static _defaultTable = apiToStringBaseToIntegerBuildTable(API_INTEGER_TO_BASE_DEFAULT_TABLE);
+    static _defaultTable = apiTStrBaseTIntBulTable(API_INT_TBASE_DEFTABLE);
     
     if (is_undefined(_table)) {
     	
@@ -38,7 +38,7 @@ function apiToStringBaseToInteger(_integerCrypt, _base, _table) {
     }
     else {
     	
-    	_table = (is_string(_table) ? apiToStringBaseToIntegerBuildTable(_table) : _table);
+    	_table = (is_string(_table) ? apiTStrBaseTIntBulTable(_table) : _table);
     }
     
     var _integer = 0;
@@ -64,9 +64,9 @@ function apiToStringBaseToInteger(_integerCrypt, _base, _table) {
 	return (_integer * _sign);
 }
 
-/// @function apiToStringBaseToIntegerBuildTable(table)
+/// @function		apiTStrBaseTIntBulTable(table)
 /// @param table
-function apiToStringBaseToIntegerBuildTable(_table) {
+function apiTStrBaseTIntBulTable(_table) {
 	
 	var _size = string_length(_table);
     var _build = {};
@@ -74,18 +74,16 @@ function apiToStringBaseToIntegerBuildTable(_table) {
     return _build;
 }
 
-/// @function apiToStringInteger(integer_or_integerCrypt, [base=16], [padding])
+/// @function		apiTStrInt(integer_or_integerCrypt, [base=16], [padding])
 /// @param integer_or_integerCrypt
 /// @param [base=16]
 /// @param [padding]
-function apiToStringInteger(_integerOrIntegerCrypt, _base=16, _padding=false) {
-	
-	if (is_undefined(_base)) _base = 16;
+function apiTStrInt(_integerOrIntegerCrypt, _base=16, _padding=false) {
 	
 	if (is_string(_integerOrIntegerCrypt))
-		return apiToStringBaseToInteger(_integerOrIntegerCrypt, _base);
+		return apiTStrBaseTInt(_integerOrIntegerCrypt, _base);
 	
-	var _hex = apiToStringIntegerToBase(_integerOrIntegerCrypt, _base);
+	var _hex = apiTStrIntTBase(_integerOrIntegerCrypt, _base);
 	if (!_padding) return _hex;
 	
 	var _sign;
