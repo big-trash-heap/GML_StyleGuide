@@ -445,6 +445,14 @@ if (API_TEST_ENABLE) {
 			"<apiArrUnshift 1>"
 		);
 		
+		apiDebugAssert(
+			array_equals(
+				_f(_array, apiArrUnshift(_array)), 
+				[7, 0, 88, 8, 9, 1, 2, 3, 4, 5]
+			),
+			"<apiArrUnshift 2>"
+		);
+		
 		show_debug_message("\t apiArrUnshift \t\tis work");
 		
 		#endregion

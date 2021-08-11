@@ -6,7 +6,7 @@
 /// @function		apiArrMap(array, f, [data]);
 function apiArrMap(_array, _f, _data) {
 	var _size = array_length(_array);
-	for (var _i = 0; _i < _size; _i += 1) 
+	for (var _i = 0; _i < _size; ++_i) 
 		array_set(_array, _i, _f(_array[_i], _i, _data));
 }
 
@@ -46,7 +46,7 @@ function apiArrBulMap(_array, _f, _data) {
 	var _size = array_length(_array);
 	var _arrayBul = array_create(_size);
 	
-	for (var _i = 0; _i < _size; _i += 1) 
+	for (var _i = 0; _i < _size; ++_i) 
 		array_set(_arrayBul, _i, _f(_array[_i], _i, _data));
 	
 	return _arrayBul;
