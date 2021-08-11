@@ -4,7 +4,7 @@
     "path": "folders/GML_StyleGuide_api/styleGuide.yy",
   },
   "resourceVersion": "1.1",
-  "name": "apiNote4_Dev",
+  "name": "apiNote3_Dev",
   "tags": [],
   "resourceType": "GMNotes",
 }
