@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "not include",
-    "path": "folders/not include.yy",
+    "name": "tree",
+    "path": "folders/not include/tree.yy",
   },
   "resourceVersion": "1.0",
-  "name": "asdf",
+  "name": "ni_redblack",
   "tags": [],
   "resourceType": "GMScript",
 }

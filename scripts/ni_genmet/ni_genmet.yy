@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "not include",
-    "path": "folders/not include.yy",
+    "name": "generators",
+    "path": "folders/not include/generators.yy",
   },
   "resourceVersion": "1.0",
-  "name": "Script1",
+  "name": "ni_genmet",
   "tags": [],
   "resourceType": "GMScript",
 }

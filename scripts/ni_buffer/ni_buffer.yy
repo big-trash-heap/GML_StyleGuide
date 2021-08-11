@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "red_black",
-    "path": "folders/not include/tree/red_black.yy",
+    "name": "not include",
+    "path": "folders/not include.yy",
   },
   "resourceVersion": "1.0",
-  "name": "apiScrTreeRedBlack",
+  "name": "ni_buffer",
   "tags": [],
   "resourceType": "GMScript",
 }

@@ -1,6 +1,6 @@
 
 								// включить код тестирования в проект
-#macro API_TEST_ENABLE			true
+#macro API_TEST_ENABLE			false
 
 								// включить все тесты, или только те,
 								// что имеют включённый локальный переключатель
@@ -15,7 +15,7 @@
 #region tests
 if (API_TEST_ENABLE) {
 	
-	API_TEST_LOCAL true;
+	API_TEST_LOCAL false;
 	if (API_TEST) {
 		
 		show_debug_message(
@@ -28,3 +28,4 @@ if (API_TEST_ENABLE) {
 	}
 }
 #endregion
+

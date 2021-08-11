@@ -6,7 +6,7 @@
     "path": "folders/not include.yy",
   },
   "resourceVersion": "1.0",
-  "name": "sdffds",
+  "name": "ni_array",
   "tags": [],
   "resourceType": "GMScript",
 }

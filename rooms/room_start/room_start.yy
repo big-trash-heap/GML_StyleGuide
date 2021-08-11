@@ -46,7 +46,7 @@
     "path": "GML_StyleGuide.yyp",
   },
   "resourceVersion": "1.0",
-  "name": "Room1",
+  "name": "room_start",
   "tags": [],
   "resourceType": "GMRoom",
 }

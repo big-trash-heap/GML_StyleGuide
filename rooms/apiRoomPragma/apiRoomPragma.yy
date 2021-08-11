@@ -22,7 +22,7 @@
   "creationCodeFile": "",
   "inheritCode": false,
   "instanceCreationOrder": [
-    {"name":"inst_44C89472","path":"rooms/apiRoomLoader/apiRoomLoader.yy",},
+    {"name":"inst_44C89472","path":"rooms/apiRoomPragma/apiRoomPragma.yy",},
   ],
   "inheritCreationOrder": false,
   "sequenceId": null,
@@ -50,7 +50,7 @@
     "path": "folders/GML_StyleGuide_api/api_core/pragma.yy",
   },
   "resourceVersion": "1.0",
-  "name": "apiRoomLoader",
+  "name": "apiRoomPragma",
   "tags": [],
   "resourceType": "GMRoom",
 }

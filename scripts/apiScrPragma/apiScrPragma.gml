@@ -1,98 +1,101 @@
 
-//
-#macro API_PRAGMA_NAME apiScrPragma
+/*
+	Данный инструмент используется, для добавления кода в очередь исполнения
+	Pragma код, который будет выполнен при старте игры (комнаты apiRoomPragma)
+	Final код, который будет выполнен при завершении игры
+*/
 
-//
-if (variable_global_exists("__apiPragmaHeap")) exit;
-
-//
-global.__apiPragmaHeap = apiStructBul(
-	["api",     ds_priority_create()],
-	["project", ds_priority_create()],
-);
-
-global.__apiFinal = ds_list_create();
-
-/// @function		apiPragma(loader, [int_priority=0]);
-/// @param loader
-/// @param [int_priority=0]
-function apiPragma(_loader, _intPriority=0) {
-	
-	if (!variable_global_exists("__apiPragmaHeap")) API_PRAGMA_NAME();
-	ds_priority_add(global.__apiPragmaHeap[$ "project"], _loader, _intPriority);
+/// @function		apiPragma(loader, [priority=0]);
+function apiPragma(_loader, _priority=0) {
+	__apiAppendHeap("__apiPragmaHeap", "project", _loader, _priority);
 }
 
-/// @function		apiFinal(final);
-/// @param final
-function apiFinal(_final) {
-	
-	if (!variable_global_exists("__apiPragmaHeap")) API_PRAGMA_NAME();
-	ds_list_add(global.__apiFinal, _final);
+/// @function		apiFinal(final, [priority=0]);
+function apiFinal(_final, _priority=0) {
+	__apiAppendHeap("__apiFinalHeap", "project", _final, _priority);
 }
 
-/// @function		__apiPragma(loader, [int_priority=0]);
-/// @param loader
-/// @param [int_priority=0]
-function __apiPragma(_loader, _intPriority=0) {
-	
-	if (!variable_global_exists("__apiPragmaHeap")) API_PRAGMA_NAME();
-	ds_priority_add(global.__apiPragmaHeap[$ "api"], _loader, _intPriority);
+/// @function		__apiPragma(loader, [priority=0]);
+/// @description	Имеет более высокий приоритет, чем apiPragma
+function __apiPragma(_loader, _priority=0) {
+	__apiAppendHeap("__apiPragmaHeap", "api", _loader, _priority);
 }
+
+/// @function		__apiFinal(final, [priority=0]);
+/// @description	Имеет более низкий приоритет, чем apiFinal
+function __apiFinal(_final, _priority=0) {
+	__apiAppendHeap("__apiFinalHeap", "api", _final, _priority);
+}
+
+
+#region private
 
 function __apiEmmitPragma() {
-	var _heap;
 	
-	_heap = global.__apiPragmaHeap[$ "api"];
-	while (!ds_priority_empty(_heap)) ds_priority_delete_max(_heap)();
-	ds_priority_destroy(_heap);
-	global.__apiPragmaHeap[$ "api"] = -1;
-	
-	_heap = global.__apiPragmaHeap[$ "project"];
-	while (!ds_priority_empty(_heap)) ds_priority_delete_max(_heap)();
-	ds_priority_destroy(_heap);
-	global.__apiPragmaHeap[$ "project"] = -1;
+	__apiEmmitHeap("__apiPragmaHeap", "api");
+	__apiEmmitHeap("__apiPragmaHeap", "project");
 	
 }
 
 function __apiEmmitFinal() {
 	
-	var _size = ds_list_size(global.__apiFinal);
-	for (var _i = 0; _i < _size; ++_i)
-		ds_list_find_value(global.__apiFinal, _i)();
-	
-	ds_list_destroy(global.__apiFinal);
-	global.__apiFinal = -1;
+	__apiEmmitHeap("__apiFinalHeap", "project");
+	__apiEmmitHeap("__apiFinalHeap", "api");
 }
 
-function __apiPragmaFree() {
-	
-	if (variable_global_exists("__apiPragmaHeap") && is_struct(global.__apiPragmaHeap)) {
-		
-		var _heap;
-		if (variable_struct_exists(global.__apiPragmaHeap, "api")) {
-			
-			_heap = global.__apiPragmaHeap[$ "api"];
-			if (ds_exists(_heap, ds_type_priority)) {
-				
-				ds_priority_destroy(_heap);
-				global.__apiPragmaHeap[$ "api"] = -1;
-			}
-		}
-		if (variable_struct_exists(global.__apiPragmaHeap, "project")) {
-			
-			_heap = global.__apiPragmaHeap[$ "project"];
-			if (ds_exists(_heap, ds_type_priority)) {
-				
-				ds_priority_destroy(_heap);
-				global.__apiPragmaHeap[$ "project"] = -1;
-			}
-		}
-	}
-		
-	if (variable_global_exists("__apiFinal") && ds_exists(global.__apiFinal, ds_type_list)) {
-		
-		ds_list_destroy(global.__apiFinal);
-		global.__apiFinal = -1;
-	}
-	
+function __apiEmmitHeap(_gname, _key) {
+	var _pack = variable_global_get(_gname);
+	var _heap = _pack[$ _key];
+	while (!ds_priority_empty(_heap)) ds_priority_delete_max(_heap)();
+	ds_priority_destroy(_heap);
+	_pack[$ _key] = -1;
 }
+
+function __apiAppendHeap(_gname, _key, _f, _priority) {
+	if (!variable_global_exists("__apiPragmaHeap")) apiScrPragma();
+	ds_priority_add(variable_global_get(_gname)[$ _key], _f, _priority);
+}
+
+function __apiFreePragma() {
+	
+	var _keys = ["api", "project"];
+	__apiFreeHeap("__apiPragmaHeap", _keys);
+	__apiFreeHeap("__apiFinalHeap", _keys);
+}
+
+function __apiFreeHeap(_gname, _keys) {
+	if (variable_global_exists(_gname)) {
+		
+		var _pack = variable_global_get(_gname);
+		if (!is_struct(_pack)) exit;
+		
+		var _size = array_length(_keys), _heap;
+		for (var _i = 0; _i < _size; ++_i) {
+			if (variable_struct_exists(_pack, _keys[_i])) {
+				_heap = _pack[$ _keys[_i]];
+				_pack[$ _keys[_i]] = -1;
+				if (ds_exists(_heap, ds_type_priority))
+					ds_priority_destroy(_heap);
+			}
+		}
+	}
+}
+
+#region global struct
+
+if (variable_global_exists("__apiPragmaHeap")) exit;
+
+global.__apiPragmaHeap = apiStructBul(
+	["api",     ds_priority_create()],
+	["project", ds_priority_create()],
+);
+
+global.__apiFinalHeap = apiStructBul(
+	["api",     ds_priority_create()],
+	["project", ds_priority_create()],
+);
+
+#endregion
+
+#endregion
+

@@ -1,3 +1,3 @@
 
 __apiEmmitFinal();
-__apiPragmaFree();
+__apiFreePragma();

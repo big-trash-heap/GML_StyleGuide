@@ -1,4 +1,7 @@
 
+/*
+	Перевод в разные системы счисления
+*/
 
 #macro API_INT_TBASE_DEFTABLE   "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 #macro API_INT_TBASE_HEX        16
@@ -107,7 +110,7 @@ function apiTStrInt(_value, _base=16, _padding=0) {
 #region tests
 if (API_TEST_ENABLE) {
 	
-	API_TEST_LOCAL true;
+	API_TEST_LOCAL false;
 	if (API_TEST) {
 		
 		show_debug_message(
