@@ -73,7 +73,8 @@ function apiArrUnshift(_array) {
     if (apiArrInsEm(_array, 0, _argSize - 1)) {
 		
         var _i = 0;
-        while (++_i < _argSize) array_set(_array, _i - 1, argument[_i]);
+        while (++_i < _argSize) 
+			array_set(_array, _i - 1, argument[_i]);
 		
 		return (_argSize - 1);
     }
@@ -274,7 +275,7 @@ function apiArrRangeInsert(_array, _index, _range) {
 #endregion
 
 
-#region tests - modify + build-apiArrBulConcat
+#region tests - modify + apiArrBulConcat
 if (API_TEST_ENABLE) {
 	
 	API_TEST_LOCAL false;
