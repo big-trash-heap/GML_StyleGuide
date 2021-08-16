@@ -3,7 +3,7 @@
   "isCompatibility": false,
   "parent": {
     "name": "generators",
-    "path": "folders/not include/generators.yy",
+    "path": "folders/not_include/generators.yy",
   },
   "resourceVersion": "1.0",
   "name": "ni_genmet",
