@@ -2,7 +2,7 @@
 
 #region basic
 
-/// @function		apiFunctorEm(...values);
+/// @param			...values
 function apiFunctorEm() {
 	return undefined;
 }
@@ -12,7 +12,7 @@ function apiFunctorId(_value) {
 	return _value;
 }
 
-/// @function		apiFunctorArr(value);
+/// @param			value
 function apiFunctorArr(_value) {
 	return (is_array(_value) ? _value : [_value]);
 }

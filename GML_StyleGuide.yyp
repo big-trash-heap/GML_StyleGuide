@@ -6,6 +6,7 @@
     {"id":{"name":"apiScrTest","path":"scripts/apiScrTest/apiScrTest.yy",},"order":9,},
     {"id":{"name":"apiRoomPragma","path":"rooms/apiRoomPragma/apiRoomPragma.yy",},"order":1,},
     {"id":{"name":"ni_callOnce","path":"scripts/ni_callOnce/ni_callOnce.yy",},"order":4,},
+    {"id":{"name":"ni_method_functor","path":"scripts/ni_method_functor/ni_method_functor.yy",},"order":5,},
     {"id":{"name":"apiScrFileJson","path":"scripts/apiScrFileJson/apiScrFileJson.yy",},"order":0,},
     {"id":{"name":"apiScrArrayHigher","path":"scripts/apiScrArrayHigher/apiScrArrayHigher.yy",},"order":1,},
     {"id":{"name":"apiScrBuffer","path":"scripts/apiScrBuffer/apiScrBuffer.yy",},"order":1,},
