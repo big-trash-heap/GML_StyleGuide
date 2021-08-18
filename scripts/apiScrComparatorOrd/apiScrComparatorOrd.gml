@@ -60,6 +60,20 @@ function apiCompOrdStr(_what, _with) {
 	return sign(_sizeWhat - _sizeWith);
 }
 
+/// @function		apiCompOrdNS(what, with);
+/// @description	Комбинация apiCompOrdNum и apiCompOrdStr
+//					Числа всегда меньше чем строки
+function apiCompOrdNS(_what, _with) {
+	if (is_string(_what)) {
+		if (is_string(_with)) {
+			return apiCompOrdStr(_what, _with);
+		}
+		return API_COMP_GT;
+	}
+	if (is_string(_with)) return API_COMP_LT;
+	return sign(_what - _with);
+}
+
 #endregion
 
 
@@ -134,13 +148,23 @@ if (API_TEST_ENABLE) {
 		show_debug_message("\t apiCompOrdStr \t\tis work");
 		
 		var _array = ["Message", "World", "Map", "Dota", "Haskell is good language"];
-		array_sort(_array, apiCompOrdStr);
+		array_sort(_array, method(_, apiCompOrdStr));
 		
 		apiDebugAssert(
 			array_equals(
 				["Dota", "Haskell is good language", "Map", "Message", "World"], _array
 			),
 			"<apiCompOrdStr array_sort>"
+		);
+		
+		var _array = [4, "Message", "World", 100, "Map", "Dota", 234, "Haskell is good language", -1];
+		array_sort(_array, method(_, apiCompOrdNS));
+		
+		apiDebugAssert(
+			array_equals(
+				[-1, 4, 100, 234, "Dota", "Haskell is good language", "Map", "Message", "World"], _array
+			),
+			"<apiCompOrdStr array_sort NS>"
 		);
 		
 		show_debug_message("<COMPLETE>");

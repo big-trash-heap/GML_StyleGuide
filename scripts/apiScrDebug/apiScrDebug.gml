@@ -32,13 +32,14 @@ function apiDebugShow(_array, _handler) {
 function apiDebugPrint() {
 	
 	//
+	API_MACRO_ARGPACK_OFFS 0;
 	API_MACRO_ARGPACK_READ;
 	var _text = apiDebugShow(API_MACRO_ARGPACK_GET);
 	
 	show_debug_message(_text);
 	return _text;
 }
-
+show_message(apiDebugPrint("helo", 1))
 #endregion
 
 #region assert

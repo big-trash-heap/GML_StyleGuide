@@ -2,11 +2,12 @@
 								// Удобный и очень важный синоним
 #macro _						undefined
 
-								// Упаковщик всех аргументов в массив
-#macro API_MACRO_ARGPACK_READ	var __argSize = argument_count;           \
-								var __argArrs = array_create(__argSize);  \
-								for (var __i = 0; __i < __argSize; ++__i) \
-									__argArrs[__i] = argument[__i];                                          
+								// Упаковщик аргументов в массив
+#macro API_MACRO_ARGPACK_OFFS   var __argOffs =
+#macro API_MACRO_ARGPACK_READ	var __argSize = argument_count;							\
+								var __argArrs = array_create(__argSize - __argOffs);	\
+								for (var __i = __argOffs; __i < __argSize; ++__i)		\
+									__argArrs[__i - __argOffs] = argument[__i];                                          
 
 #macro API_MACRO_ARGPACK_GET	__argArrs
 
