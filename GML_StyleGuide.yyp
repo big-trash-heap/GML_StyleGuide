@@ -25,6 +25,7 @@
     {"id":{"name":"apiScrMacro","path":"scripts/apiScrMacro/apiScrMacro.yy",},"order":0,},
     {"id":{"name":"apiScrStruct","path":"scripts/apiScrStruct/apiScrStruct.yy",},"order":0,},
     {"id":{"name":"apiScrStructHigher","path":"scripts/apiScrStructHigher/apiScrStructHigher.yy",},"order":1,},
+    {"id":{"name":"apiScrMath","path":"scripts/apiScrMath/apiScrMath.yy",},"order":0,},
     {"id":{"name":"apiScrBufferText","path":"scripts/apiScrBufferText/apiScrBufferText.yy",},"order":0,},
     {"id":{"name":"apiScrString","path":"scripts/apiScrString/apiScrString.yy",},"order":0,},
     {"id":{"name":"apiScrToString","path":"scripts/apiScrToString/apiScrToString.yy",},"order":2,},
@@ -71,6 +72,7 @@
     {"folderPath":"folders/GML_StyleGuide_api/api_core/file/text.yy","order":1,"resourceVersion":"1.0","name":"text","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/GML_StyleGuide_api/api_core/buffer.yy","order":8,"resourceVersion":"1.0","name":"buffer","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/GML_StyleGuide_api/api_core/file/json.yy","order":2,"resourceVersion":"1.0","name":"json","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/GML_StyleGuide_api/api_core/math.yy","order":10,"resourceVersion":"1.0","name":"math","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},
