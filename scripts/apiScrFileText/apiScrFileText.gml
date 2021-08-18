@@ -31,3 +31,24 @@ function apiFTextRead(_filename) {
 
 #endregion
 
+#region buffer
+
+/// @function		apiFTextBufWrite(filename, string);
+function apiFTextBufWrite(_filename, _string) {
+	
+	var _textbuf = apiBufTxtCreate(string_byte_length(_string));
+	apiBufTxtAppend(_textbuf, _string);
+	buffer_save(_textbuf, _filename);
+	buffer_delete(_textbuf);
+}
+
+/// @param			filename
+function apiFTextBufRead(_filename) {
+	
+	var _textbuf = buffer_load(_filename);
+	if (_textbuf == -1) return undefined;
+	return apiBufTxtFree(_textbuf);
+}
+
+#endregion
+
