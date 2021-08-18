@@ -62,7 +62,8 @@ function apiCompOrdStr(_what, _with) {
 
 /// @function		apiCompOrdNS(what, with);
 /// @description	Комбинация apiCompOrdNum и apiCompOrdStr
-//					Числа всегда меньше чем строки
+//					Числа по отношению к строкам, расцениваются
+//					как меньшее значение
 function apiCompOrdNS(_what, _with) {
 	if (is_string(_what)) {
 		if (is_string(_with)) {

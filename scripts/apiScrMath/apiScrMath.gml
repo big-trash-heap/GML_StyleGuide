@@ -4,6 +4,6 @@ function apiMthARound(_number, _f) {
 }
 
 function apiMthTrunc(_number) {
-	return (sign(_number) == -1 ? ceil(_number) : floor(_number));
+	return (sign(_number) == -1 ? ceil : floor)(_number);
 }
 

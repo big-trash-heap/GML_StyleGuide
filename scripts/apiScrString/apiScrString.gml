@@ -53,7 +53,7 @@ function apiStrFindBalance(_string, _leftOrd, _rightOrd, _index=1) {
 }
 
 /// @function		apiStrFormat(buffer, [ord='%'], [handler=string], string, ...values);
-/// @description	Записывает в буффер строку, заменяя ord на некоторое значение 
+/// @description	Записывает в буфер строку, заменяя ord на некоторое значение 
 function apiStrFormat(_textbuf, _ord=37/* % */, _handler=string, _string) {
 	
 	var _size = string_length(_string);

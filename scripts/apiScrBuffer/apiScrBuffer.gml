@@ -7,7 +7,7 @@
 */
 
 /// @function		apiTStrBuffer(buffer, [bytesize], [bytestart], [metainfo]);
-/// @description	Генерирует строку, где каждый байт буффера
+/// @description	Генерирует строку, где каждый байт буфера
 //					будет представлен в виде числа в HEX (шестнадцатеричном) формате
 //					
 /// @param			buffer
