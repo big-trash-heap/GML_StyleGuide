@@ -39,7 +39,7 @@ function apiDebugPrint() {
 	show_debug_message(_text);
 	return _text;
 }
-show_message(apiDebugPrint("helo", 1))
+
 #endregion
 
 #region assert
