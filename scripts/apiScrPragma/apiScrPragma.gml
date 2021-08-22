@@ -52,7 +52,7 @@ function __apiEmmitHeap(_gname, _key) {
 }
 
 function __apiAppendHeap(_gname, _key, _f, _priority) {
-	if (!variable_global_exists("__apiPragmaHeap")) apiScrPragma();
+	static _init = apiScrPragma();
 	ds_priority_add(variable_global_get(_gname)[$ _key], _f, _priority);
 }
 

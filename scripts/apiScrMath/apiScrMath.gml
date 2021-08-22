@@ -6,6 +6,6 @@ function apiMthARound(_number, _f) {
 
 /// @param			number
 function apiMthTrunc(_number) {
-	return (sign(_number) == -1 ? ceil : floor)(_number);
+	return (sign(_number) == -1 ? ceil(_number) : floor(_number));
 }
 

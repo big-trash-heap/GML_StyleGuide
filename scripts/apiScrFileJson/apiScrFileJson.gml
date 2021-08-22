@@ -9,7 +9,7 @@ function apiFJsonSave(_filename, _json) {
 	var _file = file_text_open_write(_filename);
 	file_text_write_real(_file, _type);
 	file_text_write_string(_file,
-		(_type ? json_encode : json_stringify)(_json)
+		(_type ? json_encode(_json) : json_stringify(_json))
 	);
 	file_text_close(_file);
 }

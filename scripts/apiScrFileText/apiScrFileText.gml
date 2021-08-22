@@ -5,7 +5,7 @@
 /// @function		apiFTextWrite(filename, string, [append=false]);
 function apiFTextWrite(_filename, _string, _append=false) {
 	
-	var _file = (_append ? file_text_open_append : file_text_open_write)(_filename);
+	var _file = (_append ? file_text_open_append(_filename) : file_text_open_write(_filename));
 	file_text_write_string(_file, _string);
 	file_text_close(_file);
 }
