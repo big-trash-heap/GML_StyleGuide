@@ -111,14 +111,28 @@ if (API_TEST_ENABLE) {
 		);
 		
 		apiDebugAssert(
+			(apiCompOrdStr("aa", "ab") == API_COMP_LT) == ("aa" < "ab"),
+			"<apiCompOrdStr lt 1.1>"
+		);
+		
+		apiDebugAssert(
 			apiCompOrdStr("a", "ab") == API_COMP_LT,
 			"<apiCompOrdStr lt 2>"
 		);
 		
+		apiDebugAssert(
+			(apiCompOrdStr("a", "ab") == API_COMP_LT) == ("a" < "ab"),
+			"<apiCompOrdStr lt 2.1>"
+		);
 		
 		apiDebugAssert(
 			apiCompOrdStr("aac", "abc") == API_COMP_LT,
 			"<apiCompOrdStr lt 3>"
+		);
+		
+		apiDebugAssert(
+			(apiCompOrdStr("aac", "abc") == API_COMP_LT) == ("aac" < "abc"),
+			"<apiCompOrdStr lt 3.1>"
 		);
 		
 		apiDebugAssert(
@@ -127,8 +141,18 @@ if (API_TEST_ENABLE) {
 		);
 		
 		apiDebugAssert(
+			(apiCompOrdStr("ab", "b") == API_COMP_LT) == ("ab" < "b"),
+			"<apiCompOrdStr lt 4.1>"
+		);
+		
+		apiDebugAssert(
 			apiCompOrdStr("ab", "aa") == API_COMP_GT,
 			"<apiCompOrdStr gt 1>"
+		);
+		
+		apiDebugAssert(
+			(apiCompOrdStr("ab", "aa") == API_COMP_GT) == ("ab" > "aa"),
+			"<apiCompOrdStr gt 1.1>"
 		);
 		
 		apiDebugAssert(
@@ -137,13 +161,28 @@ if (API_TEST_ENABLE) {
 		);
 		
 		apiDebugAssert(
+			(apiCompOrdStr("ab", "a") == API_COMP_GT) == ("ab" > "a"),
+			"<apiCompOrdStr gt 2.1>"
+		);
+		
+		apiDebugAssert(
 			apiCompOrdStr("abc", "aac") == API_COMP_GT,
 			"<apiCompOrdStr gt 3>"
 		);
 		
 		apiDebugAssert(
+			(apiCompOrdStr("abc", "aac") == API_COMP_GT) == ("abc" > "aac"),
+			"<apiCompOrdStr gt 3.1>"
+		);
+		
+		apiDebugAssert(
 			apiCompOrdStr("b", "ab") == API_COMP_GT,
 			"<apiCompOrdStr gt 4>"
+		);
+		
+		apiDebugAssert(
+			(apiCompOrdStr("b", "ab") == API_COMP_GT) == ("b" > "ab"),
+			"<apiCompOrdStr gt 4.1>"
 		);
 		
 		show_debug_message("\t apiCompOrdStr \t\tis work");
