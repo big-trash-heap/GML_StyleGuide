@@ -55,3 +55,14 @@ function apiDebugAssert(_assert, _mess) {
 
 #endregion
 
+#region error
+
+/// @function		apiDebugError(message);
+function apiDebugError(_message) {
+	show_error(
+		"API-ERROR: {\n\t" + string(_message) + "\n};", 
+		true
+	);
+}
+
+#endregion
