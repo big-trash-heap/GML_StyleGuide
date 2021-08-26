@@ -1,4 +1,6 @@
 
+//					f = function(value, index, data)
+/// @function		apiDListFilter(array, f, [data]);
 function apiDListFilter(_id, _f, _data) {
 	
 	var _idSize = ds_list_size(_id);

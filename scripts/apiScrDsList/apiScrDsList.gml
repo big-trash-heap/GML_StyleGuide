@@ -1,4 +1,9 @@
 
+
+#region modify
+
+/// @function		apiDListResize(id, size);
+/// @description	Аналог array_resize
 function apiDListResize(_id, _size) {
 	var _idSize = ds_list_size(_id);
 	if (_size > _idSize) {
@@ -11,6 +16,8 @@ function apiDListResize(_id, _size) {
 	}
 }
 
+/// @function		apiDListDel(id, index, count);
+/// @description	Аналог array_delete
 function apiDListDel(_id, _index, _count) {
 	
 	var _idSize = ds_list_size(_id);
@@ -22,6 +29,28 @@ function apiDListDel(_id, _index, _count) {
 	apiDListResize(_id, _idSize - _count);
 }
 
+#endregion
+
+#region build
+
+/// @param			...
+/// @description	Строит список из аргументов
+function apiDListBul() {
+	var _id = ds_list_create();
+	var _argSize = argument_count;
+	
+	for (var _i = 0; _i < _argSize; ++_i)
+		ds_list_add(_id, argument[_i]);
+	
+	return _id;
+}
+
+#endregion
+
+#region other
+
+/// @param			id
+/// @description	Запишет список в массив
 function apiDListToArr(_id) {
 	var _idSize = ds_list_size(_id);
 	var _array = array_create(_idSize);
@@ -32,12 +61,5 @@ function apiDListToArr(_id) {
 	return _array;
 }
 
-function apiDListBul() {
-	var _id = ds_list_create();
-	var _argSize = argument_count;
-	
-	for (var _i = 0; _i < _argSize; ++_i)
-		ds_list_add(_id, argument[_i]);
-	
-	return _id;
-}
+#endregion
+
