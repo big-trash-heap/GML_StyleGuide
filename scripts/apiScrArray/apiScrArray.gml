@@ -146,6 +146,7 @@ function apiArrIns(_dest, _destIndex, _src, _srcIndex=0, _length) {
             var _destShift = _destIndex + _length;
             if (_dest == _src) {
 				
+				// копирование с помощью временного массива
                 var _temp = array_create(_length), _i = -1;
                 while (++_i < _length) array_set(_temp, _i,                 array_get(_src, _i + _srcIndex));
                 while (_size--)        array_set(_dest, _size + _destShift, array_get(_dest, _size + _destIndex));

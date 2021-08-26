@@ -1,4 +1,5 @@
 
+
 /// @function		apiMthARound(number, f);
 function apiMthARound(_number, _f) {
 	return (sign(_number) * _f(abs(_number)));

@@ -12,6 +12,7 @@
     {"id":{"name":"apiScrBuffer","path":"scripts/apiScrBuffer/apiScrBuffer.yy",},"order":1,},
     {"id":{"name":"apiNote3_Dev","path":"notes/apiNote3_Dev/apiNote3_Dev.yy",},"order":3,},
     {"id":{"name":"apiScrFileText","path":"scripts/apiScrFileText/apiScrFileText.yy",},"order":0,},
+    {"id":{"name":"apiNote_GML_StyleGuide_api","path":"notes/apiNote_GML_StyleGuide_api/apiNote_GML_StyleGuide_api.yy",},"order":6,},
     {"id":{"name":"apiScrFunctor","path":"scripts/apiScrFunctor/apiScrFunctor.yy",},"order":0,},
     {"id":{"name":"ni_genmet","path":"scripts/ni_genmet/ni_genmet.yy",},"order":0,},
     {"id":{"name":"apiScrDsList","path":"scripts/apiScrDsList/apiScrDsList.yy",},"order":1,},

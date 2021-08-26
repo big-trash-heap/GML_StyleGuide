@@ -20,6 +20,9 @@ function apiFinal(_final, _priority=0) {
 	if (API_PREPROCESSOR_FINAL) {
 		
 		__apiAppendHeap("__apiFinalHeap", "project", _final, _priority);
+	} else {
+		
+		apiDebugError(@"apiFinal выключенна, включите её с помощью макроса API_PREPROCESSOR_FINAL");
 	}
 }
 
@@ -35,6 +38,9 @@ function __apiFinal(_final, _priority=0) {
 	if (API_PREPROCESSOR_FINAL) {
 		
 		__apiAppendHeap("__apiFinalHeap", "api", _final, _priority);
+	} else {
+		
+		apiDebugError(@"__apiFinal выключенна, включите её с помощью макроса API_PREPROCESSOR_FINAL");
 	}
 }
 
