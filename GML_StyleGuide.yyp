@@ -19,6 +19,7 @@
     {"id":{"name":"apiScrComparatorOrd","path":"scripts/apiScrComparatorOrd/apiScrComparatorOrd.yy",},"order":0,},
     {"id":{"name":"apiScrPragma","path":"scripts/apiScrPragma/apiScrPragma.yy",},"order":0,},
     {"id":{"name":"apiScrArray","path":"scripts/apiScrArray/apiScrArray.yy",},"order":0,},
+    {"id":{"name":"ni_strFormat","path":"scripts/ni_strFormat/ni_strFormat.yy",},"order":6,},
     {"id":{"name":"apiScrDebug","path":"scripts/apiScrDebug/apiScrDebug.yy",},"order":0,},
     {"id":{"name":"ni_array","path":"scripts/ni_array/ni_array.yy",},"order":1,},
     {"id":{"name":"apiScrDsListHigher","path":"scripts/apiScrDsListHigher/apiScrDsListHigher.yy",},"order":0,},
