@@ -1,7 +1,7 @@
 
 //
 __apiEmmitPragma();
-global.__apiPragmaHeap = undefined;
+delete global.__apiPragmaHeap;
 
 //
 alarm_set(0, 5);
