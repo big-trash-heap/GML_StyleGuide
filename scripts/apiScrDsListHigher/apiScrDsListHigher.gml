@@ -4,30 +4,23 @@
 function apiDListFilter(_id, _f, _data) {
 	
 	var _idSize = ds_list_size(_id);
-    if (_idSize > 0) {
+	if (_idSize > 0) {
 		
-		var _count = 0;
+		var _i = 0, _j = 0, _value;
 		do {
-			
-			_idSize -= 1;
-			if (_f(_id[| _idSize], _idSize, _data)) {
-				
-				apiDListDel(_id, _idSize + 1, _count);
-				_count = 0;
-			}
-			else {
-
-				_count += 1;
-			}
-		} until (_idSize == 0);
-		apiDListDel(_id, 0, _count);
-    }
+		
+			_value = _id[| _i];
+			if (_f(_value, _i, _data))
+				_id[| _j++] = _value;
+		} until (++_i >= _idSize);
+		apiDListResize(_id, _j);
+	}
 }
 
 #region tests
 if (API_TEST_ENABLE) {
 	
-	API_TEST_LOCAL false;
+	API_TEST_LOCAL true;
 	if (API_TEST) {
 		
 		show_debug_message(

@@ -15,24 +15,17 @@ function apiArrMap(_array, _f, _data) {
 function apiArrFilter(_array, _f, _data) {
 	
 	var _size = array_length(_array);
-    if (_size > 0) {
+	if (_size > 0) {
 		
-		var _count = 0;
+		var _i = 0, _j = 0, _value;
 		do {
-			
-			_size -= 1;
-			if (_f(_array[_size], _size, _data)) {
-				
-				array_delete(_array, _size + 1, _count);
-				_count = 0;
-			}
-			else {
-
-				_count += 1;
-			}
-		} until (_size == 0);
-		array_delete(_array, 0, _count);
-    }
+		
+			_value = _array[_i];
+			if (_f(_value, _i, _data))
+				_array[@ _j++] = _value;
+		} until (++_i >= _size);
+		array_resize(_array, _j);
+	}
 }
 
 #endregion
@@ -91,7 +84,7 @@ function apiArrCall(_array, _f, _data) {
 #region tests - apiArrFilter + apiArrBulFilter
 if (API_TEST_ENABLE) {
 	
-	API_TEST_LOCAL false;
+	API_TEST_LOCAL true;
 	if (API_TEST) {
 		
 		show_debug_message(
