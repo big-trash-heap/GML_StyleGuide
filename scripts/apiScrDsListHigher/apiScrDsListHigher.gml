@@ -12,7 +12,7 @@ function apiDListFilter(_id, _f, _data) {
 			_value = _id[| _i];
 			if (_f(_value, _i, _data))
 				_id[| _j++] = _value;
-		} until (++_i >= _idSize);
+		} until (++_i == _idSize);
 		apiDListResize(_id, _j);
 	}
 }

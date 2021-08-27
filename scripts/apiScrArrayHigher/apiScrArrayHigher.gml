@@ -23,7 +23,7 @@ function apiArrFilter(_array, _f, _data) {
 			_value = _array[_i];
 			if (_f(_value, _i, _data))
 				_array[@ _j++] = _value;
-		} until (++_i >= _size);
+		} until (++_i == _size);
 		array_resize(_array, _j);
 	}
 }
