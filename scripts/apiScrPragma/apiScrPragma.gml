@@ -1,5 +1,5 @@
 
-// позволяет включать выключать код apiFinal/__apiFinal (включать/выключать инструмент apiFinal)
+// позволяет включать выключать код apiFinal/__apiFinal (включать/выключать инструмент apiFinal/__apiFinal)
 #macro API_PREPROCESSOR_FINAL false
 
 /*
