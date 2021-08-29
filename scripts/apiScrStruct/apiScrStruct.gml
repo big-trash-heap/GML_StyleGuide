@@ -29,7 +29,7 @@ function apiStructMerge(_struct_merge, _struct, _union=false) {
 
 #region build
 
-/// @function		apiStructBul(...["key":value]);
+/// @param			...["key":value]
 function apiStructBul() {
     var _argSize = argument_count;
     var _structBul = {};

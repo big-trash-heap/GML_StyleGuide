@@ -12,7 +12,8 @@ function apiArrPlace(_array, _index) {
 		if (is_undefined(_index)) _index = _size;
 		
 		array_resize(_array, max(_size, _index + _count));
-		for (var _i = 0; _i < _count; ++_i) array_set(_array, _index + _i, argument[_i + 2]);
+		for (var _i = 0; _i < _count; ++_i) 
+			array_set(_array, _index + _i, argument[_i + 2]);
 	}
 }
 
@@ -181,7 +182,7 @@ function apiArrRemNOrd(_array, _index) {
 
 #region build
 
-/// @function		apiArrBul(...value);
+/// @param			...value
 function apiArrBul() {
 	var _argSize  = argument_count;
 	var _arrayBul = array_create(_argSize);
@@ -190,7 +191,7 @@ function apiArrBul() {
 	return _arrayBul;
 }
 
-/// @function		apiArrBulConcat(...array_or_value);
+/// @param			...value
 /// @description	Функция для построение массива из
 //					массивов и значений
 function apiArrBulConcat() {

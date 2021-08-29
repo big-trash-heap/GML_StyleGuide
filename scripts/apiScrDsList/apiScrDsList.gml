@@ -38,7 +38,7 @@ function apiDListDel(_id, _index, _count) {
 
 #region build
 
-/// @param			...
+/// @param			...value
 /// @description	Строит список из аргументов
 function apiDListBul() {
 	var _id = ds_list_create();
