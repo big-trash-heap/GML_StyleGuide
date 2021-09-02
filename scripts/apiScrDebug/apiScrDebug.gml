@@ -58,9 +58,9 @@ function apiDebugAssert(_assert, _mess) {
 #region error
 
 /// @param			message
-function apiDebugError(_message) {
+function apiDebugError(_message, _prefix="API-ERROR") {
 	show_error(
-		"API-ERROR: {\n\t" + string(_message) + "\n};", 
+		_prefix + ": {\n\t" + string(_message) + "\n};", 
 		true
 	);
 }
