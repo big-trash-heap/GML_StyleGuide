@@ -67,6 +67,14 @@ function apiBufTxtFree(_buffer) {
 	return _string;
 }
 
+/// @description	Возвращает количество данных в буффере (в байтах)
+//
+/// @param			buffer
+function apiBufTxtSize(_buffer) {
+	
+	return (buffer_tell(_buffer) + 1);
+}
+
 
 #region tests
 if (API_TEST_ENABLE) {
