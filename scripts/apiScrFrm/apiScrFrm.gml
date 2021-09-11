@@ -44,7 +44,7 @@ function apiFrm(_string) {
 			API_FRM_MODIFY_SIZE_MINS
 		);
 		
-		_iter  = 1;
+		_iter = 1;
 		apiBufTxtClear(_buffer, _msize);
 	}
 	else {

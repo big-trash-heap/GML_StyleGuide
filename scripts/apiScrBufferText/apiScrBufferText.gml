@@ -43,6 +43,19 @@ function apiBufTxtRead(_buffer) {
 	return _string;
 }
 
+/// @description	Возвращает строку записанную в буфере
+//					и очищает его
+//
+/// @param			buffer
+function apiBufTxtCRead(_buffer) {
+	
+	buffer_write(_buffer, buffer_u8, 0);
+	buffer_seek(_buffer, buffer_seek_start, 0);
+	var _string = buffer_read(_buffer, buffer_string);
+	buffer_seek(_buffer, buffer_seek_start, 0);
+	return _string;
+}
+
 /// @function		apiBufTxtClear(buffer, [newsize]);
 /// @description	Производит отчистку буферу
 //					и изменяет его размер если он был указан
