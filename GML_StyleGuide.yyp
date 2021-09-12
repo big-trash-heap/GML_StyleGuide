@@ -36,6 +36,7 @@
     {"id":{"name":"apiScrBufferText","path":"scripts/apiScrBufferText/apiScrBufferText.yy",},"order":0,},
     {"id":{"name":"apiScrString","path":"scripts/apiScrString/apiScrString.yy",},"order":0,},
     {"id":{"name":"apiScrToString","path":"scripts/apiScrToString/apiScrToString.yy",},"order":2,},
+    {"id":{"name":"apiScrGlobals","path":"scripts/apiScrGlobals/apiScrGlobals.yy",},"order":13,},
     {"id":{"name":"ni_redblack","path":"scripts/ni_redblack/ni_redblack.yy",},"order":1,},
   ],
   "Options": [

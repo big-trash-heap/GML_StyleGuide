@@ -20,13 +20,13 @@ function apiFTextRead(_filename) {
 		return undefined;
 	}
 	
-	var _textbuf = apiBufTxtCreate();
+	var _textbuf = API_GL_TXTBUF;
 	
 	while (!file_text_eof(_file))
 		apiBufTxtAppend(_textbuf, file_text_readln(_file));
 	
 	file_text_close(_file);
-	return apiBufTxtFree(_textbuf);
+	return API_GL_TXTBUF_READ;
 }
 
 #endregion
