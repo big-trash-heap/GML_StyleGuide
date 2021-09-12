@@ -23,6 +23,7 @@ function __apiGLGetter(_name) {
 
 #macro API_GL_TXTBUF_SIZE_MIN	8192
 #macro API_GL_TXTBUF_RESZ_CFD	1.75
+#macro API_GL_TXTBUF_RESZ_PRC	48
 
 global.__apiTxtBuffer      = apiBufTxtCreate(API_GL_TXTBUF_SIZE_MIN);
 global.__apiTxtBuffer_size = 0;
@@ -44,14 +45,21 @@ function __apiGLTxtBufRead() {
 			API_GL_TXTBUF_SIZE_MIN
 		);
 		
-		apiBufTxtClear(_buffer, _size);
+		var _bufsize = buffer_get_size(_buffer);
+		if (_bufsize > _size) {
+			
+			var _percent = _size / _bufsize * 100;
+			if (_percent <= API_GL_TXTBUF_RESZ_PRC) {
+				
+				buffer_resize(_buffer, _size);
+			}
+		}
 		
 		global.__apiTxtBuffer_size = 0;
 		global.__apiTxtBuffer_iter = 0;
 	}
-	else {
-		apiBufTxtClear(_buffer);
-	}
+	
+	buffer_seek(_buffer, buffer_seek_start, 0);
 	return _string;
 }
 
