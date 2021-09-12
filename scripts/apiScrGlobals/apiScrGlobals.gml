@@ -40,8 +40,10 @@ function __apiGLTxtBufRead() {
 	if (global.__apiTxtBuffer_size > 131072) {
 		
 		var _size = max(
-			round(global.__apiTxtBuffer_size / global.__apiTxtBuffer_iter),
-			round(global.__apiTxtBuffer_size / API_GL_TXTBUF_RESZ_CFD),
+			mean(
+				round(global.__apiTxtBuffer_size / global.__apiTxtBuffer_iter),
+				round(global.__apiTxtBuffer_size / API_GL_TXTBUF_RESZ_CFD)
+			),
 			API_GL_TXTBUF_SIZE_MIN
 		);
 		
