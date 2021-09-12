@@ -21,7 +21,7 @@ function __apiGLGetter(_name) {
 #macro API_GL_TXTBUF			__apiGLGetter("__apiTxtBuffer")
 #macro API_GL_TXTBUF_READ		__apiGLTxtBufRead()
 
-#macro API_GL_TXTBUF_SIZE_MIN	8192
+#macro API_GL_TXTBUF_SIZE_MIN	2048
 #macro API_GL_TXTBUF_RESZ_CFD	1.75
 #macro API_GL_TXTBUF_RESZ_PRC	48
 
@@ -42,7 +42,7 @@ function __apiGLTxtBufRead() {
 		var _size = max(
 			mean(
 				round(global.__apiTxtBuffer_size / global.__apiTxtBuffer_iter),
-				round(global.__apiTxtBuffer_size / API_GL_TXTBUF_RESZ_CFD)
+				round(global.__apiTxtBuffer_size / API_GL_TXTBUF_RESZ_PRC),
 			),
 			API_GL_TXTBUF_SIZE_MIN
 		);
