@@ -22,7 +22,7 @@ function __apiGLGetter(_name) {
 #macro API_GL_TXTBUF_READ		__apiGLTxtBufRead()
 
 #macro API_GL_TXTBUF_SIZE_MIN	8192
-#macro API_GL_TXTBUF_RESZ_CFD	2.25
+#macro API_GL_TXTBUF_RESZ_CFD	1.75
 
 global.__apiTxtBuffer      = apiBufTxtCreate(API_GL_TXTBUF_SIZE_MIN);
 global.__apiTxtBuffer_size = 0;
@@ -36,7 +36,7 @@ function __apiGLTxtBufRead() {
 	++global.__apiTxtBuffer_iter;
 	
 	var _string = apiBufTxtCRead(_buffer);
-	if (global.__apiTxtBuffer_size > API_MACRO_UINT16_MAX) {
+	if (global.__apiTxtBuffer_size > 131072) {
 		
 		var _size = max(
 			round(global.__apiTxtBuffer_size / global.__apiTxtBuffer_iter),
@@ -44,10 +44,10 @@ function __apiGLTxtBufRead() {
 			API_GL_TXTBUF_SIZE_MIN
 		);
 		
+		apiBufTxtClear(_buffer, _size);
+		
 		global.__apiTxtBuffer_size = 0;
 		global.__apiTxtBuffer_iter = 0;
-		
-		apiBufTxtClear(_buffer, _size);
 	}
 	else {
 		apiBufTxtClear(_buffer);
