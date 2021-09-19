@@ -150,10 +150,17 @@ function ApiLinkListTwo() : ApiLinkListOne() constructor {
 		_cell2[@ __API_LINK_LIST.PREV] = _prev1;
 		_cell2[@ __API_LINK_LIST.NEXT] = _next1;
 		
-		_prev1[@ __API_LINK_LIST.NEXT] = _cell2;
-		_next1[@ __API_LINK_LIST.PREV] = _cell2;
-		_prev2[@ __API_LINK_LIST.NEXT] = _cell1;
-		_next2[@ __API_LINK_LIST.PREV] = _cell1;
+		if (_prev1 != undefined)
+			_prev1[@ __API_LINK_LIST.NEXT] = _cell2;
+		
+		if (_next1 != undefined)
+			_next1[@ __API_LINK_LIST.PREV] = _cell2;
+		
+		if (_prev2 != undefined)
+			_prev2[@ __API_LINK_LIST.NEXT] = _cell1;
+		
+		if (_next2 != undefined)
+			_next2[@ __API_LINK_LIST.PREV] = _cell1;
 		
 		if (_cell1 == self.__fst) {
 			
