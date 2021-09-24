@@ -1,18 +1,29 @@
 
 
-function ApiLinkListOne() constructor {
+#region class
+
+function ApiLListO() constructor {
+	
+	#region __private
 	
 	self.__fst = undefined;
 	
+	static __build = function(_value, _next) {
+		
+		return [_value, _next];
+	}
+	
+	#endregion
+	
 	static insBegin = function(_value) {
 		
-		self.__fst = [_value, self.__fst];
+		self.__fst = self.__build(_value, self.__fst);
 		return self.__fst;
 	}
 	
 	static insAfter = function(_value, _cell) {
 		
-		_value = [_value, _cell[__API_LINK_LIST.NEXT]];
+		_value = self.__build(_value, _cell[__API_LINK_LIST.NEXT]);
 		_cell[@ __API_LINK_LIST.NEXT] = _value;
 		
 		return _value;
@@ -30,19 +41,14 @@ function ApiLinkListOne() constructor {
 		return _value;
 	}
 	
+	static rem = function(_cell, _prev) {
+		
+		_prev[@ __API_LINK_LIST.NEXT] = _cell[@ __API_LINK_LIST.NEXT];
+	}
+	
 	static clear = function() {
 		
 		self.__fst = undefined;
-	}
-	
-	static getValue = function(_cell) {
-		
-		return _cell[__API_LINK_LIST.VALUE];
-	}
-	
-	static getNext = function(_cell) {
-		
-		return _cell[__API_LINK_LIST.NEXT];
 	}
 	
 	static foreach = function(_f, _data) {
@@ -50,7 +56,18 @@ function ApiLinkListOne() constructor {
 		var _cell = self.__fst;
 		while (_cell != undefined) {
 			
-			_f(_cell[__API_LINK_LIST.VALUE],  _data);
+			_cell[@ __API_LINK_LIST.VALUE] = _f(_cell[__API_LINK_LIST.VALUE], _data);
+			_cell = _cell[__API_LINK_LIST.NEXT];
+		}
+	}
+	
+	static call = function(_f, _data) {
+		
+		var _cell = self.__fst;
+		while (_cell != undefined) {
+			
+			_f(_cell[__API_LINK_LIST.VALUE], _data);
+			_cell = _cell[__API_LINK_LIST.NEXT];
 		}
 	}
 	
@@ -59,7 +76,8 @@ function ApiLinkListOne() constructor {
 		var _cell = self.__fst;
 		while (_cell != undefined) {
 			
-			if (_f(_cell[__API_LINK_LIST.VALUE],  _data)) return _cell;
+			if (_f(_cell[__API_LINK_LIST.VALUE], _data)) return _cell;
+			_cell = _cell[__API_LINK_LIST.NEXT];
 		}
 		return undefined;
 	}
@@ -79,7 +97,7 @@ function ApiLinkListOne() constructor {
 	
 	static toClone = function(_f=apiFunctorId, _data) {
 		
-		var _clone = new ApiLinkListOne();
+		var _clone = new ApiLListO();
 		var _cell = self.__fst;
 		if (_cell != undefined) {
 			
@@ -114,4 +132,179 @@ function ApiLinkListOne() constructor {
 	}
 	
 }
+
+#endregion
+
+#region functions
+
+function apiLListOGetVal(_cell) {
+	
+	return _cell[__API_LINK_LIST.VALUE];
+}
+
+function apiLListOSetVal(_cell, _value) {
+	
+	_cell[@ __API_LINK_LIST.VALUE] = _value;
+}
+
+function apiLListOGetNext(_cell) {
+	
+	return _cell[__API_LINK_LIST.NEXT];
+}
+
+function apiLListOSwpVal(_cell1, _cell2) {
+	
+	if (_cell1 == _cell2) exit;
+	
+	var _value = _cell1[__API_LINK_LIST.VALUE];
+	_cell1[@ __API_LINK_LIST.VALUE] = _cell2[__API_LINK_LIST.VALUE];
+	_cell2[@ __API_LINK_LIST.VALUE] = _value;
+}
+
+#endregion
+
+
+#region tests
+if (API_TEST_ENABLE) {
+	
+	API_TEST_LOCAL true;
+	if (API_TEST) {
+		
+		show_debug_message(
+			"<API TEST>\n\t" + "apiScrLinkListOne"
+		);
+		
+		var _lolist = new ApiLListO();
+		
+		apiDebugAssert(
+			array_equals(
+				_lolist.toArray(),
+				[]
+			),
+			"<apiScrLinkListOne empty>"
+		);
+		
+		apiDebugAssert(
+			_lolist.mathSize() == 0,
+			"<apiScrLinkListOne size empty>"
+		);
+		
+		var _lolist_clone = _lolist.toClone();
+		_lolist.insBegin(4);
+		
+		apiDebugAssert(
+			array_equals(
+				_lolist_clone.toArray(),
+				[]
+			),
+			"<apiScrLinkListOne empty clone>"
+		);
+		
+		apiDebugAssert(
+			_lolist_clone.mathSize() == 0,
+			"<apiScrLinkListOne size empty clone>"
+		);
+		
+		apiDebugAssert(
+			array_equals(
+				_lolist.toArray(),
+				[4]
+			),
+			"<apiScrLinkListOne insBegin 1>"
+		);
+		
+		apiDebugAssert(
+			_lolist.mathSize() == 1,
+			"<apiScrLinkListOne insBegin size 1>"
+		);
+		
+		_lolist.insBegin(8);
+		apiDebugAssert(
+			array_equals(
+				_lolist.toArray(),
+				[8, 4]
+			),
+			"<apiScrLinkListOne insBegin 1>"
+		);
+		
+		apiDebugAssert(
+			_lolist.mathSize() == 2,
+			"<apiScrLinkListOne insBegin size 1>"
+		);
+		
+		apiDebugAssert(
+			array_equals(
+				_lolist_clone.toArray(),
+				[]
+			),
+			"<apiScrLinkListOne empty clone 2>"
+		);
+		
+		apiDebugAssert(
+			_lolist_clone.mathSize() == 0,
+			"<apiScrLinkListOne size empty clone 2>"
+		);
+		
+		var _pop;
+		
+		_pop = _lolist.popBegin();
+		apiDebugAssert(
+			apiLListOGetVal(_pop) == 8,
+			"<apiScrLinkListOne getValue 1>"
+		);
+		
+		apiDebugAssert(
+			apiLListOGetVal(apiLListOGetNext(_pop)) == 4,
+			"<apiScrLinkListOne getValue 1 next>"
+		);
+		
+		apiDebugAssert(
+			_lolist.mathSize() == 1,
+			"<apiScrLinkListOne getValue 1 size>"
+		);
+		
+		apiDebugAssert(
+			array_equals(
+				_lolist.toArray(),
+				[4]
+			),
+			"<apiScrLinkListOne getValue 1 check>"
+		);
+		
+		_pop = _lolist.popBegin();
+		apiDebugAssert(
+			apiLListOGetVal(_pop) == 4,
+			"<apiScrLinkListOne getValue 2>"
+		);
+		
+		apiDebugAssert(
+			apiLListOGetNext(_pop) == undefined,
+			"<apiScrLinkListOne getValue 2 next>"
+		);
+		
+		apiDebugAssert(
+			_lolist.mathSize() == 0,
+			"<apiScrLinkListOne getValue 2 size>"
+		);
+		
+		apiDebugAssert(
+			array_equals(
+				_lolist.toArray(),
+				[]
+			),
+			"<apiScrLinkListOne getValue 2 check>"
+		);
+		
+		apiDebugAssert(
+			_lolist.topBegin() == undefined,
+			"<apiScrLinkListOne getValue empty>"
+		);
+		
+		
+		
+		show_debug_message("<COMPLETE>");
+	}
+}
+#endregion
+
 

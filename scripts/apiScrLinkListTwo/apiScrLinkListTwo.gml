@@ -1,12 +1,23 @@
 
 
-function ApiLinkListTwo() : ApiLinkListOne() constructor {
+#region class
+
+function ApiLListT() : ApiLListO() constructor {
+	
+	#region __private
 	
 	self.__lst = undefined;
 	
+	static __build = function(_value, _next, _prev) {
+		
+		return [_value, _next, _prev];
+	}
+	
+	#endregion
+	
 	static insBegin = function(_value) {
 		
-		_value = [_value, self.__fst, undefined];
+		_value = self.__build(_value, self.__fst, undefined);
 		
 		if (self.__lst == undefined) {
 			
@@ -23,7 +34,7 @@ function ApiLinkListTwo() : ApiLinkListOne() constructor {
 	
 	static insEnd = function(_value) {
 		
-		_value = [_value, undefined, self.__lst];
+		_value = self.__build(_value, undefined, self.__lst);
 		
 		if (self.__fst == undefined) {
 			
@@ -40,7 +51,7 @@ function ApiLinkListTwo() : ApiLinkListOne() constructor {
 	
 	static insAfter = function(_value, _cell) {
 		
-		_value = [_value, _cell[__API_LINK_LIST.NEXT], _cell];
+		_value = self.__build(value, _cell[__API_LINK_LIST.NEXT], _cell);
 		_cell[@ __API_LINK_LIST.NEXT] = _value;
 		
 		if (_cell == self.__lst) {
@@ -53,7 +64,7 @@ function ApiLinkListTwo() : ApiLinkListOne() constructor {
 	
 	static insBefore = function(_value, _cell) {
 		
-		_value = [_value, _cell, _cell[__API_LINK_LIST.PREV]];
+		_value = self.__build(_value, _cell, _cell[__API_LINK_LIST.PREV]);
 		_cell[@ __API_LINK_LIST.PREV] = _value;
 		
 		if (_cell == self.__fst) {
@@ -127,15 +138,6 @@ function ApiLinkListTwo() : ApiLinkListOne() constructor {
 		}
 	}
 	
-	static swpVal = function(_cell1, _cell2) {
-		
-		if (_cell1 == _cell2) exit;
-		
-		var _value = _cell1[__API_LINK_LIST.VALUE];
-		_cell1[@ __API_LINK_LIST.VALUE] = _cell2[__API_LINK_LIST.VALUE];
-		_cell2[@ __API_LINK_LIST.VALUE] = _value;
-	}
-	
 	static swpRef = function(_cell1, _cell2) {
 		
 		if (_cell1 == _cell2) exit;
@@ -189,14 +191,9 @@ function ApiLinkListTwo() : ApiLinkListOne() constructor {
 		self.__lst = undefined;
 	}
 	
-	static getPrev = function(_cell) {
-		
-		return _cell[__API_LINK_LIST.PREV];
-	}
-	
 	static toClone = function(_f=apiFunctorId, _data) {
 		
-		var _clone = new ApiLinkListTwo();
+		var _clone = new ApiLListT();
 		var _cell = self.__fst;
 		if (_cell != undefined) {
 			
@@ -213,4 +210,15 @@ function ApiLinkListTwo() : ApiLinkListOne() constructor {
 	}
 	
 }
+
+#endregion
+
+#region functions
+
+function apiLListTGetPrev(_cell) {
+		
+	return _cell[__API_LINK_LIST.PREV];
+}
+
+#endregion
 
