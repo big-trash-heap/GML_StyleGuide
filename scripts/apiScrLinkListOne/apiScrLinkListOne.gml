@@ -300,7 +300,33 @@ if (API_TEST_ENABLE) {
 			"<apiScrLinkListOne getValue empty>"
 		);
 		
+		_lolist = new ApiLListO();
 		
+		var _v1 = _lolist.insBegin(4);
+		var _v2 = _lolist.insBegin(8);
+		
+		apiLListOSwpVal(_v1, _v2);
+		
+		apiDebugAssert(
+			array_equals(
+				_lolist.toArray(),
+				[4, 8]
+			),
+			"<apiScrLinkListOne swapValue>"
+		);
+		
+		_lolist.rem(_v1, _v2);
+		_lolist.insAfter("Hello", _v2);
+		apiLListOSetVal(_v2, "World");
+		apiDebugAssert(
+			array_equals(
+				_lolist.toArray(),
+				["World", "Hello"]
+			),
+			"<apiScrLinkListOne remValue>"
+		);
+		
+		// random-tests
 		
 		show_debug_message("<COMPLETE>");
 	}

@@ -1,4 +1,5 @@
 
+
 #region once
 
 if (variable_global_exists("__apiTxtBuffer")) exit;
@@ -62,4 +63,5 @@ function __apiGLTxtBufRead() {
 }
 
 #endregion
+
 
