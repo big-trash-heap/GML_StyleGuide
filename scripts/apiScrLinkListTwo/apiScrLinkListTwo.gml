@@ -63,7 +63,7 @@ function ApiLListT() : ApiLListO() constructor {
 		
 		if (_cell == self.__lst) {
 			
-			self.__lst = _cell;
+			self.__lst = _value;
 		}
 		
 		return _value;
@@ -83,7 +83,7 @@ function ApiLListT() : ApiLListO() constructor {
 		
 		if (_cell == self.__fst) {
 			
-			self.__fst = _cell;
+			self.__fst = _value;
 		}
 		
 		return _value;
@@ -533,6 +533,19 @@ if (API_TEST_ENABLE) {
 				[77, 5, "before", 6, "after", 11]
 			),
 			"<apiScrLinkListTwo before>"
+		);
+		
+		var _nb = _l.insBefore("begin", _l.topBegin());
+		var _ne = _l.insAfter("end", _l.topEnd());
+		
+		apiDebugAssert(
+			_l.topBegin() == _nb,
+			"<apiScrLinkListTwo ref check 1>"
+		);
+		
+		apiDebugAssert(
+			_l.topEnd() == _ne,
+			"<apiScrLinkListTwo ref check 2>"
 		);
 		
 		show_debug_message("<COMPLETE>");
