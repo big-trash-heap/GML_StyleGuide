@@ -51,8 +51,15 @@ function ApiLListT() : ApiLListO() constructor {
 	
 	static insAfter = function(_value, _cell) {
 		
-		_value = self.__build(_value, _cell[__API_LINK_LIST.NEXT], _cell);
+		var _next = _cell[__API_LINK_LIST.NEXT];
+		
+		_value = self.__build(_value, _next, _cell);
 		_cell[@ __API_LINK_LIST.NEXT] = _value;
+		
+		if (_next != undefined) {
+			
+			_next[@ __API_LINK_LIST.PREV] = _value;
+		}
 		
 		if (_cell == self.__lst) {
 			
@@ -64,8 +71,15 @@ function ApiLListT() : ApiLListO() constructor {
 	
 	static insBefore = function(_value, _cell) {
 		
-		_value = self.__build(_value, _cell, _cell[__API_LINK_LIST.PREV]);
+		var _prev = _cell[__API_LINK_LIST.PREV];
+		
+		_value = self.__build(_value, _cell, _prev);
 		_cell[@ __API_LINK_LIST.PREV] = _value;
+		
+		if (_prev != undefined) {
+			
+			_prev[@ __API_LINK_LIST.NEXT] = _value;
+		}
 		
 		if (_cell == self.__fst) {
 			
@@ -507,6 +521,18 @@ if (API_TEST_ENABLE) {
 		apiDebugAssert(
 			_l.topEnd() == _b,
 			"<apiScrLinkListTwo swpRef b>"
+		);
+		
+		var _m = apiLListTGetPrev(_b);
+		_l.insAfter("after", _m);
+		_l.insBefore("before", _m);
+		
+		apiDebugAssert(
+			array_equals(
+				_l.toArray(),
+				[77, 5, "before", 6, "after", 11]
+			),
+			"<apiScrLinkListTwo before>"
 		);
 		
 		show_debug_message("<COMPLETE>");
