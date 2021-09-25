@@ -51,16 +51,6 @@ function ApiLListO() constructor {
 		self.__fst = undefined;
 	}
 	
-	static foreach = function(_f, _data) {
-		
-		var _cell = self.__fst;
-		while (_cell != undefined) {
-			
-			_cell[@ __API_LINK_LIST.VALUE] = _f(_cell[__API_LINK_LIST.VALUE], _data);
-			_cell = _cell[__API_LINK_LIST.NEXT];
-		}
-	}
-	
 	static call = function(_f, _data) {
 		
 		var _cell = self.__fst;
@@ -326,11 +316,48 @@ if (API_TEST_ENABLE) {
 			"<apiScrLinkListOne remValue>"
 		);
 		
-		// random-tests
+		_lolist = new ApiLListO();
+		_lolist.insBegin(4);
+		_lolist.insBegin(8);
+		var _arr = [];
+		_lolist.call(function(_v, _a) {
+			array_push(_a, _v);
+		}, _arr);
+		
+		apiDebugAssert(
+			array_equals(
+				_arr,
+				[8, 4]
+			),
+			"<apiScrLinkListOne call>"
+		);
+		
+		var _clone = _lolist.toClone();
+		
+		var _v1 = _lolist.topBegin();
+		var _v2 = apiLListOGetNext(_v1);
+		
+		apiLListOSwpVal(_v1, _v2);
+		_lolist.insAfter(16, _v2);
+		
+		apiDebugAssert(
+			array_equals(
+				_lolist.toArray(),
+				[4, 8, 16]
+			),
+			"<apiScrLinkListOne swp 1>"
+		);
+		
+		apiDebugAssert(
+			array_equals(
+				_clone.toArray(),
+				[8, 4]
+			),
+			"<apiScrLinkListOne swp 2>"
+		);
 		
 		show_debug_message("<COMPLETE>");
 	}
 }
 #endregion
-
 
