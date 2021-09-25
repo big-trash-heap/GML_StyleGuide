@@ -72,6 +72,18 @@ function ApiLListO() constructor {
 		return undefined;
 	}
 	
+	static indexOf = function(_index) {
+		
+		var _cell = self.__fst;
+		while (_cell != undefined) {
+			
+			if (_index == 0) return _cell;
+			--_index;
+			_cell = _cell[__API_LINK_LIST.NEXT];
+		}
+		return undefined;
+	}
+	
 	static mathSize = function() {
 		
 		var _size = 0;
