@@ -156,27 +156,66 @@ function ApiLListT() : ApiLListO() constructor {
 		
 		if (_cell1 == _cell2) exit;
 		
-		var _prev1 = _cell1[__API_LINK_LIST.PREV];
-		var _next1 = _cell1[__API_LINK_LIST.NEXT];
-		var _prev2 = _cell2[__API_LINK_LIST.PREV];
-		var _next2 = _cell2[__API_LINK_LIST.NEXT];
+		var _case0;
+		if (_cell1[__API_LINK_LIST.PREV] == _cell2) {
+			
+			var _x = _cell2;
+			var _y = _cell1;
+			
+			_case0 = true;
+		}
+		else
+		if (_cell1[__API_LINK_LIST.NEXT] == _cell2) {
+			
+			var _x = _cell1;
+			var _y = _cell2;
+			
+			_case0 = true;
+		}
+		else {
+			_case0 = false;	
+		}
 		
-		_cell1[@ __API_LINK_LIST.PREV] = _prev2;
-		_cell1[@ __API_LINK_LIST.NEXT] = _next2;
-		_cell2[@ __API_LINK_LIST.PREV] = _prev1;
-		_cell2[@ __API_LINK_LIST.NEXT] = _next1;
-		
-		if (_prev1 != undefined)
-			_prev1[@ __API_LINK_LIST.NEXT] = _cell2;
-		
-		if (_next1 != undefined)
-			_next1[@ __API_LINK_LIST.PREV] = _cell2;
-		
-		if (_prev2 != undefined)
-			_prev2[@ __API_LINK_LIST.NEXT] = _cell1;
-		
-		if (_next2 != undefined)
-			_next2[@ __API_LINK_LIST.PREV] = _cell1;
+		if (_case0) {
+			
+			var _prev = _x[__API_LINK_LIST.PREV];
+			var _next = _y[__API_LINK_LIST.NEXT];
+			
+			_x[@ __API_LINK_LIST.PREV] = _y;
+			_x[@ __API_LINK_LIST.NEXT] = _next;
+			_y[@ __API_LINK_LIST.NEXT] = _y[__API_LINK_LIST.PREV];
+			_y[@ __API_LINK_LIST.PREV] = _prev;
+			
+			if (_prev != undefined)
+				_prev[@ __API_LINK_LIST.NEXT] = _y;
+			
+			if (_next != undefined)
+				_next[@ __API_LINK_LIST.PREV] = _x;
+		}
+		else {
+			
+			var _prev1 = _cell1[__API_LINK_LIST.PREV];
+			var _next1 = _cell1[__API_LINK_LIST.NEXT];
+			var _prev2 = _cell2[__API_LINK_LIST.PREV];
+			var _next2 = _cell2[__API_LINK_LIST.NEXT];
+			
+			_cell1[@ __API_LINK_LIST.PREV] = _prev2;
+			_cell1[@ __API_LINK_LIST.NEXT] = _next2;
+			_cell2[@ __API_LINK_LIST.PREV] = _prev1;
+			_cell2[@ __API_LINK_LIST.NEXT] = _next1;
+			
+			if (_prev1 != undefined)
+				_prev1[@ __API_LINK_LIST.NEXT] = _cell2;
+			
+			if (_next1 != undefined)
+				_next1[@ __API_LINK_LIST.PREV] = _cell2;
+			
+			if (_prev2 != undefined)
+				_prev2[@ __API_LINK_LIST.NEXT] = _cell1;
+			
+			if (_next2 != undefined)
+				_next2[@ __API_LINK_LIST.PREV] = _cell1;
+		}
 		
 		if (_cell1 == self.__fst) {
 			
@@ -643,11 +682,23 @@ if (API_TEST_ENABLE) {
 				}
 			}
 			
+			var _buildPrev = function(_l) {
+				
+				var _lst = _l.topEnd();
+				var _bld = [];
+				
+				while (_lst != undefined) {
+					
+					array_insert(_bld, 0, apiLListOGetVal(_lst));
+					_lst = apiLListTGetPrev(_lst);
+				}
+				
+				return _bld;
+			}
+			
+			var _list = _build.l.toArray();
 			apiDebugAssert(
-				array_equals(
-					_build.l.toArray(),
-					_build.av,
-				),
+				array_equals(_list, _build.av) and array_equals(_list, _buildPrev(_build.l)),
 				"<apiScrLinkListOne rand values>"
 			);
 			
@@ -659,7 +710,7 @@ if (API_TEST_ENABLE) {
 			}
 		}
 		
-		repeat 100 _build();
+		repeat 1000 _build();
 		
 		show_debug_message("<COMPLETE>");
 	}
