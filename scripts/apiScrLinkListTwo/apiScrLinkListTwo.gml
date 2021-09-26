@@ -548,6 +548,119 @@ if (API_TEST_ENABLE) {
 			"<apiScrLinkListTwo ref check 2>"
 		);
 		
+		apiDebugAssert(
+			apiLListOGetVal(_l.indexOf(4)) == 6,
+			"<apiScrLinkListTwo indexOf>"
+		);
+		
+		show_debug_message("<COMPLETE>");
+	}
+}
+#endregion
+
+
+#region tests
+if (API_TEST_ENABLE) {
+	
+	API_TEST_LOCAL true;
+	if (API_TEST) {
+		
+		show_debug_message(
+			"<API TEST>\n\t" + "apiScrLinkListTwo random"
+		);
+		
+		var _build = function() {
+			
+			var _build = {
+				l: new ApiLListT(),
+				s: 0,
+				al: [],
+				av: [],
+			};
+			
+			var _size   = irandom_range(20, 100);
+			var _insert = false;
+			
+			for (var _i = 0; _i < _size; ++_i) {
+				
+				if (_insert) {
+					
+					switch (choose("push", "insBegin", "insRand", "insRand2")) {
+						
+						case "push":
+							array_push(_build.al, _build.l.insEnd(_i));
+							array_push(_build.av, _i);
+							break;
+						case "insBegin":
+							array_insert(_build.al, 0, _build.l.insBegin(_i));
+							array_insert(_build.av, 0, _i);
+							break;
+						case "insRand":
+							var _j = irandom(_i - 1) + 1;
+							array_insert(_build.al, _j, _build.l.insAfter(_i, _build.al[_j - 1]));
+							array_insert(_build.av, _j, _i);
+							break;
+						case "insRand2":
+							var _j = irandom(_i - 1);
+							array_insert(_build.al, _j, _build.l.insBefore(_i, _build.al[_j]));
+							array_insert(_build.av, _j, _i);
+							break;
+					}
+				}
+				else {
+					
+					_insert = true;
+					array_push(_build.al, _build.l.insBegin(_i));
+					array_push(_build.av, _i);
+				}
+			}
+			
+			_build.s = _size;
+			
+			repeat irandom_range(10, 50) {
+				
+				var _i = irandom(_build.s - 1);
+				var _j = irandom(_build.s - 1);
+				
+				if (_i != _j and _i > -1 and _j > -1) {
+					
+					var _tmp = _build.av[_i];
+					_build.av[_i] = _build.av[_j];
+					_build.av[_j] = _tmp;
+					
+					if (choose(true, false)) {
+						
+						apiLListOSwpVal(_build.al[_i], _build.al[_j]);
+					}
+					else {
+						
+						_build.l.swpRef(_build.al[_i], _build.al[_j]);
+						
+						_tmp = _build.al[_i];
+						_build.al[_i] = _build.al[_j];
+						_build.al[_j] = _tmp;
+					}
+				}
+			}
+			
+			apiDebugAssert(
+				array_equals(
+					_build.l.toArray(),
+					_build.av,
+				),
+				"<apiScrLinkListOne rand values>"
+			);
+			
+			var _ref = _build.l.topBegin();
+			for (var _i = 0; _i < _build.s; ++_i) {
+				
+				apiDebugAssert(_ref == _build.al[_i], "<apiScrLinkListOne rand ref>");
+				_ref = apiLListOGetNext(_ref);
+			}
+		}
+		
+		repeat 100 _build();
+		
 		show_debug_message("<COMPLETE>");
 	}
 }
