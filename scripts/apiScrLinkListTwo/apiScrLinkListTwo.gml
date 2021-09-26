@@ -623,9 +623,9 @@ if (API_TEST_ENABLE) {
 				
 				if (_insert) {
 					
-					switch (choose("push", "insBegin", "insRand", "insRand2")) {
+					switch (choose("insEnd", "insBegin", "insRand", "insRand2")) {
 						
-						case "push":
+						case "insEnd":
 							array_push(_build.al, _build.l.insEnd(_i));
 							array_push(_build.av, _i);
 							break;
