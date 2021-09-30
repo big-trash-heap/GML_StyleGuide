@@ -43,7 +43,13 @@ function ApiLListO() constructor {
 	
 	static rem = function(_cell, _prev) {
 		
-		_prev[@ __API_LINK_LIST.NEXT] = _cell[@ __API_LINK_LIST.NEXT];
+		if (_cell == self.__fst) {
+			
+			self.__fst = self.__fst[__API_LINK_LIST.NEXT];
+			exit;
+		}
+		
+		_prev[@ __API_LINK_LIST.NEXT] = _cell[__API_LINK_LIST.NEXT];
 	}
 	
 	static clear = function() {
@@ -422,6 +428,29 @@ if (API_TEST_ENABLE) {
 			"<apiScrLinkListOne swp 2>"
 		);
 		
+		_lolist = new ApiLListO();
+		_lolist.insBegin(5);
+		var _fst = _lolist.insBegin(4);
+		
+		apiDebugAssert(
+			array_equals(
+				_lolist.toArray(),
+				[4, 5]
+			),
+			"<apiScrLinkListOne rem fst mode>"
+		);
+		
+		_lolist.rem(_fst);
+		
+		apiDebugAssert(
+			array_equals(
+				_lolist.toArray(),
+				[5]
+			),
+			"<apiScrLinkListOne rem fst mode 1>"
+		);
+		
+		// only ApiLListO
 		_lolist = new ApiLListO();
 		_lolist.insBegin(5);
 		_lolist.insBegin(4);

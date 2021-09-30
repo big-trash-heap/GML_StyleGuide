@@ -427,7 +427,7 @@ if (API_TEST_ENABLE) {
 			"<apiScrLinkListTwo swapValue>"
 		);
 		
-		_lolist.rem(_v1, _v2);
+		_lolist.rem(_v1);
 		_lolist.insAfter("Hello", _v2);
 		apiLListOSetVal(_v2, "World");
 		apiDebugAssert(
@@ -476,6 +476,28 @@ if (API_TEST_ENABLE) {
 				[8, 4]
 			),
 			"<apiScrLinkListTwo swp 2>"
+		);
+		
+		_lolist = new ApiLListT();
+		_lolist.insBegin(5);
+		var _fst = _lolist.insBegin(4);
+		
+		apiDebugAssert(
+			array_equals(
+				_lolist.toArray(),
+				[4, 5]
+			),
+			"<apiScrLinkListTwo rem fst mode>"
+		);
+		
+		_lolist.rem(_fst);
+		
+		apiDebugAssert(
+			array_equals(
+				_lolist.toArray(),
+				[5]
+			),
+			"<apiScrLinkListTwo rem fst mode 1>"
 		);
 		
 		show_debug_message("<COMPLETE>");
@@ -698,13 +720,13 @@ if (API_TEST_ENABLE) {
 			var _list = _build.l.toArray();
 			apiDebugAssert(
 				array_equals(_list, _build.av) and array_equals(_list, _buildPrev(_build.l)),
-				"<apiScrLinkListOne rand values>"
+				"<apiScrLinkListTwo rand values>"
 			);
 			
 			var _ref = _build.l.topBegin();
 			for (var _i = 0; _i < _build.s; ++_i) {
 				
-				apiDebugAssert(_ref == _build.al[_i], "<apiScrLinkListOne rand ref>");
+				apiDebugAssert(_ref == _build.al[_i], "<apiScrLinkListTwo rand ref>");
 				_ref = apiLListOGetNext(_ref);
 			}
 		}
