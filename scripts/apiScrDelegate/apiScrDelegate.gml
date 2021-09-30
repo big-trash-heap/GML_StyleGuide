@@ -46,7 +46,7 @@ function ApiDelegate() constructor {
 			
 			_last = self.__lolist.remFst(self.__fmet, _f);
 		}
-		
+		show_message(_last);
 		if (_last != undefined) {
 			
 			self.__last = _last[0];

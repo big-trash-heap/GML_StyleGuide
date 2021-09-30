@@ -95,6 +95,7 @@ function ApiLListO() constructor {
 				}
 				else {
 					self.__fst = _next;
+					if (_next == undefined) return [undefined];
 				}
 				
 				return undefined;
