@@ -91,7 +91,7 @@ function ApiLListO() constructor {
 				if (_prev != undefined) {
 				
 					_prev[@ __API_LINK_LIST.NEXT] = _next;
-					if (_next == undefined) return _prev;
+					if (_next == undefined) return [_prev];
 				}
 				else {
 					self.__fst = _next;
@@ -229,7 +229,7 @@ function apiLListOSwpVal(_cell1, _cell2) {
 #region tests
 if (API_TEST_ENABLE) {
 	
-	API_TEST_LOCAL true;
+	API_TEST_LOCAL false;
 	if (API_TEST) {
 		
 		show_debug_message(
@@ -475,7 +475,7 @@ if (API_TEST_ENABLE) {
 			"<apiScrLinkListOne remFst, remAll 1>"
 		);
 		
-		var _last = _lolist.remFst(function(_value) { return _value == 5; });
+		var _last = _lolist.remFst(function(_value) { return _value == 5; })[0];
 		
 		apiDebugAssert(
 			array_equals(
@@ -518,6 +518,21 @@ if (API_TEST_ENABLE) {
 			"<apiScrLinkListOne remFst, remAll 3.5>"
 		);
 		
+		var _last = _lolist.remAll(function() { return true; });
+		
+		apiDebugAssert(
+			array_equals(
+				_lolist.toArray(),
+				[]
+			),
+			"<apiScrLinkListOne remFst, remAll 4>"
+		);
+		
+		apiDebugAssert(
+			_last == undefined,
+			"<apiScrLinkListOne remFst, remAll 4.5>"
+		);
+		
 		show_debug_message("<COMPLETE>");
 	}
 }
@@ -526,7 +541,7 @@ if (API_TEST_ENABLE) {
 #region tests - random
 if (API_TEST_ENABLE) {
 	
-	API_TEST_LOCAL true;
+	API_TEST_LOCAL false;
 	if (API_TEST) {
 		
 		show_debug_message(

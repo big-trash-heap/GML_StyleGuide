@@ -303,7 +303,7 @@ function apiLListTGetPrev(_cell) {
 #region tests - One
 if (API_TEST_ENABLE) {
 	
-	API_TEST_LOCAL true;
+	API_TEST_LOCAL false;
 	if (API_TEST) {
 		
 		show_debug_message(
@@ -532,7 +532,7 @@ if (API_TEST_ENABLE) {
 #region tests - Two
 if (API_TEST_ENABLE) {
 	
-	API_TEST_LOCAL true;
+	API_TEST_LOCAL false;
 	if (API_TEST) {
 		
 		show_debug_message(
@@ -714,7 +714,7 @@ if (API_TEST_ENABLE) {
 #region tests - random
 if (API_TEST_ENABLE) {
 	
-	API_TEST_LOCAL true;
+	API_TEST_LOCAL false;
 	if (API_TEST) {
 		
 		show_debug_message(
