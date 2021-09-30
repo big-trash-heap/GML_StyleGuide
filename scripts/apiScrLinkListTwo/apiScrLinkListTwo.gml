@@ -638,6 +638,74 @@ if (API_TEST_ENABLE) {
 			"<apiScrLinkListTwo indexOf>"
 		);
 		
+		var _l = new ApiLListT();
+		_l.insEnd(1);
+		_l.insEnd(2);
+		_l.insEnd(3);
+		_l.insEnd(4);
+		_l.insEnd(5);
+		_l.insEnd(6);
+		
+		apiDebugAssert(
+			array_equals(
+				_l.toArray(),
+				[1, 2, 3, 4, 5, 6]
+			),
+			"<apiScrLinkListTwo remFst, remAll 0>"
+		);
+		
+		_l.remFst(function(_value) { return _value == 1; });
+		
+		apiDebugAssert(
+			array_equals(
+				_l.toArray(),
+				[2, 3, 4, 5, 6]
+			),
+			"<apiScrLinkListTwo remFst, remAll 1>"
+		);
+		
+		_l.remFst(function(_value) { return _value == 6; });
+		
+		apiDebugAssert(
+			array_equals(
+				_l.toArray(),
+				[2, 3, 4, 5]
+			),
+			"<apiScrLinkListTwo remFst, remAll 2>"
+		);
+		
+		apiDebugAssert(
+			apiLListOGetVal(_l.topEnd()) == 5,
+			"<apiScrLinkListTwo remFst, remAll 2.5>"
+		);
+		
+		_l.clear();
+		_l.insEnd(1);
+		_l.insEnd(2);
+		_l.insEnd(3);
+		_l.insEnd(4);
+		_l.insEnd(5);
+		_l.insEnd(6);
+		_l.insEnd(7);
+		_l.insEnd(8);
+		
+		_l.remAll(function(_value) { 
+			return _value == 1 || _value == 2 || _value == 5 || _value == 7 || _value == 8; 
+		});
+		
+		apiDebugAssert(
+			array_equals(
+				_l.toArray(),
+				[3, 4, 6]
+			),
+			"<apiScrLinkListTwo remFst, remAll 3>"
+		);
+		
+		apiDebugAssert(
+			apiLListOGetVal(_l.topEnd()) == 6,
+			"<apiScrLinkListTwo remFst, remAll 3.5>"
+		);
+		
 		show_debug_message("<COMPLETE>");
 	}
 }
