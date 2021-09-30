@@ -8,11 +8,13 @@ function ApiDelegate() constructor {
 	
 	static __fnum = function(_value, _f) {
 		
+		if (is_numeric(_value)) return (_value == _f);
 		return (method_get_index(_value) == _f);
 	}
 	
 	static __fmet = function(_value, _f) {
 		
+		if (is_numeric(_value)) exit;
 		return (method_get_index(_value) == method_get_index(_f) 
 			&&  method_get_self(_value)  == method_get_self(_f));
 	}
@@ -46,7 +48,7 @@ function ApiDelegate() constructor {
 			
 			_last = self.__lolist.remFst(self.__fmet, _f);
 		}
-		show_message(_last);
+		
 		if (_last != undefined) {
 			
 			self.__last = _last[0];
@@ -110,7 +112,9 @@ _dl.exec("hello");
 
 _dl.remAll(_f1);
 _dl.remFst(_f2);
-_dl.append(_f1);
-
+_dl.append(show_message);
+_dl.append(show_message);
+_dl.remAll(show_message);
+_dl.append(show_debug_message);
 
 _dl.exec("world");
