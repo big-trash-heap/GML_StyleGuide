@@ -72,6 +72,60 @@ function ApiLListO() constructor {
 		return undefined;
 	}
 	
+	static remFst = function(_f, _data) {
+		
+		var _prev = undefined, _next;
+		var _cell = self.__fst;
+		
+		while (_cell != undefined) {
+			
+			_next = _cell[__API_LINK_LIST.NEXT];
+			if (_f(_cell[__API_LINK_LIST.VALUE], _data)) {
+				
+				if (_prev != undefined) {
+				
+					_prev[@ __API_LINK_LIST.NEXT] = _next;
+					if (_next == undefined) return _prev;
+				}
+				else {
+					self.__fst = _next;
+				}
+				
+				return undefined;
+			}
+			
+			_prev = _cell;
+			_cell = _next;
+		}
+	}
+	
+	static remAll = function(_f, _data) {
+		
+		var _prev = undefined, _next;
+		var _cell = self.__fst;
+		
+		while (_cell != undefined) {
+			
+			_next = _cell[__API_LINK_LIST.NEXT];
+			if (_f(_cell[__API_LINK_LIST.VALUE], _data)) {
+				
+				if (_prev != undefined) {
+				
+					_prev[@ __API_LINK_LIST.NEXT] = _next;
+					if (_next == undefined) return _prev;
+				}
+				else {
+					self.__fst = _next;
+				}
+			}
+			else {
+				_prev = _cell;
+			}
+			
+			_cell = _next;
+		}
+	}
+	
 	static indexOf = function(_index) {
 		
 		var _cell = self.__fst;
@@ -307,7 +361,7 @@ if (API_TEST_ENABLE) {
 		var _v1 = _lolist.insBegin(4);
 		var _v2 = _lolist.insBegin(8);
 		
-		apiLListOSwpVal(_v1, _v2);
+		apiLListOSwpVal(_v1, _v2); // -understanding
 		
 		apiDebugAssert(
 			array_equals(
@@ -366,6 +420,74 @@ if (API_TEST_ENABLE) {
 				[8, 4]
 			),
 			"<apiScrLinkListOne swp 2>"
+		);
+		
+		_lolist = new ApiLListO();
+		_lolist.insBegin(5);
+		_lolist.insBegin(4);
+		_lolist.insBegin(3);
+		_lolist.insBegin(2);
+		_lolist.insBegin(1);
+		
+		apiDebugAssert(
+			array_equals(
+				_lolist.toArray(),
+				[1, 2, 3, 4, 5]
+			),
+			"<apiScrLinkListOne remFst, remAll 0>"
+		);
+		
+		_lolist.remFst(function(_value) { return _value == 1; });
+		
+		apiDebugAssert(
+			array_equals(
+				_lolist.toArray(),
+				[2, 3, 4, 5]
+			),
+			"<apiScrLinkListOne remFst, remAll 1>"
+		);
+		
+		var _last = _lolist.remFst(function(_value) { return _value == 5; });
+		
+		apiDebugAssert(
+			array_equals(
+				_lolist.toArray(),
+				[2, 3, 4]
+			),
+			"<apiScrLinkListOne remFst, remAll 2>"
+		);
+		
+		apiDebugAssert(
+			apiLListOGetVal(_last) == 4,
+			"<apiScrLinkListOne remFst, remAll 2.5>"
+		);
+		
+		_lolist.clear();
+		
+		_lolist.insBegin(8);
+		_lolist.insBegin(7);
+		_lolist.insBegin(6);
+		_lolist.insBegin(5);
+		_lolist.insBegin(4);
+		_lolist.insBegin(3);
+		_lolist.insBegin(2);
+		_lolist.insBegin(1);
+		
+		var _last = _lolist.remAll(function(_value) { 
+			return _value == 1 || _value == 2 || _value == 5 || _value == 7 || _value == 8; 
+		});
+		
+		apiDebugAssert(
+			array_equals(
+				_lolist.toArray(),
+				[3, 4, 6]
+			),
+			"<apiScrLinkListOne remFst, remAll 3>"
+		);
+		
+		apiDebugAssert(
+			apiLListOGetVal(_last) == 6,
+			"<apiScrLinkListOne remFst, remAll 3.5>"
 		);
 		
 		show_debug_message("<COMPLETE>");
