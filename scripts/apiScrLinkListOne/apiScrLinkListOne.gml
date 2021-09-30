@@ -450,7 +450,6 @@ if (API_TEST_ENABLE) {
 			"<apiScrLinkListOne rem fst mode 1>"
 		);
 		
-		// only ApiLListO
 		_lolist = new ApiLListO();
 		_lolist.insBegin(5);
 		_lolist.insBegin(4);

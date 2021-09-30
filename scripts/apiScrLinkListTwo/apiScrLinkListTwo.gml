@@ -152,6 +152,30 @@ function ApiLListT() : ApiLListO() constructor {
 		}
 	}
 	
+	static remFst = function(_f, _data) {
+		
+		var _cell = self.__fst;
+		while (_cell != undefined) {
+			
+			if (_f(_cell[__API_LINK_LIST.VALUE], _data)) {
+				
+				self.rem(_cell);
+				exit;
+			}
+			_cell = _cell[__API_LINK_LIST.NEXT];
+		}
+	}
+	
+	static remAll = function(_f, _data) {
+		
+		var _cell = self.__fst;
+		while (_cell != undefined) {
+			
+			if (_f(_cell[__API_LINK_LIST.VALUE], _data)) self.rem(_cell);
+			_cell = _cell[__API_LINK_LIST.NEXT];
+		}
+	}
+	
 	static swpRef = function(_cell1, _cell2) {
 		
 		if (_cell1 == _cell2) exit;
