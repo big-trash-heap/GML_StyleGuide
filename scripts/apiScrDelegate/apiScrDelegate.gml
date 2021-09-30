@@ -92,29 +92,3 @@ function ApiDelegate() constructor {
 	}
 	
 }
-
-var _f1 = function(_data) {
-	
-	show_debug_message(_data);
-}
-
-var _f2 = function(_data) {
-	
-	show_message(_data);
-}
-
-var _dl = new ApiDelegate();
-_dl.append(_f1);
-_dl.append(_f1);
-_dl.append(_f2);
-_dl.exec("hello");
-
-
-_dl.remAll(_f1);
-_dl.remFst(_f2);
-_dl.append(show_message);
-_dl.append(show_message);
-_dl.remAll(show_message);
-_dl.append(show_debug_message);
-
-_dl.exec("world");
