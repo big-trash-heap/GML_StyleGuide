@@ -116,9 +116,7 @@ function ApiLListO() constructor {
 			if (_f(_cell[__API_LINK_LIST.VALUE], _data)) {
 				
 				if (_prev != undefined) {
-				
 					_prev[@ __API_LINK_LIST.NEXT] = _next;
-					if (_next == undefined) return _prev;
 				}
 				else {
 					self.__fst = _next;
@@ -130,6 +128,8 @@ function ApiLListO() constructor {
 			
 			_cell = _next;
 		}
+		
+		return _prev;
 	}
 	
 	static indexOf = function(_index) {

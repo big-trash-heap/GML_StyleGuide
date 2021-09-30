@@ -35,6 +35,7 @@
     {"id":{"name":"apiScrStruct","path":"scripts/apiScrStruct/apiScrStruct.yy",},"order":0,},
     {"id":{"name":"apiScrStructHigher","path":"scripts/apiScrStructHigher/apiScrStructHigher.yy",},"order":1,},
     {"id":{"name":"apiScrGMLMacro","path":"scripts/apiScrGMLMacro/apiScrGMLMacro.yy",},"order":10,},
+    {"id":{"name":"apiScrDelegate","path":"scripts/apiScrDelegate/apiScrDelegate.yy",},"order":0,},
     {"id":{"name":"apiScrMath","path":"scripts/apiScrMath/apiScrMath.yy",},"order":0,},
     {"id":{"name":"apiScrBufferText","path":"scripts/apiScrBufferText/apiScrBufferText.yy",},"order":0,},
     {"id":{"name":"apiScrLinkList","path":"scripts/apiScrLinkList/apiScrLinkList.yy",},"order":0,},
@@ -89,6 +90,7 @@
     {"folderPath":"folders/GML_StyleGuide_api/api_tools/frm.yy","order":0,"resourceVersion":"1.0","name":"frm","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/GML_StyleGuide_api/api_tools.yy","order":7,"resourceVersion":"1.0","name":"api_tools","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/GML_StyleGuide_api/api_tools/link_list.yy","order":1,"resourceVersion":"1.0","name":"link_list","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/GML_StyleGuide_api/api_tools/delegate.yy","order":2,"resourceVersion":"1.0","name":"delegate","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},
