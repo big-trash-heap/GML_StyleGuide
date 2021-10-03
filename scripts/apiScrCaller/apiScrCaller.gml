@@ -1,7 +1,11 @@
 
-function ApiDelegate() constructor {
+API_GML_WARN_ARGS ApiCaller;
+
+function ApiCaller() constructor {
 	
 	#region __private
+	
+	API_GML_WARN_ARGS [push, exec];
 	
 	self.__lolist = new ApiLListO();
 	self.__last   = undefined;
@@ -92,3 +96,4 @@ function ApiDelegate() constructor {
 	}
 	
 }
+

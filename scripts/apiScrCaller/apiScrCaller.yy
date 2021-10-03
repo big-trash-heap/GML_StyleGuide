@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "delegate",
-    "path": "folders/GML_StyleGuide_api/api_tools/delegate.yy",
+    "name": "caller",
+    "path": "folders/GML_StyleGuide_api/api_tools/caller.yy",
   },
   "resourceVersion": "1.0",
-  "name": "apiScrDelegate",
+  "name": "apiScrCaller",
   "tags": [],
   "resourceType": "GMScript",
 }

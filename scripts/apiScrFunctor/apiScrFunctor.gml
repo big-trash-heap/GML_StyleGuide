@@ -1,4 +1,5 @@
 
+API_GML_WARN_ARGS apiFunctorArr;
 
 #region basic
 
