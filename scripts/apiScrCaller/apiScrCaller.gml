@@ -95,3 +95,39 @@ function ApiCaller() constructor {
 	
 }
 
+
+#region tests
+if (API_TEST_ENABLE) {
+	
+	API_TEST_LOCAL true;
+	if (API_TEST) {
+		
+		show_debug_message(
+			"<API TEST>\n\t" + "apiScrCaller"
+		);
+		
+		var _cl = new ApiCaller();
+		var _ref = {
+			
+			num: 0,
+			str: "",
+		}
+		
+		var _add_1    = method(_ref, function(_n) { self.num += _n; });
+		var _add_10   = method(_ref, function(_n) { self.num += _n * 10; });
+		var _add_100  = method(_ref, function(_n) { self.num += _n * 100; });
+		var _add_text = method(_ref, function(_s) { self.str += _s; });
+		
+		_cl.push(_add_1, _add_10, _add_100);
+		_cl.exec(1);
+		
+		apiDebugAssert(
+			_ref.num == 111,
+			"<apiScrCaller exec 0>"
+		);
+		
+		show_debug_message("<COMPLETE>");
+	}
+}
+#endregion
+
