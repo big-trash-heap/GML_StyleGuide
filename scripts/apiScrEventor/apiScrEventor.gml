@@ -40,7 +40,6 @@ function ApiEventor() constructor {
 				variable_struct_remove(self.__map, _key);
 		}
 		else {
-			
 			self.__map = {};
 		}
 	}
@@ -84,7 +83,7 @@ function ApiEventor() constructor {
 #region tests
 if (API_TEST_ENABLE) {
 	
-	API_TEST_LOCAL false;
+	API_TEST_LOCAL true;
 	if (API_TEST) {
 		
 		show_debug_message(
@@ -102,8 +101,21 @@ if (API_TEST_ENABLE) {
 		var _eventor = new ApiEventor();
 		
 		_eventor.push("ev0", _add_1, _add_10, _add_100);
+		_eventor.push("ev1", _add_1, _add_1, _add_10, _add_10, _add_100, _add_100);
 		
-		_eventor.exec("ev0");
+		_eventor.exec("ev0", 1);
+		
+		apiDebugAssert(
+			_ref.num == 111,
+			"apiScrEventor 1"
+		);
+		
+		_eventor.exec("ev1", 2);
+		
+		apiDebugAssert(
+			_ref.num == 555,
+			"apiScrEventor 2"
+		);
 		
 		show_debug_message("<COMPLETE>");
 	}
