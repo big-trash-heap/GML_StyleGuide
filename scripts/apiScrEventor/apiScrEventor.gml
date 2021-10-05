@@ -67,7 +67,12 @@ function ApiEventor() constructor {
 	static exec = function(_key, _a) {
 		
 		var _cl = self.__map[$ _key];
-		if (_cl != undefined) _cl.exec(_a);
+		if (_cl != undefined) {
+			
+			_cl.exec(_a);
+			return true;
+		}
+		return false;
 	}
 	
 	static toArray = function(_key) {
