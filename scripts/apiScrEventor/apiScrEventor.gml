@@ -45,7 +45,30 @@ function ApiEventor() constructor {
 		}
 	}
 	
+	static remFst = function(_key, _f) {
+		
+		var _cl = self.__map[$ _key];
+		if (_cl != undefined) _cl.remFst(_f);
+	}
 	
+	static remAll = function(_key, _f) {
+		
+		var _cl = self.__map[$ _key];
+		if (_cl != undefined) _cl.remAll(_f);
+	}
+	
+	static exec = function(_key, _a) {
+		
+		var _cl = self.__map[$ _key];
+		if (_cl != undefined) _cl.exec(_a);
+	}
+	
+	static toArray = function(_key) {
+		
+		var _cl = self.__map[$ _key];
+		if (_cl != undefined) return _cl.toArray();
+		return [];
+	}
 	
 }
 
