@@ -45,16 +45,24 @@ function ApiEventor() constructor {
 		}
 	}
 	
-	static remFst = function(_key, _f) {
+	static remFst = function(_key, _f, _index=false) {
 		
 		var _cl = self.__map[$ _key];
-		if (_cl != undefined) _cl.remFst(_f);
+		if (_cl != undefined) {
+			
+			if (_index && is_method(_f)) _f = method_get_index(_f);
+			_cl.remFst(_f);
+		}
 	}
 	
-	static remAll = function(_key, _f) {
+	static remAll = function(_key, _f, _index=false) {
 		
 		var _cl = self.__map[$ _key];
-		if (_cl != undefined) _cl.remAll(_f);
+		if (_cl != undefined) {
+			
+			if (_index && is_method(_f)) _f = method_get_index(_f);
+			_cl.remAll(_f);
+		}
 	}
 	
 	static exec = function(_key, _a) {
@@ -83,7 +91,19 @@ if (API_TEST_ENABLE) {
 			"<API TEST>\n\t" + "apiScrEventor"
 		);
 		
-		show_debug_message("\t<template>");
+		var _ref = {
+			num: 0	
+		}
+		
+		var _add_1   = method(_ref, function(_n) { self.num += _n; });
+		var _add_10  = method(_ref, function(_n) { self.num += _n * 10; });
+		var _add_100 = method(_ref, function(_n) { self.num += _n * 100; });
+		
+		var _eventor = new ApiEventor();
+		
+		_eventor.push("ev0", _add_1, _add_10, _add_100);
+		
+		_eventor.exec("ev0");
 		
 		show_debug_message("<COMPLETE>");
 	}
