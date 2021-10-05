@@ -231,6 +231,37 @@ if (API_TEST_ENABLE) {
 			"<apiScrCaller exec 5>"
 		);
 		
+		_cl.push(f2, f0, f2, f1, f0, f1);
+		
+		_cl.exec();
+		
+		apiDebugAssert(
+			array_equals(
+				_ref.stack,
+				["2.0", "0.0", "2.1", "1.0", "0.1", "1.1"]
+			),
+			"<apiScrCaller exec 6>"
+		);
+		
+		_ref.reset();
+		
+		_cl.remFst(f1);
+		_cl.remFst(f1);
+		_cl.remFst(f0);
+		_cl.remFst(f0);
+		_cl.remFst(f2);
+		_cl.remFst(f2);
+		
+		_cl.exec();
+		
+		apiDebugAssert(
+			array_equals(
+				_ref.stack,
+				[]
+			),
+			"<apiScrCaller exec 7>"
+		);
+		
 		#endregion
 		
 		show_debug_message("<COMPLETE>");
