@@ -110,21 +110,128 @@ if (API_TEST_ENABLE) {
 		var _ref = {
 			
 			num: 0,
-			str: "",
 		}
 		
-		var _add_1    = method(_ref, function(_n) { self.num += _n; });
-		var _add_10   = method(_ref, function(_n) { self.num += _n * 10; });
-		var _add_100  = method(_ref, function(_n) { self.num += _n * 100; });
-		var _add_text = method(_ref, function(_s) { self.str += _s; });
+		var _add_1   = method(_ref, function(_n) { self.num += _n; });
+		var _add_10  = method(_ref, function(_n) { self.num += _n * 10; });
+		var _add_100 = method(_ref, function(_n) { self.num += _n * 100; });
 		
-		_cl.push(_add_1, _add_10, _add_100);
+		_cl.push(_add_1, _add_1, _add_10, _add_100);
 		_cl.exec(1);
 		
 		apiDebugAssert(
-			_ref.num == 111,
+			_ref.num == 112,
 			"<apiScrCaller exec 0>"
 		);
+		
+		_cl.remAll(_add_1);
+		_cl.remFst(_add_100);
+		
+		_ref.num = 0;
+		_cl.exec(1);
+		
+		apiDebugAssert(
+			_ref.num == 10,
+			"<apiScrCaller exec 1>"
+		);
+		
+		_cl.push(_add_100, _add_100, _add_1);
+		
+		_ref.num = 0;
+		_cl.exec(2);
+		
+		apiDebugAssert(
+			_ref.num == 422,
+			"<apiScrCaller exec 2>"
+		);
+		
+		#region stack-check
+		
+		var _ref = {
+			stack: [],
+			f0: 0,
+			f1: 0,
+			f2: 0,
+			reset: function() { stack = []; f0 = 0; f1 = 0; f2 = 0; }
+		}
+		
+		var f0 = method(_ref, function() { array_push(stack, "0." + string(self.f0++)); });
+		var f1 = method(_ref, function() { array_push(stack, "1." + string(self.f1++)); });
+		var f2 = method(_ref, function() { array_push(stack, "2." + string(self.f2++)); });
+		
+		_cl.clear();
+		
+		_cl.append(f0);
+		_cl.append(f0);
+		_cl.push(f2, f1, f1, f2);
+		_cl.exec();
+		
+		apiDebugAssert(
+			array_equals(
+				_ref.stack,
+				["0.0", "0.1", "2.0", "1.0", "1.1", "2.1"]
+			),
+			"<apiScrCaller exec 2>"
+		);
+		
+		_ref.reset();
+		_cl.exec();
+		
+		apiDebugAssert(
+			array_equals(
+				_ref.stack,
+				["0.0", "0.1", "2.0", "1.0", "1.1", "2.1"]
+			),
+			"<apiScrCaller exec 2 two>"
+		);
+		
+		_ref.reset();
+		
+		_cl.remFst(f0);
+		_cl.remAll(f2);
+		
+		_cl.exec();
+		
+		apiDebugAssert(
+			array_equals(
+				_ref.stack,
+				["0.0", "1.0", "1.1"]
+			),
+			"<apiScrCaller exec 3>"
+		);
+		
+		_ref.reset();
+		
+		_cl.remFst(f1);
+		_cl.push(f0, f2);
+		
+		_cl.exec();
+		
+		apiDebugAssert(
+			array_equals(
+				_ref.stack,
+				["0.0", "1.0", "0.1", "2.0"]
+			),
+			"<apiScrCaller exec 4>"
+		);
+		
+		_ref.reset();
+		
+		_cl.remAll(method_get_index(f2));
+		_cl.remAll(method_get_index(f1));
+		_cl.remAll(method_get_index(f0));
+		
+		_cl.exec();
+		
+		apiDebugAssert(
+			array_equals(
+				_ref.stack,
+				[]
+			),
+			"<apiScrCaller exec 5>"
+		);
+		
+		#endregion
 		
 		show_debug_message("<COMPLETE>");
 	}
