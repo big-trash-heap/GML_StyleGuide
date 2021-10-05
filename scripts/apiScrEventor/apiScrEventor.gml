@@ -72,3 +72,22 @@ function ApiEventor() constructor {
 	
 }
 
+
+#region tests
+if (API_TEST_ENABLE) {
+	
+	API_TEST_LOCAL false;
+	if (API_TEST) {
+		
+		show_debug_message(
+			"<API TEST>\n\t" + "apiScrEventor"
+		);
+		
+		show_debug_message("\t<template>");
+		
+		show_debug_message("<COMPLETE>");
+	}
+}
+#endregion
+
+
