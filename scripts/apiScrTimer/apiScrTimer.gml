@@ -82,7 +82,7 @@ function ApiTimerAsyncTimeout(_step, _ftick, _fkill) : __ApiTimerBaseTimeout(_st
 }
 
 // Loop
-function ApiTimerLoop(_ftick=apiFunctorEm, _fkill=apiFunctorEm) : ApiTimer() constructor {
+function ApiTimerLoop(_ftick, _fkill) : __ApiTimerBaseLoop(_ftick, _fkill) constructor {
 	
 	#region __private
 	
@@ -105,8 +105,9 @@ function __ApiTimerBaseLoop(_ftick=apiFunctorEm, _fkill=apiFunctorEm) : ApiTimer
 	self.__ftick = _ftick;
 	self.__fkill = _fkill;
 	
-	static __tick = function(_arg) {
+	static __tick = function(_0, _arg) {
 		
+		self.__ftick(self, _arg);
 	}
 	
 	static __kill = function(_handler) {
@@ -123,11 +124,6 @@ function __ApiTimerBaseTimeout(_step, _ftick, _fkill) : __ApiTimerBaseLoop(_ftic
 	#region __private
 	
 	self.__step  = _step;
-	
-	static __kill = function(_handler) {
-		
-		self.__fkill(_handler);
-	}
 	
 	#endregion
 	
