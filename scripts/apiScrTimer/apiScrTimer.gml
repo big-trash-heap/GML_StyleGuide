@@ -60,6 +60,26 @@ function ApiTimerSyncTimeout(_step, _ftick, _fkill) : __ApiTimerBaseTimeout(_ste
 	
 }
 
+function ApiTimerAsyncTimeout(_step, _ftick, _fkill) : __ApiTimerBaseTimeout(_step, _ftick, _fkill) constructor {
+	
+	#region __private
+	
+	self.__time = current_time;
+	
+	static __tick = function(_arg) {
+		
+		if (current_time - self.__time < self.__step) {
+			
+			self.__ftick(_arg, self);
+			return false;
+		}
+		return true;
+	}
+	
+	#endregion
+	
+}
+
 #endregion
 
 
