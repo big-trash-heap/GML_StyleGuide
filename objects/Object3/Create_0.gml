@@ -12,7 +12,7 @@ timer = timers.append(new ApiTimerAsyncTimeout(500,
 	})
 );
 
-timers.append(new ApiTimerAsyncTimeout(5000, 
+timers.append(new ApiTimerLoop(
 	function() {
 		show_debug_message("hello");
 	},
@@ -22,4 +22,4 @@ timers.append(new ApiTimerAsyncTimeout(5000,
 );
 
 timer.rem();
-timers.clear();
+
