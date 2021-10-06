@@ -18,7 +18,7 @@ function ApiTimerHandler() constructor {
 			_next  = _cell[__API_LINK_LIST.NEXT];
 			_timer = _cell[__API_LINK_LIST.VALUE];
 			
-			if (_timer.__tick(_arg, _timer)) {
+			if (_timer.__tick(_timer, _arg)) {
 				
 				self.__ltlist.rem(_cell);
 				ds_map_delete(self.__memMap, _timer);
