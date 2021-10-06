@@ -82,16 +82,7 @@ function ApiTimerAsyncTimeout(_step, _ftick, _fkill) : __ApiTimerBaseTimeout(_st
 }
 
 // Loop
-function ApiTimerLoop(_ftick, _fkill) : __ApiTimerBaseLoop(_ftick, _fkill) constructor {
-	
-	#region __private
-	
-	self.__ftick = _ftick;
-	self.__fkill = _fkill;
-	
-	#endregion
-	
-}
+function ApiTimerLoop(_ftick, _fkill) : __ApiTimerBaseLoop(_ftick, _fkill) constructor {}
 
 #endregion
 
