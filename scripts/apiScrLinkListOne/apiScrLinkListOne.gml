@@ -235,7 +235,7 @@ function apiLListOSwpVal(_cell1, _cell2) {
 #region tests
 if (API_TEST_ENABLE) {
 	
-	API_TEST_LOCAL false;
+	API_TEST_LOCAL true;
 	if (API_TEST) {
 		
 		show_debug_message(
