@@ -13,6 +13,24 @@ function ApiLListO() constructor {
 		return [_value, _next];
 	}
 	
+	static __toClone = function(_constr, _f=apiFunctorId, _data) {
+		
+		var _clone = new _constr();
+		var _cell = self.__fst;
+		if (_cell != undefined) {
+			
+			var _ceilBuild = _clone.insBegin(_f(_cell[__API_LINK_LIST.VALUE], _data));
+			_cell          = _cell[__API_LINK_LIST.NEXT];
+			
+			while (_cell != undefined) {
+				
+				_ceilBuild = _clone.insAfter(_f(_cell[__API_LINK_LIST.VALUE], _data), _ceilBuild);
+				_cell      = _cell[__API_LINK_LIST.NEXT];
+			}
+		}
+		return _clone;
+	}
+	
 	#endregion
 	
 	static insBegin = function(_value) {
@@ -160,20 +178,7 @@ function ApiLListO() constructor {
 	
 	static toClone = function(_f=apiFunctorId, _data) {
 		
-		var _clone = new ApiLListO();
-		var _cell = self.__fst;
-		if (_cell != undefined) {
-			
-			var _ceilBuild = _clone.insBegin(_f(_cell[__API_LINK_LIST.VALUE], _data));
-			_cell          = _cell[__API_LINK_LIST.NEXT];
-			
-			while (_cell != undefined) {
-				
-				_ceilBuild = _clone.insAfter(_f(_cell[__API_LINK_LIST.VALUE], _data), _ceilBuild);
-				_cell      = _cell[__API_LINK_LIST.NEXT];
-			}
-		}
-		return _clone;
+		return self.__toClone(ApiLListO, _f, _data);
 	}
 	
 	static toArray = function() {

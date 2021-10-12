@@ -268,23 +268,11 @@ function ApiLListT() : ApiLListO() constructor {
 		self.__lst = undefined;
 	}
 	
-	static toClone = function(_f=apiFunctorId, _data) {
+	static toClone = function(_f, _data) {
 		
-		var _clone = new ApiLListT();
-		var _cell = self.__fst;
-		if (_cell != undefined) {
-			
-			var _ceilBuild = _clone.insBegin(_f(_cell[__API_LINK_LIST.VALUE], _data));
-			_cell          = _cell[__API_LINK_LIST.NEXT];
-			
-			while (_cell != undefined) {
-				
-				_ceilBuild = _clone.insAfter(_f(_cell[__API_LINK_LIST.VALUE], _data), _ceilBuild);
-				_cell      = _cell[__API_LINK_LIST.NEXT];
-			}
-		}
-		return _clone;
+		return self.__toClone(ApiLListT, _f, _data);
 	}
+	
 	
 }
 
