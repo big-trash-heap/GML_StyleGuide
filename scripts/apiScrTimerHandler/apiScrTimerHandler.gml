@@ -1,4 +1,5 @@
 
+
 function ApiTimerHandler() constructor {
 	
 	#region __private
@@ -41,7 +42,6 @@ function ApiTimerHandler() constructor {
 		self.__memMap[? _timer] = [_cell, self];
 		
 		_timer.__init(self);
-		
 		return _timer;
 	}
 	

@@ -36,8 +36,7 @@ function ApiEventor() constructor {
 		
 		if (is_string(_key)) {
 			
-			if (variable_struct_exists(self.__map, _key))
-				variable_struct_remove(self.__map, _key);
+			variable_struct_remove(self.__map, _key);
 		}
 		else {
 			self.__map = {};
@@ -80,6 +79,52 @@ function ApiEventor() constructor {
 		var _cl = self.__map[$ _key];
 		if (_cl != undefined) return _cl.toArray();
 		return [];
+	}
+	
+	static on  = self.append;
+	static off = self.remFst;
+	
+}
+
+function ApiEventorJust() constructor {
+	
+	#region __private
+	
+	self.__map = {};
+	
+	#endregion
+	
+	static on = function(_key, _f) {
+		
+		self.__map[$ _key] = _f;
+	}
+	
+	static off = function(_key) {
+		
+		variable_struct_remove(self.__map, _key);
+	}
+	
+	static clear = function(_key) {
+		
+		if (is_string(_key)) {
+			
+			variable_struct_remove(self.__map, _key);
+		}
+		else {
+			
+			self.__map = {};
+		}
+	}
+	
+	static exec = function(_key, _a) {
+		
+		var _f = self.__map[$ _key];
+		if (_f != undefined) {
+			
+			_f(_a);
+			return true;
+		}
+		return false;
 	}
 	
 }
@@ -126,5 +171,4 @@ if (API_TEST_ENABLE) {
 	}
 }
 #endregion
-
 

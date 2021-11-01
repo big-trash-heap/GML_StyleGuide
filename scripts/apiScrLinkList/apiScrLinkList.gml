@@ -1,2 +1,2 @@
 
-enum __API_LINK_LIST {VALUE, NEXT, PREV};
+enum __API_LINK_LIST { VALUE, NEXT, PREV };

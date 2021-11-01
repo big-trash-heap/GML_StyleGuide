@@ -43,7 +43,7 @@ function ApiTimer() constructor {
 #region base timers
 
 // Timeout
-function ApiTimerSyncTimeout(_step, _ftick, _fkill) : __ApiTimerBaseTimeout(_step, _ftick, _fkill) constructor {
+function ApiTimerSyncTimeout(_step, _ftick, _finit, _fkill) : __ApiTimerBaseTimeout(_step, _ftick, _finit, _fkill) constructor {
 	
 	#region __private
 	
@@ -61,7 +61,7 @@ function ApiTimerSyncTimeout(_step, _ftick, _fkill) : __ApiTimerBaseTimeout(_ste
 	
 }
 
-function ApiTimerAsyncTimeout(_step, _ftick, _fkill) : __ApiTimerBaseTimeout(_step, _ftick, _fkill) constructor {
+function ApiTimerAsyncTimeout(_step, _ftick, _finit, _fkill) : __ApiTimerBaseTimeout(_step, _ftick, _finit, _fkill) constructor {
 	
 	#region __private
 	
@@ -82,39 +82,48 @@ function ApiTimerAsyncTimeout(_step, _ftick, _fkill) : __ApiTimerBaseTimeout(_st
 }
 
 // Loop
-function ApiTimerLoop(_ftick, _fkill) : __ApiTimerBaseLoop(_ftick, _fkill) constructor {}
+function ApiTimerLoop(_ftick, _finit, _fkill) : __ApiTimerBaseLoop(_ftick, _finit, _fkill) constructor {}
 
 #endregion
 
 
 #region __private
 
-function __ApiTimerBaseLoop(_ftick=apiFunctorEm, _fkill=apiFunctorEm) : ApiTimer() constructor {
+function __ApiTimerBaseLoop(_ftick=apiFunctorEm, _finit=undefined, _fkill=undefined) : ApiTimer() constructor {
 	
 	#region __private
 	
+	apiSelfSet("__ftick", _fkill);
+	apiSelfSet("__finit", _finit);
+	
 	self.__ftick = _ftick;
-	self.__fkill = _fkill;
 	
 	static __tick = function(_0, _arg) {
 		
 		self.__ftick(self, _arg);
 	}
 	
+	static __init = function(_handler) {
+		
+		var _f = self[$ "__finit"];
+		if (_f != undefined) _f(_handler);
+	}
+	
 	static __kill = function(_handler) {
 		
-		self.__fkill(_handler);
+		var _f = self[$ "__fkill"];
+		if (_f != undefined) _f(_handler);
 	}
 	
 	#endregion
 	
 }
 
-function __ApiTimerBaseTimeout(_step, _ftick, _fkill) : __ApiTimerBaseLoop(_ftick, _fkill) constructor {
+function __ApiTimerBaseTimeout(_step, _ftick, _finit, _fkill) : __ApiTimerBaseLoop(_ftick, _finit, _fkill) constructor {
 	
 	#region __private
 	
-	self.__step  = _step;
+	self.__step = _step;
 	
 	#endregion
 	
