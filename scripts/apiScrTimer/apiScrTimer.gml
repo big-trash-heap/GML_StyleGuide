@@ -93,8 +93,8 @@ function __ApiTimerBaseLoop(_ftick=apiFunctorEm, _finit=undefined, _fkill=undefi
 	
 	#region __private
 	
-	apiSelfSet("__ftick", _fkill);
 	apiSelfSet("__finit", _finit);
+	apiSelfSet("__fkill", _fkill);
 	
 	self.__ftick = _ftick;
 	
