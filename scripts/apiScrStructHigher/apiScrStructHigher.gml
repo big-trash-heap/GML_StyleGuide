@@ -4,7 +4,7 @@
 
 //					f = f(struct, key, data)
 /// @function		apiStructForEach(struct, f, [data]);
-function apiStructForeach(_struct, _f, _data) {
+function apiStructForEach(_struct, _f, _data) {
     
     var _keys = variable_struct_get_names(_struct);
     var _size = array_length(_keys);

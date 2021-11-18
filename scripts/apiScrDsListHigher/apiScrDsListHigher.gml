@@ -1,4 +1,5 @@
 
+
 //					f = function(value, index, data)
 /// @function		apiDListFilter(array, f, [data]);
 function apiDListFilter(_id, _f, _data) {
@@ -16,6 +17,7 @@ function apiDListFilter(_id, _f, _data) {
 		apiDListResize(_id, _j);
 	}
 }
+
 
 #region tests
 if (API_TEST_ENABLE) {

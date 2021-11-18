@@ -1,5 +1,5 @@
 
-API_GML_WARN_ARGS apiFunctorArr;
+API_GML_WARN_ARGS [apiFunctorArr, apiFunctorMeth, apiFunctorFunc];
 
 #region basic
 
@@ -22,3 +22,16 @@ function apiFunctorArr(_value) {
 
 #endregion
 
+#region method
+
+/// @param			func
+function apiFunctorMeth(_func) {
+	return method(undefined, _func);
+}
+
+/// @param			func
+function apiFunctorFunc(_func) {
+	return (is_method(_func) ? method_get_index(_func) : _func);
+}
+
+#endregion

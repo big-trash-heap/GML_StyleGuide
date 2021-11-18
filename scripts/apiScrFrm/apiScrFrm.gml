@@ -1,5 +1,5 @@
 
-#macro API_FRM_CHAR	37
+#macro API_FRM_CHAR	126 /* ord('~') */
 
 /// @function		apiFrm(string_format, ...args);
 /// @description	Формат строки

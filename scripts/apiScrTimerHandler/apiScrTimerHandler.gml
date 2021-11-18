@@ -1,5 +1,4 @@
 
-
 function ApiTimerHandler() constructor {
 	
 	#region __private
@@ -7,6 +6,9 @@ function ApiTimerHandler() constructor {
 	self.__ltlist = new ApiLListT();
 	
 	static __memMap = __apiTimerHandlerMemMap();
+	
+	static __castInit = __apiTimerHandler_castInit;
+	static __castKill = __apiTimerHandler_castKill;
 	
 	#endregion
 	
@@ -21,10 +23,9 @@ function ApiTimerHandler() constructor {
 			
 			if (_timer.__tick(_timer, _arg)) {
 				
+				self.__castKill(_timer, self);
 				self.__ltlist.rem(_cell);
 				ds_map_delete(self.__memMap, _timer);
-				
-				_timer.__kill(self);
 			}
 			
 			_cell = _next;
@@ -41,7 +42,7 @@ function ApiTimerHandler() constructor {
 		var _cell = self.__ltlist.insEnd(_timer);
 		self.__memMap[? _timer] = [_cell, self];
 		
-		_timer.__init(self);
+		self.__castInit(_timer, self);
 		return _timer;
 	}
 	
@@ -54,9 +55,8 @@ function ApiTimerHandler() constructor {
 			_timer = _cell[__API_LINK_LIST.VALUE];
 			_cell  = _cell[__API_LINK_LIST.NEXT];
 			
+			self.__castKill(_timer, self);
 			ds_map_delete(self.__memMap, _timer);
-			
-			_timer.__kill(self);
 		}
 		
 		self.__ltlist.clear();
@@ -78,10 +78,10 @@ function apiTimerHandlerRem(_timer) {
 	var _timerMetaInfo = _memMap[? _timer];
 	if (_timerMetaInfo != undefined) {
 		
+		_timerMetaInfo[1].__castKill(_timer, _timerMetaInfo[1]);
 		_timerMetaInfo[1].__ltlist.rem(_timerMetaInfo[0]);
-		ds_map_delete(_memMap, _timer);
 		
-		_timer.__kill(_timerMetaInfo[1]);
+		ds_map_delete(_memMap, _timer);
 		return true;
 	}
 	return false;
@@ -92,8 +92,29 @@ function apiTimerHandlerIsBind(_timer) {
 	return ds_map_exists(__apiTimerHandlerMemMap(), _timer);
 }
 
+
+#region __private
+
 function __apiTimerHandlerMemMap() {
 	static __memMap = ds_map_create();
 	return __memMap;
 }
+
+function __apiTimerHandler_castInit(_timer) {
+	_timer.__init(_timer);
+}
+
+function __apiTimerHandler_castKill(_timer) {
+	_timer.__kill(_timer);
+}
+
+function __apiTimerHandler_castInitSelf(_timer, _handler) {
+	_timer.__init(_timer, _handler);
+}
+
+function __apiTimerHandler_castKillSelf(_timer, _handler) {
+	_timer.__kill(_timer, _handler);
+}
+
+#endregion
 

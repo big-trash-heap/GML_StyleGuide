@@ -73,11 +73,15 @@ function apiBufTxtClear(_buffer, _size) {
 //					строку записанную в нём
 //
 /// @param			buffer
-function apiBufTxtFree(_buffer) {
+function apiBufTxtFree(_buffer, _read=true) {
 	
-	var _string = apiBufTxtRead(_buffer);
+	if (_read) {
+		var _string = apiBufTxtRead(_buffer);
+		buffer_delete(_buffer);
+		return _string;
+	}
+	
 	buffer_delete(_buffer);
-	return _string;
 }
 
 /// @description	Возвращает количество данных в буффере (в байтах)

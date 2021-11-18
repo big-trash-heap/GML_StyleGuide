@@ -27,6 +27,7 @@
     {"id":{"name":"apiScrArray","path":"scripts/apiScrArray/apiScrArray.yy",},"order":0,},
     {"id":{"name":"ni_strFormat","path":"scripts/ni_strFormat/ni_strFormat.yy",},"order":6,},
     {"id":{"name":"apiScrTimer","path":"scripts/apiScrTimer/apiScrTimer.yy",},"order":0,},
+    {"id":{"name":"apiScrComparatorBase","path":"scripts/apiScrComparatorBase/apiScrComparatorBase.yy",},"order":1,},
     {"id":{"name":"apiScrLinkListOne","path":"scripts/apiScrLinkListOne/apiScrLinkListOne.yy",},"order":1,},
     {"id":{"name":"apiScrDebug","path":"scripts/apiScrDebug/apiScrDebug.yy",},"order":0,},
     {"id":{"name":"ni_array","path":"scripts/ni_array/ni_array.yy",},"order":1,},

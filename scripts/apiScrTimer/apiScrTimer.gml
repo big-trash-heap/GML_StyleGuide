@@ -8,9 +8,9 @@ function ApiTimer() constructor {
 	
 	#region __private
 	
-	static __init = apiFunctorEm /* handler   */;
-	static __tick = apiFunctorEm /* arg, self */;
-	static __kill = apiFunctorEm /* handler   */;
+	static __init = apiFunctorEm /* self, ?handler? */;
+	static __tick = apiFunctorEm /* self, arg       */;
+	static __kill = apiFunctorEm /* self, ?handler? */;
 	
 	#endregion
 	
@@ -43,16 +43,16 @@ function ApiTimer() constructor {
 #region base timers
 
 // Timeout
-function ApiTimerSyncTimeout(_step, _ftick, _finit, _fkill) : __ApiTimerBaseTimeout(_step, _ftick, _finit, _fkill) constructor {
+function ApiTimerSyncTimeout(_steps, _ftick, _finit, _fkill) : __ApiTimerBaseTimeout(_steps, _ftick, _finit, _fkill) constructor {
 	
 	#region __private
 	
-	static __tick = function(_arg) {
+	static __tick = function(_timer, _arg) {
 		
 		if (self.__step > 0) {
 			
 			--self.__step;
-			self.__ftick(_arg, self);
+			self.__ftick(_timer, _arg);
 		}
 		return (self.__step <= 0);
 	}
@@ -61,17 +61,17 @@ function ApiTimerSyncTimeout(_step, _ftick, _finit, _fkill) : __ApiTimerBaseTime
 	
 }
 
-function ApiTimerAsyncTimeout(_step, _ftick, _finit, _fkill) : __ApiTimerBaseTimeout(_step, _ftick, _finit, _fkill) constructor {
+function ApiTimerAsyncTimeout(_milisec, _ftick, _finit, _fkill) : __ApiTimerBaseTimeout(_milisec, _ftick, _finit, _fkill) constructor {
 	
 	#region __private
 	
 	self.__time = current_time;
 	
-	static __tick = function(_arg) {
+	static __tick = function(_timer, _arg) {
 		
 		if (current_time - self.__time < self.__step) {
 			
-			self.__ftick(self, _arg);
+			self.__ftick(_timer, _arg);
 			return false;
 		}
 		return true;
@@ -98,21 +98,21 @@ function __ApiTimerBaseLoop(_ftick=apiFunctorEm, _finit=undefined, _fkill=undefi
 	
 	self.__ftick = _ftick;
 	
-	static __tick = function(_0, _arg) {
+	static __tick = function(_arg) {
 		
-		self.__ftick(self, _arg);
+		return self.__ftick(self, _arg);
 	}
 	
-	static __init = function(_handler) {
+	static __init = function(_timer, _handler) {
 		
 		var _f = self[$ "__finit"];
-		if (_f != undefined) _f(_handler);
+		if (_f != undefined) _f(_timer, _handler);
 	}
 	
-	static __kill = function(_handler) {
+	static __kill = function(_timer, _handler) {
 		
 		var _f = self[$ "__fkill"];
-		if (_f != undefined) _f(_handler);
+		if (_f != undefined) _f(_timer, _handler);
 	}
 	
 	#endregion
