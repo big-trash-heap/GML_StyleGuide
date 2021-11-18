@@ -6,7 +6,10 @@ timers = new ApiTimerHandler();
 timer = timers.append(new ApiTimerAsyncTimeout(500, 
 	function() {
 		show_debug_message("end");
-	}, _,
+	}, 
+	function(_0, _handler) {
+		show_message(_handler);
+	},
 	function() {
 		show_debug_message(" << end");
 	})

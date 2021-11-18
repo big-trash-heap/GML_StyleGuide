@@ -1,5 +1,5 @@
 
-function ApiTimerHandler() constructor {
+function ApiTimerHandlerSave() constructor {
 	
 	#region __private
 	
@@ -69,6 +69,23 @@ function ApiTimerHandler() constructor {
 			return (self == _timerMetaInfo[1]);
 		return false;
 	}
+	
+	static toString = function() {
+		
+		var _size = self.__ltlist.mathSize();
+		return (instanceof(self) + "; size: " + string(_size));
+	}
+	
+}
+
+function ApiTimerHandler() : ApiTimerHandlerSave() constructor {
+	
+	#region __private
+	
+	static __castInit = __apiTimerHandler_castInitSelf;
+	static __castKill = __apiTimerHandler_castKillSelf;
+	
+	#endregion
 	
 }
 
