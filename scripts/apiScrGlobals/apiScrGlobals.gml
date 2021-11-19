@@ -93,21 +93,29 @@ function __apiGLTxtBufRead() {
 
 global.__apiTimerHandler = new ApiTimerHandlerSave();
 
-function apiTmHand_timer(_timer) {
+function apiTHand_timer(_timer) {
 	static _handler = __API_TIMER_HANDLER;
 	return _handler.append(_timer);
 }
 
-function apiTmHand_sync(_steps, _ftick, _finit, _fkill) {
-	return apiTmHand_timer(new ApiTimerSyncTimeout(_steps, _ftick, _finit, _fkill));
+function apiTHand_sync(_steps, _ftick, _finit, _fkill) {
+	return apiTHand_timer(new ApiTimerSyncTimeout(_steps, _ftick, _finit, _fkill));
 }
 
-function apiTmHand_async(_milisec, _ftick, _finit, _fkill) {
-	return apiTmHand_timer(new ApiTimerAsyncTimeout(_milisec, _ftick, _finit, _fkill));
+function apiTHand_end_sync(_steps, _fkill) {
+	return apiTHand_timer(new ApiTimerSyncTimeout(_steps, _, _, _fkill));
 }
 
-function apiTmHand_loop(_ftick, _finit, _fkill) {
-	return apiTmHand_timer(new ApiTimerLoop(_ftick, _finit, _fkill));
+function apiTHand_async(_milisec, _ftick, _finit, _fkill) {
+	return apiTHand_timer(new ApiTimerAsyncTimeout(_milisec, _ftick, _finit, _fkill));
+}
+
+function apiTHand_end_async(_milisec, _fkill) {
+	return apiTHand_timer(new ApiTimerAsyncTimeout(_milisec, _, _, _fkill));
+}
+
+function apiTHand_loop(_ftick, _finit, _fkill) {
+	return apiTHand_timer(new ApiTimerLoop(_ftick, _finit, _fkill));
 }
 
 #endregion

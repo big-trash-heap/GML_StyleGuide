@@ -2,13 +2,12 @@
 window_set_size(1366, 768);
 
 
-timer = apiTmHand_async(5000, function() {
+timer = apiTHand_async(5000, function() {
 	show_debug_message("hello");
 }, _, function() {
 	show_debug_message("<< hello");
 });
-
-
+timer.pause();
 
 /*
 timers = new ApiTimerHandler();

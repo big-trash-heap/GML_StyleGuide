@@ -51,15 +51,7 @@ function ApiTimerSyncTimeout(_steps, _ftick, _finit, _fkill) : __ApiTimerBaseTim
 	
 	#region __private
 	
-	static __tick = function(_timer, _arg) {
-		
-		if (self.__step > 0) {
-			
-			--self.__step;
-			self.__ftick(_timer, _arg);
-		}
-		return (self.__step <= 0);
-	}
+	static __tick = __apiTimer_tickSync;
 	
 	#endregion
 	
@@ -69,24 +61,7 @@ function ApiTimerAsyncTimeout(_milisec, _ftick, _finit, _fkill) : __ApiTimerBase
 	
 	#region __private
 	
-	static __tick = function(_timer, _arg) {
-		
-		if (self.__step > 0) {
-			
-			var _step = API_TIME_ASYNC_STEP;
-			if (self.__step > _step) {
-				self.__step -= _step;
-			}
-			else {
-				_step = self.__step;
-				self.__step = 0;
-			}
-			
-			self.__ftick(_timer, _arg, _step);
-			return false;
-		}
-		return true;
-	}
+	static __tick = __apiTimer_tickAsync;
 	
 	#endregion
 	
@@ -97,8 +72,34 @@ function ApiTimerLoop(_ftick, _finit, _fkill) : __ApiTimerBaseLoop(_ftick, _fini
 
 #endregion
 
+#region ext timers
+
+// Timeout
+function ApiTimerSyncTimeoutExt(_steps, _ftick, _finit, _fkill) : __ApiTimerBaseTimeoutExt(_steps, _ftick, _finit, _fkill) constructor {
+	
+	#region __private
+	
+	static __tick = __apiTimer_tickSync;
+	
+	#endregion
+	
+}
+
+function ApiTimerAsyncTimeoutExt(_milisec, _ftick, _finit, _fkill) : __ApiTimerBaseTimeoutExt(_milisec, _ftick, _finit, _fkill) constructor {
+	
+	#region __private
+	
+	static __tick = __apiTimer_tickAsync;
+	
+	#endregion
+	
+}
+
+#endregion
+
 
 #region __private
+
 
 function __ApiTimerBaseLoop(_ftick=apiFunctorEm, _finit=undefined, _fkill=undefined) : ApiTimer() constructor {
 	
@@ -130,24 +131,115 @@ function __ApiTimerBaseLoop(_ftick=apiFunctorEm, _finit=undefined, _fkill=undefi
 	
 }
 
-function __ApiTimerBaseTimeout(_step, _ftick, _finit, _fkill) : __ApiTimerBaseLoop(_ftick, _finit, _fkill) constructor {
+function __ApiTimerBaseTimeout(_steps, _ftick, _finit, _fkill) : __ApiTimerBaseLoop(_ftick, _finit, _fkill) constructor {
 	
 	#region __private
 	
-	self.__step = _step;
+	self.__step = apiMthARound(_steps, ceil);
 	
 	#endregion
 	
 	static setTime = function(_steps) {
-		
-		self.__step = _steps;
+		self.__step = apiMthARound(_steps, ceil);
+		return self;
 	}
 	
 	static getTime = function() {
-		return self.__step;
+		return abs(self.__step);
+	}
+	
+	static pause = function() {
+		if (self.__step > 0) self.__step = -self.__step;
+		return self;
+	}
+	
+	static resume = function() {
+		if (self.__step < 0) self.__step = -self.__step;
+		return self;
+	}
+	
+	static isPause = function() {
+		return (self.__step < 0);
+	}
+	
+	static isPlay = function() {
+		return (self.__step > 0);
+	}
+	
+	static isEnd = function() {
+		return (self.__step == 0);
 	}
 	
 }
+
+function __ApiTimerBaseTimeoutExt(_steps, _ftick, _finit, _fkill) : __ApiTimerBaseTimeout(_steps, _ftick, _finit, _fkill) constructor {
+	
+	#region __private
+	
+	self.__max_step = abs(self.__step);
+	
+	#endregion
+	
+	static setTime = function(_steps) {
+		self.__step = apiMthARound(_steps, ceil);
+		self.__max_step = abs(self.__step);
+		return self;
+	}
+	
+	static getTimeMax = function() {
+		return self.__max_step;
+	}
+	
+	static getPast = function() {
+		return (self.__max_step - abs(self.__step));
+	}
+	
+	static getLeft = self.getTime;
+	
+	static getPastCf = function() {
+		return (1 - abs(self.__step) / self.__max_step);
+	}
+	
+	static getLeftCf = function() {
+		return (abs(self.__step) / self.__max_step);
+	}
+	
+	static resetTime = function() {
+		self.__step = self.__max_step * sign(self.__step);
+		return self;
+	}
+	
+}
+
+
+function __apiTimer_tickSync(_timer, _arg) {
+	
+	if (self.__step > 0) {
+		
+		--self.__step;
+		self.__ftick(_timer, _arg);
+		return (self.__step == 0);
+	}
+}
+
+function __apiTimer_tickAsync(_timer, _arg) {
+		
+	if (self.__step > 0) {
+		
+		var _step = API_TIME_ASYNC_STEP;
+		if (self.__step > _step) {
+			self.__step -= _step;
+		}
+		else {
+			_step = self.__step;
+			self.__step = 0;
+		}
+		
+		self.__ftick(_timer, _arg, _step);
+		return (self.__step == 0);
+	}
+}
+
 
 #endregion
 
