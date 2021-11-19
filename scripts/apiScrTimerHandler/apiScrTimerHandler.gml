@@ -1,4 +1,7 @@
 
+
+#region class
+
 function ApiTimerHandlerSave() constructor {
 	
 	#region __private
@@ -89,6 +92,10 @@ function ApiTimerHandler() : ApiTimerHandlerSave() constructor {
 	
 }
 
+#endregion
+
+#region functions
+
 function apiTimerHandlerRem(_timer) {
 	
 	var _memMap = __apiTimerHandlerMemMap();
@@ -108,6 +115,8 @@ function apiTimerHandlerIsBind(_timer) {
 	
 	return ds_map_exists(__apiTimerHandlerMemMap(), _timer);
 }
+
+#endregion
 
 
 #region __private

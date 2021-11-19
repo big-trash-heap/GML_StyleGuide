@@ -65,12 +65,11 @@ function ApiTimerAsyncTimeout(_milisec, _ftick, _finit, _fkill) : __ApiTimerBase
 	
 	#region __private
 	
-	self.__time = current_time;
-	
 	static __tick = function(_timer, _arg) {
 		
-		if (current_time - self.__time < self.__step) {
+		if (self.__step > 0) {
 			
+			self.__step -= API_TIME_ASYNC_STEP;
 			self.__ftick(_timer, _arg);
 			return false;
 		}
@@ -100,7 +99,7 @@ function __ApiTimerBaseLoop(_ftick=apiFunctorEm, _finit=undefined, _fkill=undefi
 	
 	static __tick = function(_arg) {
 		
-		return self.__ftick(self, _arg);
+		self.__ftick(self, _arg);
 	}
 	
 	static __init = function(_timer, _handler) {
@@ -126,6 +125,15 @@ function __ApiTimerBaseTimeout(_step, _ftick, _finit, _fkill) : __ApiTimerBaseLo
 	self.__step = _step;
 	
 	#endregion
+	
+	static setTime = function(_steps) {
+		
+		self.__step = _steps;
+	}
+	
+	static getTime = function() {
+		return self.__step;
+	}
 	
 }
 

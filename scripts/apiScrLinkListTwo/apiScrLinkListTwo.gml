@@ -273,7 +273,6 @@ function ApiLListT() : ApiLListO() constructor {
 		return self.__toClone(ApiLListT, _f, _data);
 	}
 	
-	
 }
 
 #endregion

@@ -64,4 +64,57 @@ function __apiGLTxtBufRead() {
 
 #endregion
 
+#region apiTimeSync
+
+#macro API_TIME_SYNC	__apiTimeSync_get()
+#macro API_TIME_SYNC_RS	__apiTimeSyncRS_get()
+
+#macro API_TIME_SYNC_LM	API_MACRO_INT32_MAX
+
+global.__apiTimeSync   = 0;
+global.__apiTimeSyncRS = 0;
+
+function __apiTimeSync_get() {
+	static _once = apiScrGlobals();
+	return global.__apiTimeSync;
+}
+
+function __apiTimeSyncRS_get() {
+	static _once = apiScrGlobals();
+	return global.__apiTimeSyncRS;
+}
+
+function __apiTimeSyncIter() {
+	
+	if (++global.__apiTimeSync >= API_TIME_SYNC_LM) {
+		global.__apiTimeSync = 0;
+	}
+	
+	if (++global.__apiTimeSyncRS >= room_speed) {
+		global.__apiTimeSyncRS = 0;
+	}
+}
+
+#endregion
+
+#region apiTimeAsync
+
+#macro API_TIME_ASYNC_STEP	__apiTimeAsync()
+
+global.__apiTimeAsync_s0 = current_time;
+global.__apiTimeAsync_s1 = global.__apiTimeAsync_s0;
+global.__apiTimeAsync_sd = 0;
+
+function __apiTimeAsync() {
+	static _once = apiScrGlobals();
+	return global.__apiTimeAsync_sd;
+}
+
+function __apiTimeAsyncIter() {
+	global.__apiTimeAsync_s1 = global.__apiTimeAsync_s0;
+	global.__apiTimeAsync_s0 = current_time;
+	global.__apiTimeAsync_sd = global.__apiTimeAsync_s0 - global.__apiTimeAsync_s1;
+}
+
+#endregion
 
