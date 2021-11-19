@@ -76,7 +76,7 @@ function ApiTimerHandlerSave() constructor {
 	static toString = function() {
 		
 		var _size = self.__ltlist.mathSize();
-		return (instanceof(self) + "; size: " + string(_size));
+		return (instanceof(self) + "; number of timers: " + string(_size));
 	}
 	
 }
