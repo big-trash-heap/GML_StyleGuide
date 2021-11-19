@@ -7,10 +7,9 @@ timer = timers.append(new ApiTimerAsyncTimeout(5000,
 	function() {
 		show_debug_message("end");
 	}, 
-	function() {
-		//show_message("set");	
+	function(_timer) {
 	},
-	function() {
+	function(_timer) {
 		show_debug_message(" << end");
 	})
 );

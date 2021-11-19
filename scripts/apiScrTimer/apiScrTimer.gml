@@ -8,9 +8,9 @@ function ApiTimer() constructor {
 	
 	#region __private
 	
-	static __init = apiFunctorEm /* self, ?handler? */;
-	static __tick = apiFunctorEm /* self, arg       */;
-	static __kill = apiFunctorEm /* self, ?handler? */;
+	static __init = apiFunctorEm /* self, ?handler?, ?more...? */;
+	static __tick = apiFunctorEm /* self, arg,       ?more...? */;
+	static __kill = apiFunctorEm /* self, ?handler?, ?more...? */;
 	
 	#endregion
 	
@@ -69,8 +69,16 @@ function ApiTimerAsyncTimeout(_milisec, _ftick, _finit, _fkill) : __ApiTimerBase
 		
 		if (self.__step > 0) {
 			
-			self.__step -= API_TIME_ASYNC_STEP;
-			self.__ftick(_timer, _arg);
+			var _step = API_TIME_ASYNC_STEP;
+			if (self.__step > _step) {
+				self.__step -= _step;
+			}
+			else {
+				_step = self.__step;
+				self.__step = 0;
+			}
+			
+			self.__ftick(_timer, _arg, _step);
 			return false;
 		}
 		return true;
