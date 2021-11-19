@@ -1,6 +1,16 @@
 
 window_set_size(1366, 768);
 
+
+timer = apiTmHand_async(5000, function() {
+	show_debug_message("hello");
+}, _, function() {
+	show_debug_message("<< hello");
+});
+
+
+
+/*
 timers = new ApiTimerHandler();
 
 timer = timers.append(new ApiTimerAsyncTimeout(5000, 

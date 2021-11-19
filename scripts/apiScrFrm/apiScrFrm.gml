@@ -5,7 +5,7 @@
 /// @description	Формат строки
 function apiFrm(_string) {
 	
-	static _buffer = API_GL_TXTBUF;
+	static _buffer = ____API_GL_TXTBUF;
 	
 	var _size = string_length(_string);
 	var _i = 1, _j = 1, _a = 1, _k;
@@ -26,6 +26,6 @@ function apiFrm(_string) {
 	if (_k > 0)
 		apiBufTxtAppend(_buffer, string_copy(_string, _j, _k));
 	
-	return API_GL_TXTBUF_READ;
+	return ____API_GL_TXTBUF_READ;
 }
 

@@ -8,9 +8,13 @@ function ApiTimer() constructor {
 	
 	#region __private
 	
-	static __init = apiFunctorEm /* self, ?handler?, ?more...? */;
-	static __tick = apiFunctorEm /* self, arg,       ?more...? */;
-	static __kill = apiFunctorEm /* self, ?handler?, ?more...? */;
+	// self        <- handler.timer
+	// ?handler?   <- handler.self | undefined
+	// ??more...?? <- timer.arguments...
+	
+	static __init = apiFunctorEm /* self, ?handler?, ??more...?? */;
+	static __tick = apiFunctorEm /* self, arg,       ??more...?? */;
+	static __kill = apiFunctorEm /* self, ?handler?, ??more...?? */;
 	
 	#endregion
 	
