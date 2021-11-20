@@ -67,3 +67,12 @@ function apiDebugError(_message, _prefix="API-ERROR") {
 
 #endregion
 
+#region warning
+
+/// @param			message
+function apiDebugWarn(_message, _prefix="API-WARN") {
+	show_debug_message(_prefix + ": {\n\t" + string(_message) + "\n};");
+}
+
+#endregion
+

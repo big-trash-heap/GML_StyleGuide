@@ -8,8 +8,9 @@ function ApiTimerHandlerSave() constructor {
 	
 	self.__ltlist = new ApiLListT();
 	
-	self.__forEach_next = undefined;
-	self.__forEach_end  = undefined;
+	self.__forEach_enable = 0;
+	self.__forEach_next   = undefined;
+	self.__forEach_end    = undefined;
 	
 	static __memMap = __apiTimerHandlerMemMap();
 	
@@ -44,9 +45,15 @@ function ApiTimerHandlerSave() constructor {
 	
 	static iter = function(_arg) {
 		
+		if (self.__forEach_enable > 0) {
+			
+			apiDebugError("ApiTimerHandler: Нельзя вызывать метод iter во время вызова в этом обработчике iter или clear методов");
+		}
+		
 		var _cell = self.__ltlist.topBegin();
 		if (_cell != undefined) {
 			
+			++self.__forEach_enable;
 			self.__forEach_end = self.__ltlist.topEnd();
 			
 			while (_cell != self.__forEach_end) {
@@ -66,6 +73,8 @@ function ApiTimerHandlerSave() constructor {
 				_cell = _cell[__API_LINK_LIST.VALUE];
 				if (_cell.__tick(_cell, _arg)) apiTimerHandlerRem(_cell);
 			}
+			
+			--self.__forEach_enable;
 		}
 	}
 	
@@ -85,7 +94,21 @@ function ApiTimerHandlerSave() constructor {
 	
 	static clear = function() {
 		
+		if (self.__forEach_enable > 0) {
+			
+			apiDebugWarn("ApiTimerHandler: Опасно вызывать метод clear во время вызова в этом обработчике iter или clear методов");
+		}
+		
+		++self.__forEach_enable;
 		self.__forEach(apiTimerHandlerRem);
+		--self.__forEach_enable;
+	}
+	
+	static clearSave = function() {
+		
+		++self.__forEach_enable;
+		apiArrCall(self.__ltlist.toArray(), apiTimerHandlerRem);
+		--self.__forEach_enable;
 	}
 	
 	static isBind = function(_timer) {

@@ -1,7 +1,43 @@
 
 window_set_size(1366, 768);
 
-
+apiTHand_loop(
+	function(_timer) {
+		
+		if (_timer.timer != undefined) {
+			_timer.timer.rem();
+		}
+		
+		show_message(1);
+		
+		_timer.timer = apiTHand_loop(
+			function(_timer) {
+				show_message(_timer.num);
+			}, _,
+			function(_timer) {
+				_timer.timer.rem();
+				apiTHand_loop(
+					function(_timer) {
+						show_message("&" + string(_timer.num));
+					}).set("num", _timer.num);
+			}).set("num", ++_timer.num);
+		
+		var _t = apiTHand_loop(
+			function(_timer) {
+				show_message(_timer.num);
+			}).set("num", ++_timer.num);
+		
+		_timer.timer.set("timer", _t);
+		
+		if (_timer.num > 8) {
+			global.__apiTimerHandler.clearSave();
+			return;
+		}
+		
+	}, _,
+	function() {
+		show_message("clear");
+	}).set("num", 1).set("timer", _);
 
 
 //timer = apiTHand_async(5000, function(_timer) {
