@@ -94,29 +94,12 @@ function ApiTimerHandlerSave() constructor {
 	
 	static clear = function() {
 		
-		if (self.__forEach_enable > 0) {
-			
-			apiDebugWarn("ApiTimerHandler: Опасно вызывать метод clear во время вызова в этом обработчике iter или clear методов");
-		}
-		
 		++self.__forEach_enable;
 		self.__forEach(apiTimerHandlerRem);
 		--self.__forEach_enable;
 	}
 	
-	static clearSave = function() {
-		
-		static _f = apiFunctorFunc(function(_timer) {
-			
-			if (self.isBind(_timer)) apiTimerHandlerRem(_timer);
-		});
-		
-		++self.__forEach_enable;
-		apiArrCall(self.__ltlist.toArray(), _f);
-		--self.__forEach_enable;
-	}
-	
-	static clearSaveAll = function() {
+	static clearAll = function() {
 		
 		++self.__forEach_enable;
 		var _timer = self.__ltlist.popBegin();
