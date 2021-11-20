@@ -34,10 +34,10 @@ function ApiTimerHandlerSave() constructor {
 				_cell = self.__forEach_next;
 			}
 			
-			self.__forEach_next = undefined;
-			self.__forEach_end = undefined;
-			
 			if (_cell != undefined) {
+				self.__forEach_next = undefined;
+				self.__forEach_end  = undefined;
+				
 				_f(_cell[__API_LINK_LIST.VALUE], _arg);
 			}
 		}
@@ -55,32 +55,33 @@ function ApiTimerHandlerSave() constructor {
 			
 			apiDebugError("ApiTimerHandler: Нельзя вызывать метод iter во время вызова в этом обработчике iter или clear методов");
 		}
-		
-		var _cell = self.__ltlist.topBegin();
-		if (_cell != undefined) {
-			
-			++self.__forEach_enable;
-			self.__forEach_end = self.__ltlist.topEnd();
-			
-			while (_cell != self.__forEach_end) {
-				
-				self.__forEach_next = _cell[__API_LINK_LIST.NEXT];
-				
-				_cell = _cell[__API_LINK_LIST.VALUE];
-				if (_cell.__tick(_cell, _arg)) apiTimerHandlerRem(_cell);
-				
-				_cell = self.__forEach_next;
-			}
-			
-			self.__forEach_next = undefined;
-			self.__forEach_end = undefined;
-			
+		else {
+			var _cell = self.__ltlist.topBegin();
 			if (_cell != undefined) {
-				_cell = _cell[__API_LINK_LIST.VALUE];
-				if (_cell.__tick(_cell, _arg)) apiTimerHandlerRem(_cell);
-			}
 			
-			--self.__forEach_enable;
+				++self.__forEach_enable;
+				self.__forEach_end = self.__ltlist.topEnd();
+				
+				while (_cell != self.__forEach_end) {
+				
+					self.__forEach_next = _cell[__API_LINK_LIST.NEXT];
+					
+					_cell = _cell[__API_LINK_LIST.VALUE];
+					if (_cell.__tick(_cell, _arg)) apiTimerHandlerRem(_cell);
+					
+					_cell = self.__forEach_next;
+				}
+				
+				if (_cell != undefined) {
+					self.__forEach_next = undefined;
+					self.__forEach_end  = undefined;
+					
+					_cell = _cell[__API_LINK_LIST.VALUE];
+					if (_cell.__tick(_cell, _arg)) apiTimerHandlerRem(_cell);
+				}
+				
+				--self.__forEach_enable;
+			}
 		}
 	}
 	
@@ -112,6 +113,7 @@ function ApiTimerHandlerSave() constructor {
 		self.__forEach_end  = undefined;
 		
 		++self.__forEach_enable;
+		
 		var _cell = self.__ltlist.popBegin();
 		while (_cell != undefined) {
 			
