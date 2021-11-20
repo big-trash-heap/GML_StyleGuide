@@ -106,8 +106,25 @@ function ApiTimerHandlerSave() constructor {
 	
 	static clearSave = function() {
 		
+		static _f = apiFunctorFunc(function(_timer) {
+			
+			if (self.isBind(_timer)) apiTimerHandlerRem(_timer);
+		});
+		
 		++self.__forEach_enable;
-		apiArrCall(self.__ltlist.toArray(), apiTimerHandlerRem);
+		apiArrCall(self.__ltlist.toArray(), _f);
+		--self.__forEach_enable;
+	}
+	
+	static clearSaveAll = function() {
+		
+		++self.__forEach_enable;
+		var _timer = self.__ltlist.popBegin();
+		while (_timer != undefined) {
+			
+			apiTimerHandlerRem(_timer);
+			_timer = self.__ltlist.popBegin();
+		}
 		--self.__forEach_enable;
 	}
 	

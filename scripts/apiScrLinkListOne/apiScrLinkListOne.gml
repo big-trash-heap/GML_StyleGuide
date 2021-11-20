@@ -55,7 +55,7 @@ function ApiLListO() constructor {
 	static popBegin = function() {
 		
 		var _value = self.__fst;
-		self.__fst = _value[__API_LINK_LIST.NEXT];
+		if (_value != undefined) self.__fst = _value[__API_LINK_LIST.NEXT];
 		return _value;
 	}
 	

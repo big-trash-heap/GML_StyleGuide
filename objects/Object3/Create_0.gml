@@ -30,7 +30,7 @@ apiTHand_loop(
 		_timer.timer.set("timer", _t);
 		
 		if (_timer.num > 8) {
-			global.__apiTimerHandler.clearSave();
+			global.__apiTimerHandler.clearSaveAll();
 			return;
 		}
 		

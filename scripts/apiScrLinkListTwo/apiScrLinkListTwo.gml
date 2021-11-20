@@ -92,15 +92,18 @@ function ApiLListT() : ApiLListO() constructor {
 	static popBegin = function() {
 		
 		var _value = self.__fst;
-		self.__fst = _value[__API_LINK_LIST.NEXT];
-		
-		if (self.__fst == undefined) {
+		if (_value != undefined) {
 			
-			self.__lst = undefined;
-		}
-		else {
+			self.__fst = _value[__API_LINK_LIST.NEXT];
 			
-			self.__fst[@ __API_LINK_LIST.PREV] = undefined;
+			if (self.__fst == undefined) {
+				
+				self.__lst = undefined;
+			}
+			else {
+				
+				self.__fst[@ __API_LINK_LIST.PREV] = undefined;
+			}
 		}
 		
 		return _value;
@@ -114,15 +117,18 @@ function ApiLListT() : ApiLListO() constructor {
 	static popEnd = function() {
 		
 		var _value = self.__lst;
-		self.__lst = _value[__API_LINK_LIST.PREV];
-		
-		if (self.__lst == undefined) {
+		if (_value != undefined) {
 			
-			self.__fst = undefined;
-		}
-		else {
+			self.__lst = _value[__API_LINK_LIST.PREV];
 			
-			self.__lst[@ __API_LINK_LIST.NEXT] = undefined;
+			if (self.__lst == undefined) {
+				
+				self.__fst = undefined;
+			}
+			else {
+				
+				self.__lst[@ __API_LINK_LIST.NEXT] = undefined;
+			}
 		}
 		
 		return _value;
@@ -155,6 +161,9 @@ function ApiLListT() : ApiLListO() constructor {
 	static cropEnd = function(_cell) {
 		
 		self.__lst = _cell;
+		if (self.__lst == undefined) {
+			self.__fst = undefined;	
+		}
 	}
 	
 	static remFst = function(_f, _data) {
@@ -179,6 +188,18 @@ function ApiLListT() : ApiLListO() constructor {
 			if (_f(_cell[__API_LINK_LIST.VALUE], _data)) self.rem(_cell);
 			_cell = _cell[__API_LINK_LIST.NEXT];
 		}
+	}
+	
+	static indexOfInv = function(_index) {
+		
+		var _cell = self.__lst;
+		while (_cell != undefined) {
+			
+			if (_index == 0) return _cell;
+			--_index;
+			_cell = _cell[__API_LINK_LIST.PREV];
+		}
+		return undefined;
 	}
 	
 	static swpRef = function(_cell1, _cell2) {
