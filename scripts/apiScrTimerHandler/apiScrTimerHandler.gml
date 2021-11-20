@@ -12,6 +12,8 @@ function ApiTimerHandlerSave() constructor {
 	self.__forEach_next   = undefined;
 	self.__forEach_end    = undefined;
 	
+	self.__countTimer = 0;
+	
 	static __memMap = __apiTimerHandlerMemMap();
 	
 	static __castInit = __apiTimerHandler_castInit;
@@ -42,6 +44,10 @@ function ApiTimerHandlerSave() constructor {
 	});
 	
 	#endregion
+	
+	static getCount = function() {
+		return self.__countTimer;
+	}
 	
 	static iter = function(_arg) {
 		
@@ -88,6 +94,7 @@ function ApiTimerHandlerSave() constructor {
 		var _cell = self.__ltlist.insEnd(_timer);
 		self.__memMap[? _timer] = [_cell, self];
 		
+		++self.__countTimer;
 		self.__castInit(_timer, self);
 		return _timer;
 	}
@@ -101,12 +108,15 @@ function ApiTimerHandlerSave() constructor {
 	
 	static clearAll = function() {
 		
+		self.__forEach_next = undefined;
+		self.__forEach_end  = undefined;
+		
 		++self.__forEach_enable;
-		var _timer = self.__ltlist.popBegin();
-		while (_timer != undefined) {
+		var _cell = self.__ltlist.popBegin();
+		while (_cell != undefined) {
 			
-			apiTimerHandlerRem(_timer);
-			_timer = self.__ltlist.popBegin();
+			apiTimerHandlerRem(_cell[__API_LINK_LIST.VALUE]);
+			_cell = self.__ltlist.popBegin();
 		}
 		--self.__forEach_enable;
 	}
@@ -119,10 +129,12 @@ function ApiTimerHandlerSave() constructor {
 		return false;
 	}
 	
+	static isEmpty = function() {
+		return self.__ltlist.isEmpty();
+	}
+	
 	static toString = function() {
-		
-		var _size = self.__ltlist.mathSize();
-		return (instanceof(self) + "; number of timers: " + string(_size));
+		return (instanceof(self) + "; number of timers: " + string(self.__countTimer));
 	}
 	
 }
@@ -173,6 +185,7 @@ function apiTimerHandlerRem(_timer) {
 			}
 		}
 		
+		--_handler.__countTimer;
 		_handler.__ltlist.rem(_cell);
 		_handler.__castKill(_timer, _handler);
 		

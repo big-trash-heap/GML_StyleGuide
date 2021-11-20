@@ -181,6 +181,10 @@ function ApiLListO() constructor {
 		return _size;
 	}
 	
+	static isEmpty = function() {
+		return is_undefined(self.__fst);
+	}
+	
 	static toClone = function(_f=apiFunctorId, _data) {
 		
 		return self.__toClone(ApiLListO, _f, _data);

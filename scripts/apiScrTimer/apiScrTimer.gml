@@ -116,7 +116,7 @@ function __ApiTimerBaseLoop(_ftick=apiFunctorEm, _finit=undefined, _fkill=undefi
 	
 	static __tick = function(_arg) {
 		
-		self.__ftick(self, _arg);
+		return self.__ftick(self, _arg);
 	}
 	
 	static __init = function(_timer, _handler) {
