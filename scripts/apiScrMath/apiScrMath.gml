@@ -10,7 +10,9 @@ function apiMthTrunc(_number) {
 	return (sign(_number) == -1 ? ceil(_number) : floor(_number));
 }
 
-function apiMthSign(_number, _abs=true) {
+/// @function		apiMthARound(number, [positive=true]);
+function apiMthSign(_number, _positive=true) {
 	_number = sign(_number);
-	return (_number != 0 ? _number : (_abs ? 1 : -1));
+	return (_number != 0 ? _number : (_positive ? 1 : -1));
 }
+
