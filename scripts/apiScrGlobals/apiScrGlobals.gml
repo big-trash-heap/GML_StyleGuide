@@ -98,16 +98,18 @@ function apiTHand_timer(_timer) {
 	return _handler.append(_timer);
 }
 
-function apiTHand_sync(_steps, _ftick, _finit, _fkill) {
-	return apiTHand_timer(new ApiTimerSyncTimeout(_steps, _ftick, _finit, _fkill));
+function apiTHand_sync(_steps, _ftick, _finit, _fkill, _extType=true) {
+	_extType = (_extType ? ApiTimerSyncTimeoutExt : ApiTimerSyncTimeout);
+	return apiTHand_timer(new _extType(_steps, _ftick, _finit, _fkill));
 }
 
 function apiTHand_end_sync(_steps, _fkill) {
 	return apiTHand_timer(new ApiTimerSyncTimeout(_steps, _, _, _fkill));
 }
 
-function apiTHand_async(_milisec, _ftick, _finit, _fkill) {
-	return apiTHand_timer(new ApiTimerAsyncTimeout(_milisec, _ftick, _finit, _fkill));
+function apiTHand_async(_milisec, _ftick, _finit, _fkill, _extType=true) {
+	_extType = (_extType ? ApiTimerAsyncTimeoutExt : ApiTimerAsyncTimeout);
+	return apiTHand_timer(new _extType(_milisec, _ftick, _finit, _fkill));
 }
 
 function apiTHand_end_async(_milisec, _fkill) {

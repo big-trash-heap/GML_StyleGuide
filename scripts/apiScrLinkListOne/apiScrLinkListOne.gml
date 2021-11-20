@@ -70,6 +70,11 @@ function ApiLListO() constructor {
 		_prev[@ __API_LINK_LIST.NEXT] = _cell[__API_LINK_LIST.NEXT];
 	}
 	
+	static cropBegin = function(_cell) {
+		
+		self.__fst = _cell;
+	}
+	
 	static clear = function() {
 		
 		self.__fst = undefined;

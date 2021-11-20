@@ -40,6 +40,10 @@ function ApiTimer() constructor {
 		return self;
 	}
 	
+	static toString = function() {
+		return instanceof(self);	
+	}
+	
 }
 
 #endregion
@@ -204,8 +208,8 @@ function __ApiTimerBaseTimeoutExt(_steps, _ftick, _finit, _fkill) : __ApiTimerBa
 		return (abs(self.__step) / self.__max_step);
 	}
 	
-	static resetTime = function() {
-		self.__step = self.__max_step * sign(self.__step);
+	static resetTime = function(_endPlay=false) {
+		self.__step = self.__max_step * apiMthSign(self.__step, _endPlay);
 		return self;
 	}
 	

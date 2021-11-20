@@ -152,6 +152,11 @@ function ApiLListT() : ApiLListO() constructor {
 		}
 	}
 	
+	static cropEnd = function(_cell) {
+		
+		self.__lst = _cell;
+	}
+	
 	static remFst = function(_f, _data) {
 		
 		var _cell = self.__fst;
@@ -264,8 +269,8 @@ function ApiLListT() : ApiLListO() constructor {
 	
 	static clear = function() {
 		
-		self.__fst = undefined;
-		self.__lst = undefined;
+		delete self.__fst;
+		delete self.__lst;
 	}
 	
 	static toClone = function(_f, _data) {

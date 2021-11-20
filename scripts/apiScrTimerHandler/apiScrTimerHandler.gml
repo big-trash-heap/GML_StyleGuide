@@ -8,30 +8,64 @@ function ApiTimerHandlerSave() constructor {
 	
 	self.__ltlist = new ApiLListT();
 	
+	self.__forEach_next = undefined;
+	self.__forEach_end  = undefined;
+	
 	static __memMap = __apiTimerHandlerMemMap();
 	
 	static __castInit = __apiTimerHandler_castInit;
 	static __castKill = __apiTimerHandler_castKill;
+	
+	static __forEach = apiFunctorFunc(function(_f, _arg) {
+		
+		var _cell = self.__ltlist.topBegin();
+		if (_cell != undefined) {
+			
+			self.__forEach_end = self.__ltlist.topEnd();
+			
+			while (_cell != self.__forEach_end) {
+				
+				self.__forEach_next = _cell[__API_LINK_LIST.NEXT];
+				
+				_f(_cell[__API_LINK_LIST.VALUE], _arg);
+				_cell = self.__forEach_next;
+			}
+			
+			self.__forEach_next = undefined;
+			self.__forEach_end = undefined;
+			
+			if (_cell != undefined) {
+				_f(_cell[__API_LINK_LIST.VALUE], _arg);
+			}
+		}
+	});
 	
 	#endregion
 	
 	static iter = function(_arg) {
 		
 		var _cell = self.__ltlist.topBegin();
-		var _next, _timer;
-		while (_cell != undefined) {
+		if (_cell != undefined) {
 			
-			_next  = _cell[__API_LINK_LIST.NEXT];
-			_timer = _cell[__API_LINK_LIST.VALUE];
+			self.__forEach_end = self.__ltlist.topEnd();
 			
-			if (_timer.__tick(_timer, _arg)) {
+			while (_cell != self.__forEach_end) {
 				
-				self.__castKill(_timer, self);
-				self.__ltlist.rem(_cell);
-				ds_map_delete(self.__memMap, _timer);
+				self.__forEach_next = _cell[__API_LINK_LIST.NEXT];
+				
+				_cell = _cell[__API_LINK_LIST.VALUE];
+				if (_cell.__tick(_cell, _arg)) apiTimerHandlerRem(_cell);
+				
+				_cell = self.__forEach_next;
 			}
 			
-			_cell = _next;
+			self.__forEach_next = undefined;
+			self.__forEach_end = undefined;
+			
+			if (_cell != undefined) {
+				_cell = _cell[__API_LINK_LIST.VALUE];
+				if (_cell.__tick(_cell, _arg)) apiTimerHandlerRem(_cell);
+			}
 		}
 	}
 	
@@ -51,18 +85,7 @@ function ApiTimerHandlerSave() constructor {
 	
 	static clear = function() {
 		
-		var _cell = self.__ltlist.topBegin();
-		var _timer;
-		while (_cell != undefined) {
-			
-			_timer = _cell[__API_LINK_LIST.VALUE];
-			_cell  = _cell[__API_LINK_LIST.NEXT];
-			
-			self.__castKill(_timer, self);
-			ds_map_delete(self.__memMap, _timer);
-		}
-		
-		self.__ltlist.clear();
+		self.__forEach(apiTimerHandlerRem);
 	}
 	
 	static isBind = function(_timer) {
@@ -98,14 +121,38 @@ function ApiTimerHandler() : ApiTimerHandlerSave() constructor {
 
 function apiTimerHandlerRem(_timer) {
 	
-	var _memMap = __apiTimerHandlerMemMap();
-	var _timerMetaInfo = _memMap[? _timer];
-	if (_timerMetaInfo != undefined) {
+	static _memMap = __apiTimerHandlerMemMap();
+	
+	if (_timer == undefined) return false;
+	
+	var _cell = _memMap[? _timer];
+	if (_cell != undefined) {
 		
-		_timerMetaInfo[1].__castKill(_timer, _timerMetaInfo[1]);
-		_timerMetaInfo[1].__ltlist.rem(_timerMetaInfo[0]);
+		var _handler = _cell[1];
+		_cell        = _cell[0];
 		
 		ds_map_delete(_memMap, _timer);
+		
+		if (_handler.__forEach_next != undefined) {
+			
+			if (_handler.__forEach_next == _cell) {
+				if (_handler.__forEach_end == _cell) {
+					_handler.__forEach_next = undefined;
+					_handler.__forEach_end = undefined;
+				}
+				else {
+					_handler.__forEach_next = _cell[__API_LINK_LIST.NEXT];
+				}
+			}
+			else
+			if (_handler.__forEach_end == _cell) {
+				_handler.__forEach_end = _cell[__API_LINK_LIST.PREV];
+			}
+		}
+		
+		_handler.__ltlist.rem(_cell);
+		_handler.__castKill(_timer, _handler);
+		
 		return true;
 	}
 	return false;
@@ -122,8 +169,8 @@ function apiTimerHandlerIsBind(_timer) {
 #region __private
 
 function __apiTimerHandlerMemMap() {
-	static __memMap = ds_map_create();
-	return __memMap;
+	static _memMap = ds_map_create();
+	return _memMap;
 }
 
 function __apiTimerHandler_castInit(_timer) {
