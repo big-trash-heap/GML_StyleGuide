@@ -117,7 +117,7 @@ function __ApiTimerBaseLoop(_ftick=undefined, _finit=undefined, _fkill=undefined
 	
 }
 
-function __ApiTimerBaseTimeout(_steps, _ftick, _finit, _fkill) : ApiTimer() constructor {
+function __ApiTimerBaseTimeout(_steps, _ftick=undefined, _finit=undefined, _fkill=undefined) : ApiTimer() constructor {
 	
 	#region __private
 	
