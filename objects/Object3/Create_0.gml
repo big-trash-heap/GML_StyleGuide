@@ -24,7 +24,9 @@ apiTHand_loop(
 							
 							var _t1 = apiTHand_loop();
 							var _t2 = apiTHand_loop(_, _, function() { show_message(222); });
-							var _t3 = apiTHand_loop();
+							var _t3 = apiTHand_loop(_, _, function() {
+								show_message(global.__apiTimerHandler.__forEach_enable);
+								global.__apiTimerHandler.clearAll(); });
 							var _t4 = apiTHand_loop(_, _, function() { show_message(444); });
 							
 							_t2.rem();

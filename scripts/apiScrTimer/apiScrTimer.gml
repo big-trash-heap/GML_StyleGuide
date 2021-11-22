@@ -105,41 +105,29 @@ function ApiTimerAsyncTimeoutExt(_milisec, _ftick, _finit, _fkill) : __ApiTimerB
 #region __private
 
 
-function __ApiTimerBaseLoop(_ftick=apiFunctorEm, _finit=undefined, _fkill=undefined) : ApiTimer() constructor {
+function __ApiTimerBaseLoop(_ftick=undefined, _finit=undefined, _fkill=undefined) : ApiTimer() constructor {
 	
 	#region __private
 	
-	apiSelfSet("__finit", _finit);
-	apiSelfSet("__fkill", _fkill);
-	
-	self.__ftick = _ftick;
-	
-	static __tick = function(_arg) {
-		
-		return self.__ftick(self, _arg);
-	}
-	
-	static __init = function(_timer, _handler) {
-		
-		var _f = self[$ "__finit"];
-		if (_f != undefined) _f(_timer, _handler);
-	}
-	
-	static __kill = function(_timer, _handler) {
-		
-		var _f = self[$ "__fkill"];
-		if (_f != undefined) _f(_timer, _handler);
-	}
+	apiSelfSet("__init", _finit);
+	apiSelfSet("__tick", _ftick);
+	apiSelfSet("__kill", _fkill);
 	
 	#endregion
 	
 }
 
-function __ApiTimerBaseTimeout(_steps, _ftick, _finit, _fkill) : __ApiTimerBaseLoop(_ftick, _finit, _fkill) constructor {
+function __ApiTimerBaseTimeout(_steps, _ftick, _finit, _fkill) : ApiTimer() constructor {
 	
 	#region __private
 	
 	self.__step = apiMthARound(_steps, ceil);
+	
+	apiSelfSet("__init", _finit);
+	apiSelfSet("__kill", _fkill);
+	
+	static __ftick = apiFunctorEm;
+	apiSelfSet("__ftick", _ftick);
 	
 	#endregion
 	

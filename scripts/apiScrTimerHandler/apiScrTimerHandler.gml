@@ -109,9 +109,6 @@ function ApiTimerHandlerSave() constructor {
 	
 	static clearAll = function() {
 		
-		self.__forEach_next = undefined;
-		self.__forEach_end  = undefined;
-		
 		++self.__forEach_enable;
 		
 		var _cell = self.__ltlist.popBegin();
@@ -121,6 +118,11 @@ function ApiTimerHandlerSave() constructor {
 			_cell = self.__ltlist.popBegin();
 		}
 		--self.__forEach_enable;
+		
+		if (self.__forEach_next != undefined) {
+			self.__forEach_next = undefined;
+			self.__forEach_end  = undefined;
+		}
 	}
 	
 	static isBind = function(_timer) {
