@@ -120,5 +120,9 @@ function apiTHand_loop(_ftick, _finit, _fkill) {
 	return apiTHand_timer(new ApiTimerLoop(_ftick, _finit, _fkill));
 }
 
+function apiTHand_isBind(_timer) {
+	return global.__apiTimerHandler.isBind(_timer);
+}
+
 #endregion
 

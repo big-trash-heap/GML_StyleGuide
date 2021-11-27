@@ -54,34 +54,34 @@ function ApiTimerHandlerSave() constructor {
 		if (self.__forEach_enable > 0) {
 			
 			apiDebugError("ApiTimerHandler: Нельзя вызывать метод iter во время вызова в этом обработчике iter или clear методов");
+			return;
 		}
-		else {
-			var _cell = self.__ltlist.topBegin();
-			if (_cell != undefined) {
+		
+		var _cell = self.__ltlist.topBegin();
+		if (_cell != undefined) {
 			
-				++self.__forEach_enable;
-				self.__forEach_end = self.__ltlist.topEnd();
+			++self.__forEach_enable;
+			self.__forEach_end = self.__ltlist.topEnd();
+			
+			while (_cell != self.__forEach_end) {
 				
-				while (_cell != self.__forEach_end) {
+				self.__forEach_next = _cell[__API_LINK_LIST.NEXT];
 				
-					self.__forEach_next = _cell[__API_LINK_LIST.NEXT];
-					
-					_cell = _cell[__API_LINK_LIST.VALUE];
-					if (_cell.__tick(_cell, _arg)) apiTimerHandlerRem(_cell);
-					
-					_cell = self.__forEach_next;
-				}
+				_cell = _cell[__API_LINK_LIST.VALUE];
+				if (_cell.__tick(_cell, _arg)) apiTimerHandlerRem(_cell);
 				
-				if (_cell != undefined) {
-					self.__forEach_next = undefined;
-					self.__forEach_end  = undefined;
-					
-					_cell = _cell[__API_LINK_LIST.VALUE];
-					if (_cell.__tick(_cell, _arg)) apiTimerHandlerRem(_cell);
-				}
-				
-				--self.__forEach_enable;
+				_cell = self.__forEach_next;
 			}
+			
+			if (_cell != undefined) {
+				self.__forEach_next = undefined;
+				self.__forEach_end  = undefined;
+				
+				_cell = _cell[__API_LINK_LIST.VALUE];
+				if (_cell.__tick(_cell, _arg)) apiTimerHandlerRem(_cell);
+			}
+			
+			--self.__forEach_enable;
 		}
 	}
 	

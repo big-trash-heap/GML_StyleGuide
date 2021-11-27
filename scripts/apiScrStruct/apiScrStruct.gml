@@ -23,6 +23,7 @@ function apiStructMerge(_struct_merge, _struct, _union=false) {
         if (_union and variable_struct_exists(_struct_merge, _key)) continue;
         _struct_merge[$ _key] = _struct[$ _key];
     }
+	return _struct_merge;
 }
 
 #endregion
