@@ -2,10 +2,8 @@
 
 function __ApiWrap() constructor {
 	
-	static _set = function(_key, _value) {
-		self[$ _key] = _value;
-		return self;	
-	}
+	static _set = __apiSelfSet;
+	static _impl = __apiSelfImpl;
 	
 }
 

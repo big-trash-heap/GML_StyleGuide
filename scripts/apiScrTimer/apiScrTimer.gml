@@ -28,17 +28,9 @@ function ApiTimer() constructor {
 		return apiTimerHandlerIsBind(self);
 	}
 	
-	static set = function(_key, _data) {
-		
-		self[$ _key] = _data;
-		return self;
-	}
+	static set = __apiSelfSet;
 	
-	static impl = function(_struct) {
-		
-		apiStructMerge(self, _struct, true);
-		return self;
-	}
+	static impl = __apiSelfImpl;
 	
 	static toString = function() {
 		return instanceof(self);	
