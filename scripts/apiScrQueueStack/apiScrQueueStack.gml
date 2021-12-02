@@ -24,7 +24,7 @@ function ApiQS(_wrap) constructor {
 		self.__size += _argSize;
 	}
 	
-	static enqueue = function() {
+	static qpush = function() {
 		
 		var _argSize = argument_count;
 		for (var _i = 0; _i < _argSize; ++_i)
@@ -47,22 +47,48 @@ function ApiQS(_wrap) constructor {
 		}
 	}
 	
-	static head = self.top;
-	
-	static tail = self.pop;
-	
 	static size = function() {
 		return self.__size;	
 	}
 	
-	static indexOf = function(_index) {
+	static indexOf = function(_index, _remove=false) {
 		var _value = self.__ltlist.indexOf(_index);
-		if (_value != undefined) return _value[__API_LINK_LIST.VALUE];
+		if (_value != undefined) {
+			
+			if (_remove) {
+				
+				--self.__size;
+				self.__ltlist.rem(_value);
+			}
+			return _value[__API_LINK_LIST.VALUE];
+		}
 	}
 	
-	static indexOfInv = function(_index) {
+	static indexOfInv = function(_index, _remove=false) {
 		var _value = self.__ltlist.indexOfInv(_index);
-		if (_value != undefined) return _value[__API_LINK_LIST.VALUE];
+		if (_value != undefined) {
+			
+			if (_remove) {
+				
+				--self.__size;
+				self.__ltlist.rem(_value);
+			}
+			return _value[__API_LINK_LIST.VALUE];
+		}
+	}
+	
+	static pull = function(_index, _f, _data) {
+		var _value = self.__ltlist.indexOf(_index);
+		if (_value != undefined) {
+			
+			_index = _value[__API_LINK_LIST.VALUE];
+			if (_f(_index, _data)) {
+				
+				--self.__size;
+				self.__ltlist.rem(_value);
+				return [_index];
+			}
+		}
 	}
 	
 	static clear = function() {
@@ -78,7 +104,7 @@ function ApiQS(_wrap) constructor {
 		return self.__ltlist.toArray();	
 	}
 	
-	static toClone = function(_f, _data) {
+	static toClone = function(_f=apiFunctorId, _data) {
 		return new ApiQS(
 			new __ApiWrap()
 				._set("size", self.__size)

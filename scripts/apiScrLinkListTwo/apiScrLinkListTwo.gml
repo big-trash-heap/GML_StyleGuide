@@ -89,6 +89,20 @@ function ApiLListT() : ApiLListO() constructor {
 		return _value;
 	}
 	
+	static insAfterIf = function(_value, _f, _data) {
+		
+		var _cell = self.__lst;
+		while (_cell != undefined) {
+			
+			if (_f(_cell[__API_LINK_LIST.VALUE], _data))
+				return self.insAfter(_value, _cell);
+			
+			_cell = _cell[__API_LINK_LIST.PREV];
+		}
+		
+		return self.insBegin(_value);
+	}
+	
 	static popBegin = function() {
 		
 		var _value = self.__fst;
@@ -294,7 +308,7 @@ function ApiLListT() : ApiLListO() constructor {
 		delete self.__lst;
 	}
 	
-	static toClone = function(_f, _data) {
+	static toClone = function(_f=apiFunctorId, _data) {
 		
 		return self.__toClone(ApiLListT, _f, _data);
 	}

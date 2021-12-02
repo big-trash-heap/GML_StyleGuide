@@ -81,8 +81,8 @@ apiTHand_loop(
 
 _fff = function() {
 	show_message(global.__apiTimerHandler.isEmpty());
-	timer = apiTHand_async(5000, function(_timer) {
-		show_debug_message(["hello", _timer.getLeftCf()]);
+	timer = apiTHand_async(5000, function(_timer, _0, _count) {
+		show_debug_message(["hello", _timer.getLeftCf(), _count]);
 	}, _, function(_timer) {
 		show_debug_message("<< hello");
 		_timer.resetTime(true);
