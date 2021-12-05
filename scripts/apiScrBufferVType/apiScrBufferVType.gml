@@ -4,8 +4,6 @@ enum API_BUF {
 	NUM = 20,
 	INF, NINF, NAN,
 	UND,
-	NULL,
-	
 }
 
 
@@ -23,8 +21,8 @@ function apiBufVType(_value) {
 		return _map;
 	}();
 	
-	_value = typeof(_value);
-	if (_value == "number") {
+	var _value_type = typeof(_value);
+	if (_value_type == "number") {
 		
 		if (is_nan(_value))				return API_BUF.NAN;
 		if (is_infinity(_value))		return (_value > 0 ? API_BUF.INF : API_BUF.NINF);
@@ -43,7 +41,6 @@ function apiBufVType(_value) {
 		}
 		return buffer_u64;
 	}
-	_value = _map[? _value];
-	return (is_undefined(_value) ? API_BUF.NULL : _value);
+	return _map[? _value_type];
 }
 
