@@ -4,7 +4,6 @@ enum API_BUF {
 	NUM = 20,
 	INF, NINF, NAN,
 	UND,
-	ARRAY, STRUCT,
 	NULL,
 	
 }
@@ -19,8 +18,6 @@ function apiBufVType(_value) {
 		_map[? "bool"]      = buffer_bool;
 		_map[? "int32"]     = buffer_u32;
 		_map[? "int64"]     = buffer_u64;
-		_map[? "array"]     = API_BUF.ARRAY;
-		_map[? "struct"]    = API_BUF.STRUCT;
 		_map[? "undefined"] = API_BUF.UND;
 		
 		return _map;
