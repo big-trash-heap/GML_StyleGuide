@@ -1,6 +1,7 @@
 
-#macro API_FRM_CHAR	126 /* ord('~') */
-
+#macro API_FRM_CHAR	37 /* ord('%') */
+show_message(apiFrm("hello %s world is %s on 100%%!! And look my %s. %s text", "Kirill", 48, "[car]", "Break"));
+show_message(apiFrm("hello %s world is %s on 100%%!! And look my %s. %s text", "KirilL", 47, "[cc]", "End"));
 /// @function		apiFrm(string_format, ...args);
 /// @description	Формат строки
 function apiFrm(_string) {
@@ -17,8 +18,15 @@ function apiFrm(_string) {
 			if (_k > 0)
 				apiBufTxtAppend(_buffer, string_copy(_string, _j, _k));
 			
-			apiBufTxtAppend(_buffer, string(argument[_a++]));
-			_j = _i + 1;
+			if (string_ord_at(_string, _i + 1) != API_FRM_CHAR) {
+				
+				apiBufTxtAppend(_buffer, string(argument[_a++]));
+			}
+			else {
+				apiBufTxtAppend(_buffer, "%");
+			}
+			
+			_j = ++_i + 1;
 		}
 	}
 	
