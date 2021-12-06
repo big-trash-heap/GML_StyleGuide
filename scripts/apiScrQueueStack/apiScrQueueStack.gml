@@ -1,14 +1,16 @@
 
 
-function ApiQS(_wrap) constructor {
+function ApiQS() constructor {
 
 	#region __private
 	
-	if (__apiIsWrap(_wrap)) {
+	API_MACRO_CONSTRUCTOR_WRAP {
+		var _wrap = argument[0];
 		self.__ltlist = _wrap.list;
 		self.__size   = _wrap.size;
 	}
-	else {
+	else
+	API_MACRO_CONSTRUCTOR_DEFL {
 		self.__ltlist = new ApiLListT();
 		self.__size   = 0;
 	}

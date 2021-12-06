@@ -1,16 +1,18 @@
 
 
-function ApiQPriority(_wrap) constructor {
+function ApiQPriority() constructor {
 	
 	#region __private
 	
 	enum __API_QPRIORITY { PRIORITY, VALUE };
 	
-	if (__apiIsWrap(_wrap)) {
+	API_MACRO_CONSTRUCTOR_WRAP {
+		var _wrap = argument[0];
 		self.__ltlist = _wrap.list;
 		self.__size   = _wrap.size;
 	}
-	else {
+	else
+	API_MACRO_CONSTRUCTOR_DEFL {
 		self.__ltlist = new ApiLListT();
 		self.__size   = 0;
 	}

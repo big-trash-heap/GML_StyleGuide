@@ -19,3 +19,7 @@
 								//
 #macro API_MACRO_DEFCHAR		"▯"
 
+#macro API_MACRO_CONSTRUCTOR_WRAP if (argument_count == 1 && __apiIsWrap(argument[0]))
+#macro API_MACRO_CONSTRUCTOR_MORE if (argument_count > 0)
+#macro API_MACRO_CONSTRUCTOR_DEFL if (true)
+
