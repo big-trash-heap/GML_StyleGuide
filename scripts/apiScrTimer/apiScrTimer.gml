@@ -2,6 +2,8 @@
 API_GML_WARN_ARGS ApiTimer;
 API_GML_WARN_ARGS [__init, __tick, __kill];
 
+#macro API_TIMER_ASYNC_TIMESTEP_AWAIT infinity
+
 #region abstract-class timer
 
 function ApiTimer() constructor {
@@ -210,7 +212,7 @@ function __apiTimer_tickAsync(_timer, _arg) {
 		
 	if (self.__step > 0) {
 		
-		var _step = API_TIME_ASYNC_STEP;
+		var _step = min(API_TIMER_ASYNC_TIMESTEP_AWAIT, API_TIME_ASYNC_STEP);
 		if (self.__step > _step) {
 			self.__step -= _step;
 		}
