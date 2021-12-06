@@ -1,1 +1,14 @@
 
+apiNote3_Dev дописать некоторые конструкции
+
+apiScrPriority		- до ума
+apiScrQueueStack	- до ума
+
+apiScrCaller		- добавить toClone
+apiScrEventor		- добавить toClone
+
+grid
+animator
+
+----
+tests new
