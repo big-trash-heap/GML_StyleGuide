@@ -36,6 +36,7 @@
     {"id":{"name":"ni_array","path":"scripts/ni_array/ni_array.yy",},"order":1,},
     {"id":{"name":"apiScrDsListHigher","path":"scripts/apiScrDsListHigher/apiScrDsListHigher.yy",},"order":0,},
     {"id":{"name":"apiScrFrm","path":"scripts/apiScrFrm/apiScrFrm.yy",},"order":0,},
+    {"id":{"name":"apiScrFor","path":"scripts/apiScrFor/apiScrFor.yy",},"order":0,},
     {"id":{"name":"apiNote1_Named","path":"notes/apiNote1_Named/apiNote1_Named.yy",},"order":0,},
     {"id":{"name":"apiScrTimerHandler","path":"scripts/apiScrTimerHandler/apiScrTimerHandler.yy",},"order":1,},
     {"id":{"name":"ni_buffer","path":"scripts/ni_buffer/ni_buffer.yy",},"order":0,},
@@ -110,6 +111,7 @@
     {"folderPath":"folders/GML_StyleGuide_api/api_tools/wrap.yy","order":6,"resourceVersion":"1.0","name":"wrap","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/GML_StyleGuide_api/api_tools_addition.yy","order":9,"resourceVersion":"1.0","name":"api_tools_addition","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/GML_StyleGuide_api/api_tools_addition/qstack.yy","order":1,"resourceVersion":"1.0","name":"qstack","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/GML_StyleGuide_api/api_tools/for.yy","order":7,"resourceVersion":"1.0","name":"for","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},
