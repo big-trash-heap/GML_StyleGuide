@@ -45,7 +45,7 @@ if (API_TEST_ENABLE) {
 
 		var _f = function(_value) { return _value > 5; };
 		var _id0 = apiDListBul(1, 8, 4, 1, 10, 20, -1, 3, 7, 11, 1);
-		var _id1 = apiDListBul(1, "hello", 1, 2, _, "world", [], {}, 123, 1);
+		var _id1 = apiDListBul(1, "hello", 1, 2, undefined, "world", [], {}, 123, 1);
 		
 		#region apiDListFilter
 		

@@ -45,7 +45,7 @@ function apiTStrBuffer(_buffer, _j, _i, _meta=true) {
 		}
 		
 		_string += " ";
-		_string += apiTStrInt(buffer_peek(_buffer, _i, buffer_u8), _, 2);
+		_string += apiTStrInt(buffer_peek(_buffer, _i, buffer_u8), undefined, 2);
 	}
 	return (_meta ? _string + ">" : string_delete(_string, 1, 1));
 }
@@ -72,7 +72,7 @@ if (API_TEST_ENABLE) {
 		);
 		
 		apiDebugAssert(
-			_f(_buffer, _, _, false) == "00 00 00 00 00 00 00 00",
+			_f(_buffer, undefined, undefined, false) == "00 00 00 00 00 00 00 00",
 			"<apiTStrBuffer 1.1>"
 		);
 		
@@ -86,7 +86,7 @@ if (API_TEST_ENABLE) {
 		);
 		
 		apiDebugAssert(
-			_f(_buffer, 4, _, false) == "FE FF 00 00",
+			_f(_buffer, 4, undefined, false) == "FE FF 00 00",
 			"<apiTStrBuffer 2.1>"
 		);
 		
@@ -101,12 +101,12 @@ if (API_TEST_ENABLE) {
 		);
 		
 		apiDebugAssert(
-			_f(_buffer, _, 1) == "<Buffer start of 1 | FF 00 00 00 00 00 20>",
+			_f(_buffer, undefined, 1) == "<Buffer start of 1 | FF 00 00 00 00 00 20>",
 			"<apiTStrBuffer 4>"
 		);
 		
 		apiDebugAssert(
-			_f(_buffer, _, 1, false) == "FF 00 00 00 00 00 20",
+			_f(_buffer, undefined, 1, false) == "FF 00 00 00 00 00 20",
 			"<apiTStrBuffer 4.1>"
 		);
 		

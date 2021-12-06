@@ -104,7 +104,7 @@ function apiTHand_sync(_steps, _ftick, _finit, _fkill, _extType=true) {
 }
 
 function apiTHand_end_sync(_steps, _fkill) {
-	return apiTHand_timer(new ApiTimerSyncTimeout(_steps, _, _, _fkill));
+	return apiTHand_timer(new ApiTimerSyncTimeout(_steps, undefined, undefined, _fkill));
 }
 
 function apiTHand_async(_milisec, _ftick, _finit, _fkill, _extType=true) {
@@ -113,7 +113,7 @@ function apiTHand_async(_milisec, _ftick, _finit, _fkill, _extType=true) {
 }
 
 function apiTHand_end_async(_milisec, _fkill) {
-	return apiTHand_timer(new ApiTimerAsyncTimeout(_milisec, _, _, _fkill));
+	return apiTHand_timer(new ApiTimerAsyncTimeout(_milisec, undefined, undefined, _fkill));
 }
 
 function apiTHand_loop(_ftick, _finit, _fkill) {

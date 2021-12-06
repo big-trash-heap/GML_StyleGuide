@@ -188,7 +188,7 @@ if (API_TEST_ENABLE) {
 		show_debug_message("\t apiCompOrdStr \t\tis work");
 		
 		var _array = ["Message", "World", "Map", "Dota", "Haskell is good language"];
-		array_sort(_array, method(_, apiCompOrdStr));
+		array_sort(_array, method(undefined, apiCompOrdStr));
 		
 		apiDebugAssert(
 			array_equals(
@@ -198,7 +198,7 @@ if (API_TEST_ENABLE) {
 		);
 		
 		var _array = [4, "Message", "World", 100, "Map", "Dota", 234, "Haskell is good language", -1];
-		array_sort(_array, method(_, apiCompOrdNS));
+		array_sort(_array, method(undefined, apiCompOrdNS));
 		
 		apiDebugAssert(
 			array_equals(

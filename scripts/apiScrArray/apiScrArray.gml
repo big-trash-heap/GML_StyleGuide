@@ -301,7 +301,7 @@ if (API_TEST_ENABLE) {
 		
 		apiDebugAssert(
 			array_equals(
-				_f(_array, apiArrPlace(_array, _, 8, 9)), 
+				_f(_array, apiArrPlace(_array, undefined, 8, 9)), 
 				[1, 2, 3, 4, 5, 8, 9]
 			),
 			"<apiArrPlace push>"
