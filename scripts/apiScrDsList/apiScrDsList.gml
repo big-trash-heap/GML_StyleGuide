@@ -50,6 +50,14 @@ function apiDListBul() {
 	return _id;
 }
 
+/// @param			id
+/// @description	Клонирует список (глубиной 1)
+function apiDListBulDup1d(_id) {
+	var _id_new = ds_list_create();
+	ds_list_copy(_id_new, _id);
+	return _id_new;
+}
+
 #endregion
 
 #region other
