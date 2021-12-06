@@ -1,7 +1,6 @@
 
 #macro API_FRM_CHAR	37 /* ord('%') */
-show_message(apiFrm("hello %s world is %s on 100%%!! And look my %s. %s text", "Kirill", 48, "[car]", "Break"));
-show_message(apiFrm("hello %s world is %s on 100%%!! And look my %s. %s text", "KirilL", 47, "[cc]", "End"));
+
 /// @function		apiFrm(string_format, ...args);
 /// @description	Формат строки
 function apiFrm(_string) {
