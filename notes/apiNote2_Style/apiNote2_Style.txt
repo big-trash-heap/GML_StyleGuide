@@ -197,12 +197,20 @@
 		0,
 		1,
 	];
+	
+	var ar =
+		[
+		];
 
 	var struct = {name: "hello", mark: true};
 	var struct = {
 		name: "hello",
 		mark: true
 	};
+	
+	var struct =
+		{
+		};
 
 -- ########################################################################################## --
 # return

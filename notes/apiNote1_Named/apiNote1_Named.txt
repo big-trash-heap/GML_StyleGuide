@@ -19,8 +19,9 @@
 	catch(_0)
 	funct(_0, _1, name) - вызов функции
 
-	-- ############################## --
-	# именна ресурсов
+-- ########################################################################################## --
+# именна ресурсов
+
 	- префиксы, которые зарезервированны под имена ресурсов
 	[spr, snd, obj, scr, seq, shad, room, ext, path, note, timeline, tileset, font, curve, incl, tag]
 
@@ -29,10 +30,12 @@
 	scrWindowAdapt
 
 -- ########################################################################################## --
-# именнование локальных переменных (self.публичные) и функций
+# именнование локальных переменных и функций
+
+public:
 
 	- style: camelCase
-	- обязательно с использованием явного self.
+	- обязательно с использованием явного self. (для переменных)
 	- не рекомендуется использовать built-in имена
 
 	- example:
@@ -42,22 +45,27 @@
 	function thisName()
 
 	При использование variable_struct_get, variable_struct_set, variable_instance_get, variable_instance_set
-	Допускается использовании любого стиля именнование, но без __ в префикса имени
+	допускается использовании любого стиля именнование, но без __ в префикса имени
 
--- ########################################################################################## --
-# именнование локальных переменных (self.приватные) и функций
+private:
 
-	- style: camelCase
-	- обязательно с использованием явного self.
+	- style: camelCase (+), snake_case
+	- обязательно с использованием явного self. (для переменных)
 
 	- example:
 	self.__helloWorld
 	self.__thisName
 	function __helloWorld()
 	function __thisName()
+	self.__hell_world
+	self.__this_name
+	function __hello_world()
+	function __this_name()
 
 -- ########################################################################################## --
-# именнование глобальных переменных (global.публичные)
+# именнование глобальных переменных
+
+public:
 
 	- style: camelCase
 	- не рекомендуется использовать built-in имена
@@ -70,64 +78,102 @@
 	При использовании variable_global_get, variable_global_set
 	Допускается использование любого стиля именнование, но без __ в префикса имени
 
--- ########################################################################################## --
-# именнование глобальных переменных (global.приватные)
+private:
 
-	- style: camelCase
+	- style: camelCase (+), snake_case
 	- не рекомендуется использовать имена функций (пользовательских)
 
 	- example:
 	global.__helloWorld
 	global.__thisName
+	global.__hello_world
+	global.__this_name
 
-	# использование конструкторов (constructor)
+-- ########################################################################################## --
+# использование конструкторов (constructor)
+
+public:
+
 	- style: PascalCase
 
 	- example:
 	function Integer() constructor
 	function Tween() constructor
 
+private:
+	
+	- style: PascalCase
+	
+	- example:
+	function __Integer() constructor
+	function __Tween() constructor
+
+general:
+	
 	Для полей static в конструкторах и функций допускается использование:
 	static thisName
 	static _thisName
 	static __thisName
 
 -- ########################################################################################## --
-# именнование глобальных переменных (всегда публичные)
+# именнование глобальных переменных (премущественно публичные)
 
-	- style: PascalCase
-	- не рекомендуется использовать (предпочтение PascalCase для констукторов)
+	- style: PascalCase (+), snake_case, MACRO_CASE
+	- не рекомендуется использовать
+
+public:
 
 	- example:
 	globalvar HelloWorld
 	globalvar ThisName
+	globalvar GL
+	globalvar base_auto
 
-	При использовании variable_global_get, variable_global_set
-	Допускается использование любого стиля именнование, но без __ в префикса имени
+private:
+
+	- example:
+	globalvar __HelloWorld
+	globalvar __ThisName
+	globalvar __GL
+	globalvar __base_auto
 
 -- ########################################################################################## --
-# именнование enum (всегда публичные)
+# именнование enum
 
 	- style: MACRO_CASE
+
+public:
 
 	- example: 
-	enum HELLO_WORLD {HELLO, WORLD}
-	enum THIS_NAME {THIS, NAME}
+	enum HELLO_WORLD { HELLO, WORLD }
+	enum THIS_NAME { THIS, NAME }
+
+private:
+
+	- example: 
+	enum __HELLO_WORLD { HELLO, WORLD }
+	enum __THIS_NAME { THIS, NAME }
 
 -- ########################################################################################## --
-# именнование макросов (всегда публичные)
+# именнование макросов
 
 	- style: MACRO_CASE
+
+public:
 
 	- example:
 	#macro HELLO_WORLD
 	#macor THIS_NAME
 
+private:
+	
+	#macro ____HELLO_WORLD
+	#macor ____THIS_NAME
+	
 -- ########################################################################################## --
 # временные переменные (var)
 
-	- style: camelCase
-	- не рекомендуется использовать built-in имена
+	- style: camelCase(+)
 
 	- example:
 	var _helloWorld;
@@ -141,7 +187,7 @@
 	- JDoc
 	
 	- example:
-	/// @function name(arg0, [arg1], [arg2], [arg3])   // публичная сигнатура
+	/// @function name(arg0, [arg1], [arg2="arg"], [arg3])   // публичная сигнатура
 	function name(_arg0, _arg1, _i="arg", _j)          // сигнатура объявление
 
 -- ###################################################################################################################################################################################################################### --

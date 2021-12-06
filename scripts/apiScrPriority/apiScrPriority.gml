@@ -23,7 +23,7 @@ function ApiQPriority(_wrap) constructor {
 		self.__ltlist.insAfterIf([_priority, _value],
 			function(_value, _priority) {
 				
-				return (_value[__API_QPRIORITY.PRIORITY] >= _priority);
+				return (_value[__API_QPRIORITY.PRIORITY] <= _priority);
 			}, _priority);
 	}
 	
@@ -82,6 +82,23 @@ function ApiQPriority(_wrap) constructor {
 						];
 					}, {f: _f, data: _data}))
 		);
+	}
+	
+	static toArray = function() {
+		if (self.__size > 0) {
+			
+			var _array = array_create(self.__size);
+			var _cell = self.__ltlist.__fst;
+			var _indx = 0;
+			while (_indx < self.__size) {
+				
+				_array[++_indx] = _cell[__API_LINK_LIST.VALUE][__API_QPRIORITY.VALUE];
+				_cell = _cell[__API_LINK_LIST.NEXT];
+			}
+			
+			return _array;
+		}
+		return [];
 	}
 	
 }

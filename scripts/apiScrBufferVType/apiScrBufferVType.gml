@@ -1,9 +1,8 @@
 
 
 enum API_BUF {
-	NUM = 20,
+	UND = 20,
 	INF, NINF, NAN,
-	UND,
 }
 
 function apiBufSizeofNumber(_value) {
