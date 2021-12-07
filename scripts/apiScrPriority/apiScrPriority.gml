@@ -110,6 +110,36 @@ function ApiQPriority() constructor {
 		while (_cell != undefined) {
 			
 			_val = _cell[__API_LINK_LIST.VALUE];
+			if (_f(_val[__API_QPRIORITY.PRIORITY], _val[__API_QPRIORITY.VALUE], _data)) return;
+			
+			_cell = _cell[__API_LINK_LIST.NEXT];
+		}
+	}
+	
+	static forRemove = function(_f, _data) {
+		
+		var _val;
+		var _cell = self.__ltlist.__fst;
+		while (_cell != undefined) {
+			
+			_val = _cell[__API_LINK_LIST.VALUE];
+			if (_f(_val[__API_QPRIORITY.PRIORITY], _val[__API_QPRIORITY.VALUE], _data)) {
+				
+				self.__ltlist.rem(_cell);
+				--self.__size;
+			}
+			
+			_cell = _cell[__API_LINK_LIST.NEXT];
+		}
+	}
+	
+	static forCode = function(_f, _data) {
+		
+		var _val;
+		var _cell = self.__ltlist.__fst;
+		while (_cell != undefined) {
+			
+			_val = _cell[__API_LINK_LIST.VALUE];
 			_val = _f(_val[__API_QPRIORITY.PRIORITY], _val[__API_QPRIORITY.VALUE], _data);
 			if (is_numeric(_val)) {
 				if (_val == 0) return;
@@ -165,6 +195,34 @@ function ApiQPriority() constructor {
 		
 		self.__size -= array_length(_res);
 		return _res;
+	}
+	
+	static remFst = function(_priority) {
+		
+		self.find(_priority, true);
+	}
+	
+	static remAll = function(_priority) {
+		var _res = 0;
+		var _val;
+		var _cell = self.__ltlist.__fst;
+		while (_cell != undefined) {
+			
+			_val = _cell[__API_LINK_LIST.VALUE];
+			if (_val[__API_QPRIORITY.PRIORITY] == _priority) {
+				
+				self.__ltlist.rem(_cell);
+				++_res;
+			}
+			else {
+				
+				if (_res > 0) break;
+			}
+			
+			_cell = _cell[__API_LINK_LIST.NEXT];
+		}
+		
+		self.__size -= _res;
 	}
 	
 }
