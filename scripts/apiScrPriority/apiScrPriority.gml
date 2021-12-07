@@ -69,7 +69,7 @@ function ApiQPriority() constructor {
 	}
 	
 	static isEmpty = function() {
-		return self.__ltlist.isEmpty();
+		return (self.__size == 0);
 	}
 	
 	static toClone = function(_f=apiFunctorId, _data) {
@@ -101,6 +101,70 @@ function ApiQPriority() constructor {
 			return _array;
 		}
 		return [];
+	}
+	
+	static forEach = function(_f, _data) {
+		
+		var _val;
+		var _cell = self.__ltlist.__fst;
+		while (_cell != undefined) {
+			
+			_val = _cell[__API_LINK_LIST.VALUE];
+			_val = _f(_val[__API_QPRIORITY.PRIORITY], _val[__API_QPRIORITY.VALUE], _data);
+			if (is_numeric(_val)) {
+				if (_val == 0) return;
+				
+				self.__ltlist.rem(_cell);
+				--self.__size;
+			}
+			
+			_cell = _cell[__API_LINK_LIST.NEXT];
+		}
+	}
+	
+	static find = function(_priority, _pop=false) {
+		
+		var _val;
+		var _cell = self.__ltlist.__fst;
+		while (_cell != undefined) {
+			
+			_val = _cell[__API_LINK_LIST.VALUE];
+			if (_val[__API_QPRIORITY.PRIORITY] == _priority) {
+				
+				if (_pop) {
+					
+					self.__ltlist.rem(_cell);
+					--self.__size;
+				}
+				return _val[__API_QPRIORITY.VALUE];
+			}
+			
+			_cell = _cell[__API_LINK_LIST.NEXT];
+		}
+	}
+	
+	static findAll = function(_priority, _pop=false) {
+		var _res = [];
+		var _val;
+		var _cell = self.__ltlist.__fst;
+		while (_cell != undefined) {
+			
+			_val = _cell[__API_LINK_LIST.VALUE];
+			if (_val[__API_QPRIORITY.PRIORITY] == _priority) {
+				
+				if (_pop) self.__ltlist.rem(_cell);
+				array_push(_res, _val[__API_QPRIORITY.VALUE]);
+			}
+			else {
+				
+				if (array_length(_res) > 0) break;
+			}
+			
+			_cell = _cell[__API_LINK_LIST.NEXT];
+		}
+		
+		self.__size -= array_length(_res);
+		return _res;
 	}
 	
 }

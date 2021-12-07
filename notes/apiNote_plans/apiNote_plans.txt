@@ -1,5 +1,4 @@
 
-apiNote3_Dev дописать некоторые конструкции
 
 apiScrPriority		- до ума
 apiScrQueueStack	- до ума

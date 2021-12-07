@@ -99,7 +99,7 @@ function ApiQS() constructor {
 	}
 	
 	static isEmpty = function() {
-		return self.__ltlist.isEmpty();
+		return (self.__size == 0);
 	}
 	
 	static toArray = function() {
