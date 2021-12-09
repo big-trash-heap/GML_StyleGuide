@@ -1,6 +1,6 @@
 
 
-apiScrPriority		- до ума
+
 apiScrQueueStack	- до ума
 
 apiScrCaller		- добавить toClone

@@ -72,38 +72,6 @@ function ApiQPriority() constructor {
 		return (self.__size == 0);
 	}
 	
-	static toClone = function(_f=apiFunctorId, _data) {
-		return new ApiQPriority(
-			new __ApiWrap()
-				._set("size", self.__size)
-				._set("list", self.__ltlist.toClone(
-					function(_value, _data) {
-						return [
-							_value[__API_QPRIORITY.PRIORITY],
-							_data.f(_value[__API_QPRIORITY.VALUE], _data.data)
-						];
-					}, {f: _f, data: _data}))
-		);
-	}
-	
-	static toArray = function() {
-		if (self.__size > 0) {
-			
-			var _array = array_create(self.__size);
-			var _cell = self.__ltlist.__fst;
-			var _indx = 0;
-			while (_indx < self.__size) {
-				
-				_array[_indx] = _cell[__API_LINK_LIST.VALUE][__API_QPRIORITY.VALUE];
-				_cell = _cell[__API_LINK_LIST.NEXT];
-				++_indx;
-			}
-			
-			return _array;
-		}
-		return [];
-	}
-	
 	static forEach = function(_f, _data) {
 		
 		var _val;
@@ -153,7 +121,7 @@ function ApiQPriority() constructor {
 		}
 	}
 	
-	static find = function(_priority, _pop=false) {
+	static find = function(_priority, _remove=false) {
 		
 		var _val;
 		var _cell = self.__ltlist.__fst;
@@ -162,7 +130,7 @@ function ApiQPriority() constructor {
 			_val = _cell[__API_LINK_LIST.VALUE];
 			if (_val[__API_QPRIORITY.PRIORITY] == _priority) {
 				
-				if (_pop) {
+				if (_remove) {
 					
 					self.__ltlist.rem(_cell);
 					--self.__size;
@@ -174,7 +142,7 @@ function ApiQPriority() constructor {
 		}
 	}
 	
-	static findAll = function(_priority, _pop=false) {
+	static findAll = function(_priority, _remove=false) {
 		var _cell = self.__ltlist.__fst, _val;
 		while (_cell != undefined) {
 			
@@ -182,7 +150,7 @@ function ApiQPriority() constructor {
 			if (_val[__API_QPRIORITY.PRIORITY] == _priority) {
 				
 				var _res = [];
-				if (_pop) {
+				if (_remove) {
 					
 					var _left = _cell, _right;
 					while (true) {
@@ -250,6 +218,38 @@ function ApiQPriority() constructor {
 			_cell = _cell[__API_LINK_LIST.NEXT];
 		}
 		return 0;
+	}
+	
+	static toClone = function(_f=apiFunctorId, _data) {
+		return new ApiQPriority(
+			new __ApiWrap()
+				._set("size", self.__size)
+				._set("list", self.__ltlist.toClone(
+					function(_value, _data) {
+						return [
+							_value[__API_QPRIORITY.PRIORITY],
+							_data.f(_value[__API_QPRIORITY.VALUE], _data.data)
+						];
+					}, {f: _f, data: _data}))
+		);
+	}
+	
+	static toArray = function() {
+		if (self.__size > 0) {
+			
+			var _array = array_create(self.__size);
+			var _cell = self.__ltlist.__fst;
+			var _indx = 0;
+			while (_indx < self.__size) {
+				
+				_array[_indx] = _cell[__API_LINK_LIST.VALUE][__API_QPRIORITY.VALUE];
+				_cell = _cell[__API_LINK_LIST.NEXT];
+				++_indx;
+			}
+			
+			return _array;
+		}
+		return [];
 	}
 	
 }

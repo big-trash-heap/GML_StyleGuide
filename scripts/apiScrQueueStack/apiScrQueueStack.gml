@@ -80,7 +80,10 @@ function ApiQS() constructor {
 	}
 	
 	static pull = function(_index, _f, _data) {
-		var _value = self.__ltlist.indexOf(_index);
+		var _value = 
+			(_index > (self.__size div 2)
+			? self.__ltlist.indexOfInv(self.__size - _index - 1) 
+			: self.__ltlist.indexOf(_index));
 		if (_value != undefined) {
 			
 			_index = _value[__API_LINK_LIST.VALUE];
@@ -88,7 +91,7 @@ function ApiQS() constructor {
 				
 				--self.__size;
 				self.__ltlist.rem(_value);
-				return [_index];
+				return _index;
 			}
 		}
 	}
