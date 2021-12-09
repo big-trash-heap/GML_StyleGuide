@@ -185,6 +185,14 @@ function ApiLListT() : ApiLListO() constructor {
 		}
 	}
 	
+	static cropBegin = function(_cell) {
+		
+		self.__fst = _cell;
+		if (self.__fst == undefined) {
+			self.__lst = undefined;	
+		}
+	}
+	
 	static cropEnd = function(_cell) {
 		
 		self.__lst = _cell;

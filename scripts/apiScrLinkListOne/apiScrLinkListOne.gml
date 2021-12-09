@@ -77,7 +77,7 @@ function ApiLListO() constructor {
 	
 	static clear = function() {
 		
-		self.__fst = undefined;
+		delete self.__fst;
 	}
 	
 	static call = function(_f, _data) {
