@@ -94,8 +94,9 @@ function ApiQPriority() constructor {
 			var _indx = 0;
 			while (_indx < self.__size) {
 				
-				_array[++_indx] = _cell[__API_LINK_LIST.VALUE][__API_QPRIORITY.VALUE];
+				_array[_indx] = _cell[__API_LINK_LIST.VALUE][__API_QPRIORITY.VALUE];
 				_cell = _cell[__API_LINK_LIST.NEXT];
+				++_indx;
 			}
 			
 			return _array;
@@ -174,27 +175,48 @@ function ApiQPriority() constructor {
 	}
 	
 	static findAll = function(_priority, _pop=false) {
-		var _res = [];
-		var _val;
-		var _cell = self.__ltlist.__fst;
+		var _cell = self.__ltlist.__fst, _val;
 		while (_cell != undefined) {
 			
 			_val = _cell[__API_LINK_LIST.VALUE];
 			if (_val[__API_QPRIORITY.PRIORITY] == _priority) {
 				
-				if (_pop) self.__ltlist.rem(_cell);
-				array_push(_res, _val[__API_QPRIORITY.VALUE]);
+				var _res = [];
+				if (_pop) {
+					
+					var _left = _cell, _right;
+					while (true) {
+						
+						_right = _cell;
+						array_push(_res, _val[__API_QPRIORITY.VALUE]);
+						
+						_cell = _cell[__API_LINK_LIST.NEXT];
+						if (_cell == undefined) break;
+						
+						_val = _cell[__API_LINK_LIST.VALUE];
+						if (_val[__API_QPRIORITY.PRIORITY] != _priority) break;
+					}
+					
+					self.__size -= array_length(_res);
+					self.__ltlist.remRange(_left, _right);
+				}
+				else {
+					while (true) {
+						
+						array_push(_res, _val[__API_QPRIORITY.VALUE]);
+						
+						_cell = _cell[__API_LINK_LIST.NEXT];
+						if (_cell == undefined) break;
+						
+						_val = _cell[__API_LINK_LIST.VALUE];
+						if (_val[__API_QPRIORITY.PRIORITY] != _priority) break;
+					}
+				}
+				return _res;
 			}
-			else {
-				
-				if (array_length(_res) > 0) break;
-			}
-			
 			_cell = _cell[__API_LINK_LIST.NEXT];
 		}
-		
-		self.__size -= array_length(_res);
-		return _res;
+		return [];
 	}
 	
 	static remFst = function(_priority) {
@@ -203,27 +225,33 @@ function ApiQPriority() constructor {
 	}
 	
 	static remAll = function(_priority) {
-		var _res = 0;
-		var _val;
-		var _cell = self.__ltlist.__fst;
+		var _cell = self.__ltlist.__fst, _val;
 		while (_cell != undefined) {
 			
 			_val = _cell[__API_LINK_LIST.VALUE];
 			if (_val[__API_QPRIORITY.PRIORITY] == _priority) {
 				
-				self.__ltlist.rem(_cell);
-				++_res;
-			}
-			else {
+				var _res;
+				while (true) {
+					
+					++_res;
+					self.__ltlist.rem(_cell);
+					
+					_cell = _cell[__API_LINK_LIST.NEXT];
+					if (_cell == undefined) break;
+					
+					_val = _cell[__API_LINK_LIST.VALUE];
+					if (_val[__API_QPRIORITY.PRIORITY] != _priority) break;
+				}
 				
-				if (_res > 0) break;
+				self.__size -= _res;
+				return _res;
 			}
-			
 			_cell = _cell[__API_LINK_LIST.NEXT];
 		}
-		
-		self.__size -= _res;
+		return 0;
 	}
 	
 }
+
 

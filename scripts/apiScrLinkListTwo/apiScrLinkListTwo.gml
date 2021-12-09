@@ -172,6 +172,19 @@ function ApiLListT() : ApiLListO() constructor {
 		}
 	}
 	
+	static remRange = function(_left, _right) {
+		if (_left == _right) {
+			self.rem(_left);	
+		}
+		else {
+			_left[@ __API_LINK_LIST.NEXT] = _right;
+			_right[@ __API_LINK_LIST.PREV] = _left;
+			
+			self.rem(_left);
+			self.rem(_right);
+		}
+	}
+	
 	static cropEnd = function(_cell) {
 		
 		self.__lst = _cell;
