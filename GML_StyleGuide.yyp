@@ -7,6 +7,7 @@
     {"id":{"name":"apiRoomPragma","path":"rooms/apiRoomPragma/apiRoomPragma.yy",},"order":1,},
     {"id":{"name":"apiScrSelf","path":"scripts/apiScrSelf/apiScrSelf.yy",},"order":1,},
     {"id":{"name":"Object3","path":"objects/Object3/Object3.yy",},"order":1,},
+    {"id":{"name":"apiScrGet","path":"scripts/apiScrGet/apiScrGet.yy",},"order":2,},
     {"id":{"name":"ni_callOnce","path":"scripts/ni_callOnce/ni_callOnce.yy",},"order":4,},
     {"id":{"name":"apiScrGMLDebug","path":"scripts/apiScrGMLDebug/apiScrGMLDebug.yy",},"order":11,},
     {"id":{"name":"ni_method_functor","path":"scripts/ni_method_functor/ni_method_functor.yy",},"order":5,},
@@ -123,7 +124,7 @@
   ],
   "IncludedFiles": [],
   "MetaData": {
-    "IDEVersion": "2.3.7.603",
+    "IDEVersion": "2.3.7.606",
   },
   "resourceVersion": "1.4",
   "name": "GML_StyleGuide",

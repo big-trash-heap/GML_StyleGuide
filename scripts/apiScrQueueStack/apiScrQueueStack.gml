@@ -82,7 +82,7 @@ function ApiQS() constructor {
 	static pull = function(_index, _f, _data) {
 		var _value = 
 			(_index > (self.__size div 2)
-			? self.__ltlist.indexOfInv(self.__size - _index - 1) 
+			? self.__ltlist.indexOfInv(self.__size - _index - 1)
 			: self.__ltlist.indexOf(_index));
 		if (_value != undefined) {
 			
@@ -103,6 +103,49 @@ function ApiQS() constructor {
 	
 	static isEmpty = function() {
 		return (self.__size == 0);
+	}
+	
+	static forEach = function(_f, _data) {
+		var _cell = self.__ltlist.__fst;
+		while (_cell != undefined) {
+			
+			if (_f(_cell[__API_LINK_LIST.VALUE], _data)) return;
+			_cell = _cell[__API_LINK_LIST.NEXT];
+		}
+	}
+	
+	static forRemove = function(_f, _data) {
+		
+		var _val;
+		var _cell = self.__ltlist.__fst;
+		while (_cell != undefined) {
+			
+			if (_f(_cell[__API_LINK_LIST.VALUE], _data)) {
+				
+				self.__ltlist.rem(_cell);
+				--self.__size;
+			}
+			
+			_cell = _cell[__API_LINK_LIST.NEXT];
+		}
+	}
+	
+	static forCode = function(_f, _data) {
+		
+		var _val;
+		var _cell = self.__ltlist.__fst;
+		while (_cell != undefined) {
+			
+			_val = _f(_cell[__API_LINK_LIST.VALUE], _data);
+			if (is_numeric(_val)) {
+				if (_val == 0) return;
+				
+				self.__ltlist.rem(_cell);
+				--self.__size;
+			}
+			
+			_cell = _cell[__API_LINK_LIST.NEXT];
+		}
 	}
 	
 	static toArray = function() {
