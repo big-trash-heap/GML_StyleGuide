@@ -8,7 +8,7 @@ enum API_BUF {
 function apiBufSizeofNumber(_value) {
 	
 	if (sign(_value) == -1) {
-			
+		
 		if (_value >= -128)			return buffer_s8;
 		if (_value >= -32768)		return buffer_s16;
 		if (_value >= -2147483648)	return buffer_s32;

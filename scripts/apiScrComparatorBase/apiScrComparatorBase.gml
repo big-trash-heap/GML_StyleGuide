@@ -9,3 +9,5 @@ function apiCompLT(_x, _y) { return (_x < _y); };
 function apiCompGE(_x, _y) { return (_x >= _y); };
 function apiCompLE(_x, _y) { return (_x <= _y); };
 
+function apiCompUU(_x, _y) { return (_x ?? _y); };
+
