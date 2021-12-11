@@ -4,7 +4,14 @@ function ApiEventor() constructor {
 	
 	#region __private
 	
-	self.__map = {};
+	API_MACRO_CONSTRUCTOR_WRAP {
+		var _wrap = argument[0];
+		self.__map = _wrap.value;
+	}
+	else
+	API_MACRO_CONSTRUCTOR_DEFL {
+		self.__map = {};
+	}
 	
 	static __getCaller = function(_key) {
 		
@@ -84,13 +91,34 @@ function ApiEventor() constructor {
 	static on  = self.append;
 	static off = self.remFst;
 	
+	static toClone = function(_f=apiFunctorId, _data) {
+		var _value = {};
+		var _keys = variable_struct_get_names(self.__map), _key;
+		var _size = array_length(_keys);
+		while (_size > 0) {
+			_key = _keys[$ --_size];
+			_value[$ _key] = self.__map[$ _key].toClone(_f, _data);
+		}
+		return new ApiEventor(
+			new __ApiWrap()
+				._set("value", _value)
+		);
+	}
+	
 }
 
 function ApiEventorJust() constructor {
 	
 	#region __private
 	
-	self.__map = {};
+	API_MACRO_CONSTRUCTOR_WRAP {
+		var _wrap = argument[0];
+		self.__map = _wrap.value;
+	}
+	else
+	API_MACRO_CONSTRUCTOR_DEFL {
+		self.__map = {};
+	}
 	
 	#endregion
 	
@@ -125,6 +153,13 @@ function ApiEventorJust() constructor {
 			return true;
 		}
 		return false;
+	}
+	
+	static toClone = function(_f=apiFunctorId, _data) {
+		return new ApiEventorJust(
+			new __ApiWrap()
+				._set("value", apiStructBulDup1d(self.__map))
+		);
 	}
 	
 }

@@ -5,8 +5,16 @@ function ApiCaller() constructor {
 	
 	#region __private
 	
-	self.__lolist = new ApiLListO();
-	self.__last   = undefined;
+	API_MACRO_CONSTRUCTOR_WRAP {
+		var _wrap = argument[0];
+		self.__lolist = _wrap.list;
+		self.__last   = _wrap.last;
+	}
+	else
+	API_MACRO_CONSTRUCTOR_DEFL {
+		self.__lolist = new ApiLListO();
+		self.__last   = undefined;
+	}
 	
 	static __fnum = function(_value, _f) {
 		
@@ -91,6 +99,28 @@ function ApiCaller() constructor {
 	static toString = function() {
 		
 		return string(self.__lolist);
+	}
+	
+	static toClone = function(_f=apiFunctorId, _data) {
+		var _list = new ApiLListO();
+		var _last = undefined;
+		var _cell = self.__lolist.__fst;
+		if (_cell != undefined) {
+			
+			_last = _list.insBegin(_f(_cell[__API_LINK_LIST.VALUE], _data));
+			_cell = _cell[__API_LINK_LIST.NEXT];
+		}
+		
+		while (_cell != undefined) {
+			
+			_last = _list.insAfter(_f(_cell[__API_LINK_LIST.VALUE], _data), _last);
+			_cell = _cell[__API_LINK_LIST.NEXT];
+		}
+		return new ApiCaller(
+			new __ApiWrap()
+				._set("list", _list)
+				._set("last", _last)
+		);
 	}
 	
 }
