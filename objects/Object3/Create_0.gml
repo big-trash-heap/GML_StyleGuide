@@ -1,6 +1,10 @@
 
 window_set_size(1366, 768);
 
+
+
+
+/*
 apiTHand_loop(
 	function(_timer) {
 		

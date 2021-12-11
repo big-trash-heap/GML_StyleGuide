@@ -21,6 +21,7 @@
     {"id":{"name":"apiScrLinkListTwo","path":"scripts/apiScrLinkListTwo/apiScrLinkListTwo.yy",},"order":2,},
     {"id":{"name":"apiScrFunctor","path":"scripts/apiScrFunctor/apiScrFunctor.yy",},"order":0,},
     {"id":{"name":"apiScrPriority","path":"scripts/apiScrPriority/apiScrPriority.yy",},"order":1,},
+    {"id":{"name":"apiScrTimerAnimator","path":"scripts/apiScrTimerAnimator/apiScrTimerAnimator.yy",},"order":1,},
     {"id":{"name":"ni_genmet","path":"scripts/ni_genmet/ni_genmet.yy",},"order":0,},
     {"id":{"name":"apiScrDsList","path":"scripts/apiScrDsList/apiScrDsList.yy",},"order":1,},
     {"id":{"name":"apiObjMain","path":"objects/apiObjMain/apiObjMain.yy",},"order":3,},
