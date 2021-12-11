@@ -24,7 +24,7 @@ function apiGetAccess() {
 		_table[$ "i"] = variable_instance_get;
 		_table[$ "g"] = variable_global_get;
 		_table[$ "m"] = apiFunctorFunc(function(_data, _key) {
-			return (_key(_data));
+			return _key(_data);
 		});
 		
 		return _table;

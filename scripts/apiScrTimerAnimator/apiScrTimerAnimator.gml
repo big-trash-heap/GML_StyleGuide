@@ -20,6 +20,7 @@ function ApiTimerAnimator() : ApiTimer() constructor {
 			ds_list_destroy(ds_queue_dequeue(_timer.__stack)[__API_TIMER_ANIMATOR_STACK.FRAME]);
 		
 		ds_queue_destroy(_timer.__stack);
+		_timer.__stack = -1;
 	}
 	
 	static __tick = function(_timer) {
