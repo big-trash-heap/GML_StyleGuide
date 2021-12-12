@@ -19,8 +19,7 @@ function apiStructFind(_struct, _f, _data) {
     var _keys = variable_struct_get_names(_struct);
     var _size = array_length(_keys);
 	while (_size > 0) {
-		--_size;
-		if (_f(_struct, _keys[_size], _data)) return _keys[_size];
+		if (_f(_struct, _keys[--_size], _data)) return _keys[_size];
 	}
 	
     return undefined;

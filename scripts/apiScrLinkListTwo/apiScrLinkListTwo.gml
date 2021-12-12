@@ -351,7 +351,7 @@ function apiLListTGetPrev(_cell) {
 #region tests - One
 if (API_TEST_ENABLE) {
 	
-	API_TEST_LOCAL true;
+	API_TEST_LOCAL false;
 	if (API_TEST) {
 		
 		show_debug_message(

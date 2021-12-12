@@ -26,6 +26,9 @@ function apiGetAccess() {
 		_table[$ "m"] = apiFunctorFunc(function(_data, _key) {
 			return _key(_data);
 		});
+		_table[$ "#"] = apiFunctorFunc(function(_data, _key) {
+			return ds_grid_get(_data, _key[0], _key[1]);
+		});
 		
 		return _table;
 	}();

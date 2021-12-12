@@ -113,7 +113,7 @@
     {"folderPath":"folders/GML_StyleGuide_api/api_tools/wrap.yy","order":6,"resourceVersion":"1.0","name":"wrap","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/GML_StyleGuide_api/api_tools_addition.yy","order":9,"resourceVersion":"1.0","name":"api_tools_addition","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/GML_StyleGuide_api/api_tools_addition/qstack.yy","order":1,"resourceVersion":"1.0","name":"qstack","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/GML_StyleGuide_api/api_tools/for.yy","order":7,"resourceVersion":"1.0","name":"for","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/GML_StyleGuide_api/api_tools_addition/for.yy","order":2,"resourceVersion":"1.0","name":"for","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/GML_StyleGuide_api/api_tools/time/base_timer/timers.yy","order":1,"resourceVersion":"1.0","name":"timers","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/GML_StyleGuide_api/api_tools/time/base_timer/handler.yy","order":0,"resourceVersion":"1.0","name":"handler","tags":[],"resourceType":"GMFolder",},
   ],
